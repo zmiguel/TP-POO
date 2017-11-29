@@ -21,12 +21,18 @@
     <ClInclude Include="libs.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="formiga.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TP-POO.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="consola.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="formiga.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

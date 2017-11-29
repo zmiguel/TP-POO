@@ -144,10 +144,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="consola.h" />
+    <ClInclude Include="formiga.h" />
     <ClInclude Include="libs.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="consola.cpp" />
+    <ClCompile Include="formiga.cpp" />
     <ClCompile Include="TP-POO.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
