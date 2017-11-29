@@ -24,7 +24,7 @@ HANDLE Consola::hStdin = GetStdHandle(STD_INPUT_HANDLE);;
 HWND Consola::hwnd = GetConsoleWindow();
 
 /*
-Consola::Consola() {
+Consola::Consola() { 
 	hconsola = GetStdHandle(STD_OUTPUT_HANDLE);
 	hStdin = GetStdHandle(STD_INPUT_HANDLE);
 	hwnd = GetConsoleWindow();
