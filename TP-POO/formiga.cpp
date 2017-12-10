@@ -1,11 +1,34 @@
-#include "formiga.h"
+#include "Formiga.h"
 
+int Formiga::i = 1;
 
-formiga::formiga()
-{
+Formiga::Formiga(int x, int y){
+	this->id = i++;
+	this->posX = x;
+	this->posY = y;
+	cout << getAsString();
+}
+
+int Formiga::getX() const{
+
+	return posX;
+}
+
+int Formiga::getY() const{
+
+	return posY;
 }
 
 
-formiga::~formiga()
-{
+string Formiga::getAsString() {
+	ostringstream oss;
+
+	oss << "\nID" << id
+		<< "\Energia" << energia
+		<< "\nRaio de Visao" << raioMov
+		<< "\nX: " << posX
+		<< "\nY: " << posY;
+
+	string s = oss.str();
+	return s;
 }

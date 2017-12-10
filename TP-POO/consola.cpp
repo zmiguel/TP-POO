@@ -8,8 +8,8 @@ Dez 2010 - Implementação: Funcoes da consola + exemplo + comentários
 Nov 2013 - Pequenas correcções
 Dez 2015 - Comentários melhorados
 Dez 2016 - Exemplo melhorado.
-         - Compatibilidade com mingw automatizada
-         - As funções passaram a ser estáticas
+- Compatibilidade com mingw automatizada
+- As funções passaram a ser estáticas
 */
 
 /* --> ver comentários em consola.h */
@@ -24,13 +24,13 @@ HANDLE Consola::hStdin = GetStdHandle(STD_INPUT_HANDLE);;
 HWND Consola::hwnd = GetConsoleWindow();
 
 /*
-Consola::Consola() { 
-	hconsola = GetStdHandle(STD_OUTPUT_HANDLE);
-	hStdin = GetStdHandle(STD_INPUT_HANDLE);
-	hwnd = GetConsoleWindow();
-	// NT "upwards" apenas
-	// O suporte para w95 e w98 é demasiado retorcido
-	// e já ninguém usa esses "sistemas"
+Consola::Consola() {
+hconsola = GetStdHandle(STD_OUTPUT_HANDLE);
+hStdin = GetStdHandle(STD_INPUT_HANDLE);
+hwnd = GetConsoleWindow();
+// NT "upwards" apenas
+// O suporte para w95 e w98 é demasiado retorcido
+// e já ninguém usa esses "sistemas"
 }
 */
 
@@ -66,7 +66,7 @@ void Consola::setTextColor(WORD color) {
 	WORD cor = csbi.wAttributes;
 	cor &= 0xFFF0;  // isola os bits que interessam
 	cor |= color;   // lga os bits da cor
-	// duvidas na operacação binária -> ver TI ou TAC
+					// duvidas na operacação binária -> ver TI ou TAC
 	SetConsoleTextAttribute(hconsola, cor);
 	return;
 }
@@ -77,7 +77,7 @@ void Consola::setBackgroundColor(WORD color) {
 	WORD cor = csbi.wAttributes;
 	cor &= 0xFF0F;
 	cor |= (color << 4);  // coloca os bits da cor nos bits certos
-	// duvidas na operacação binária -> ver TI ou TAC
+						  // duvidas na operacação binária -> ver TI ou TAC
 	SetConsoleTextAttribute(hconsola, cor);
 }
 
@@ -125,15 +125,15 @@ char Consola::getch(void) {
 			&& irInputRecord.Event.KeyEvent.wVirtualKeyCode != VK_CONTROL)
 		{
 
-		cChar = irInputRecord.Event.KeyEvent.uChar.AsciiChar;
-		ReadConsoleInputA(hStdin, &irInputRecord, 1, &dwEventsRead); /* Read key release */
+			cChar = irInputRecord.Event.KeyEvent.uChar.AsciiChar;
+			ReadConsoleInputA(hStdin, &irInputRecord, 1, &dwEventsRead); /* Read key release */
 
-		if (irInputRecord.Event.KeyEvent.wVirtualKeyCode == VK_LEFT) return ESQUERDA;
-		if (irInputRecord.Event.KeyEvent.wVirtualKeyCode == VK_RIGHT) return DIREITA;
-		if (irInputRecord.Event.KeyEvent.wVirtualKeyCode == VK_UP) return CIMA;
-		if (irInputRecord.Event.KeyEvent.wVirtualKeyCode == VK_DOWN) return BAIXO;
+			if (irInputRecord.Event.KeyEvent.wVirtualKeyCode == VK_LEFT) return ESQUERDA;
+			if (irInputRecord.Event.KeyEvent.wVirtualKeyCode == VK_RIGHT) return DIREITA;
+			if (irInputRecord.Event.KeyEvent.wVirtualKeyCode == VK_UP) return CIMA;
+			if (irInputRecord.Event.KeyEvent.wVirtualKeyCode == VK_DOWN) return BAIXO;
 
-		return cChar;
+			return cChar;
 		}
 	return EOF;
 }
@@ -150,12 +150,12 @@ typedef BOOL(WINAPI * GetConsoleFontInfo_)(HANDLE ConsoleOutput, BOOL Unknown1, 
 typedef DWORD(WINAPI * GetNumberOfConsoleFonts_)(); // kernel32!GetNumberOfConsoleFonts
 
 
-void Consola::setTextSizeXP(int x, int y){
+void Consola::setTextSizeXP(int x, int y) {
 #ifdef _MSC_VER
 	// Obtém acesso às funções "secretas" do Windows
-	SetConsoleFont_ SetConsoleFont = reinterpret_cast<SetConsoleFont_>(GetProcAddress(GetModuleHandle(L"kernel32.dll"), "SetConsoleFont"));
-	GetConsoleFontInfo_ GetConsoleFontInfo = reinterpret_cast<GetConsoleFontInfo_>(GetProcAddress(GetModuleHandle(L"kernel32.dll"), "GetConsoleFontInfo"));
-	GetNumberOfConsoleFonts_ GetNumberOfConsoleFonts = reinterpret_cast<GetNumberOfConsoleFonts_>(GetProcAddress(GetModuleHandle(L"kernel32.dll"), "GetNumberOfConsoleFonts"));
+	SetConsoleFont_ SetConsoleFont = reinterpret_cast<SetConsoleFont_>(GetProcAddress(GetModuleHandle("kernel32.dll"), "SetConsoleFont"));
+	GetConsoleFontInfo_ GetConsoleFontInfo = reinterpret_cast<GetConsoleFontInfo_>(GetProcAddress(GetModuleHandle("kernel32.dll"), "GetConsoleFontInfo"));
+	GetNumberOfConsoleFonts_ GetNumberOfConsoleFonts = reinterpret_cast<GetNumberOfConsoleFonts_>(GetProcAddress(GetModuleHandle("kernel32.dll"), "GetNumberOfConsoleFonts"));
 
 	// Num de fontes
 	DWORD NumFonts = GetNumberOfConsoleFonts();
@@ -194,7 +194,7 @@ void Consola::setTextSizeXP(int x, int y){
 //   por esse motivo nao vale a pena optimizar certos aspectos destas funções
 // os alunos que gostarem de iformática podem pegar nisto
 //  e explorar e acrescentar 
-void Consola::drawLine(int x1, int y1, int x2, int y2, int cor){
+void Consola::drawLine(int x1, int y1, int x2, int y2, int cor) {
 #ifdef _MSC_VER
 	HDC DrawHDC;
 	HPEN hOPen;  // penstyle, width, color
@@ -209,7 +209,7 @@ void Consola::drawLine(int x1, int y1, int x2, int y2, int cor){
 }
 
 // converte circle(centerX,centerY,radius,pen) para a WinApi
-void Consola::drawCircle(int X, int Y, int R, int Pen, int Fill){
+void Consola::drawCircle(int X, int Y, int R, int Pen, int Fill) {
 #ifdef _MSC_VER
 	HDC DrawHDC;
 	DrawHDC = GetDC(hwnd);  // penstyle, width, color

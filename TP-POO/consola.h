@@ -8,8 +8,8 @@ Dez 2010 - Implementação: Funcoes da consola + exemplo + comentários
 Nov 2013 - Pequenas correcções
 Dez 2015 - Comentários melhorados
 Dez 2016 - Exemplo melhorado.
-         - Compatibilidade com mingw automatizada
-         - As funções passaram a ser estáticas
+- Compatibilidade com mingw automatizada
+- As funções passaram a ser estáticas
 */
 
 
@@ -54,11 +54,11 @@ public:
 	const static char ESCAPE = 27;
 
 	Consola() = delete;  // Nao quero objectos disto a proliferarem por ai.
-	                     // As funcçõe são estáticas por alguma razão.
-	                     // ----------> C++ 2011 ou posterior
+						 // As funcçõe são estáticas por alguma razão.
+						 // ----------> C++ 2011 ou posterior
 
-	// Posiciona o cursor na posição x,y
-	// - Os proximos cout/cin serão feitos a partir daí
+						 // Posiciona o cursor na posição x,y
+						 // - Os proximos cout/cin serão feitos a partir daí
 	static void gotoxy(int x, int y);
 
 	// Limpa o ecrã
@@ -88,20 +88,20 @@ public:
 	// - Ver também setSTextSizeXP
 	static void setTextSize(int x, int y); // ##### Mingw ->Sem efeito (Não disponivel) #####
 
-	// Muda (tenta mudar) o tamanho da letra para XP (alguém ainda usa isso?)
-	// - Esta função é para usar apenas no caso do sistema
-	//   ser o XP
-	//   No outros sistemas existe a função setTextSize
-	// - Pode falhar em determinadas situações
-	//   (falhar = não muda nada)
-	// - Ver também setSTextSizeXP
+										   // Muda (tenta mudar) o tamanho da letra para XP (alguém ainda usa isso?)
+										   // - Esta função é para usar apenas no caso do sistema
+										   //   ser o XP
+										   //   No outros sistemas existe a função setTextSize
+										   // - Pode falhar em determinadas situações
+										   //   (falhar = não muda nada)
+										   // - Ver também setSTextSizeXP
 	static void setTextSizeXP(int x, int y);  // ##### Mingw ->Sem efeito (Não disponivel) #####
 
-	// Lê um caracter sem precisar de "enter" no fim
-	// - Util para fazer pausas do tipo
-	//   "press any key to continue"
-	// - Esta funcionalidade também se consegue de
-	//   outras formas
+											  // Lê um caracter sem precisar de "enter" no fim
+											  // - Util para fazer pausas do tipo
+											  //   "press any key to continue"
+											  // - Esta funcionalidade também se consegue de
+											  //   outras formas
 	static char getch(void);
 
 	// As duas funções seguintes são pouco interessantes
@@ -115,14 +115,15 @@ public:
 	//   . Se redimensiona a janela
 	static void drawLine(int x1, int y1, int x2, int y2, int cor);  // ##### Mingw ->Sem efeito (Não disponivel) #####
 
-	// Desenha um círculo usando pixeis (não é com caracteres)
-	// - Esta é uma função gráfica. Trabalha com pixeis
-	// - Os pixeis do círculo ficam sobrepostos ao texto
-	// Esta função é pouco interessante porque:
-	// - O círculo não fica memorizado. Desaparece quando:
-	//   . Se oculta e volta a mostrar a janela da consola
-	//   . Se redimensiona a janela
+																	// Desenha um círculo usando pixeis (não é com caracteres)
+																	// - Esta é uma função gráfica. Trabalha com pixeis
+																	// - Os pixeis do círculo ficam sobrepostos ao texto
+																	// Esta função é pouco interessante porque:
+																	// - O círculo não fica memorizado. Desaparece quando:
+																	//   . Se oculta e volta a mostrar a janela da consola
+																	//   . Se redimensiona a janela
 	static void drawCircle(int X, int Y, int R, int Pen, int Fill);  // ##### Mingw ->Sem efeito (Não disponivel) #####
 };
 
 #endif
+
