@@ -1,0 +1,3 @@
+﻿  Interface.cpp
+c:\users\ricardo marques\source\repos\tp\tp\interface.cpp(20): warning C4101: 'num3': variável local não referenciada
+  TP.vcxproj -> C:\Users\Ricardo Marques\source\repos\TP\Debug\TP.exe
