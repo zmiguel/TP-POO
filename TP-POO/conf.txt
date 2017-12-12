@@ -1,5 +1,5 @@
 mundo	12
-en	5
+en	150
 pc	10
 vt	2
 mi	5
