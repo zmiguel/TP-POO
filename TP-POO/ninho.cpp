@@ -24,7 +24,7 @@ string Ninho::getAsString()const {
 	oss << "Ninho com ID: " << id
 		<< "\nPosicao: (" << PosX
 		<< "," << PosY << ")"
-		<< "\nEnergia Inicial de: "<< energiaInicial << endl;
+		<< "\nEnergia: "<< energiaInicial << endl;
 
 	for (unsigned int i = 0; i < formigas.size();i++) {
 		oss << formigas[i]->getAsString() << endl;
