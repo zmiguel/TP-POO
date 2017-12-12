@@ -26,8 +26,6 @@ void Mundo::imprime(){
 	int xi = 65;
 	int yi = 5;
 
-	cout << ninhos.size();
-
 	while (x < getDim() + xi && y < getDim() + yi) {
 		Consola::gotoxy(x, y);
 		flag = 0;
@@ -60,19 +58,28 @@ void Mundo::imprime(){
 	}
 }
 
-void Mundo::acrescentaNinho(int x, int y){
+void Mundo::acrescentaNinho(int x, int y, int *cx, int *cy){
 	
-	ninhos.push_back(Ninho(x, y, energNinhos));
+	if (ocupaPos(x, y) == false) {
+		ninhos.push_back(Ninho(x, y, energNinhos));
+		*cx = *cx + 2;
+		*cy = *cy + 2;
+	}
+	else {
+		cout << "\n Foi tentado ser criado um ninho numa posição já ocupada!";
+		*cx = *cx + 4;
+		*cy = *cy + 4;
 
+	}
 }
 
-string Mundo::getAsString(int *x, int *y) const{
+string Mundo::getAsString(int *cx, int *cy) const{
 
 	ostringstream oss;
 	for (vector<Ninho>::const_iterator it = ninhos.begin(); it != ninhos.end(); it++) {
 		oss << it->getAsString() << endl;
-		*x = *x + 3;
-		*y = *y + 3;
+		*cx = *cx + 3;
+		*cy = *cy + 3;
 	}
 	return oss.str();
 }
@@ -96,11 +103,42 @@ int Mundo::numNinhos() {
 
 }
 
-void Mundo::formiga(int qnts, int id){
-	
-	int dim = getDim();
-	ninhos[id-1].acrescentaFormiga(qnts, dim);
+void Mundo::trataFormiga(int qnts, int id) {
 
+	int dim = getDim();
+	int x;
+	int y;
+
+	while (qnts != 0) {
+		x = rand() % dim;
+		y = rand() % dim;
+
+		if (ocupaPos(x, y) == false) {
+
+			ninhos[id - 1].acrescentaFormiga(x, y);
+			qnts--;
+		}
+	};
+}
+
+
+bool Mundo::ocupaPos(int x, int y) {
+
+	for (unsigned int i = 0; i < ninhos.size(); i++) {
+		if (ninhos[i].getX() == x && ninhos[i].getY() == y) {
+			return true;
+		}
+	}
+
+	for (unsigned int i = 0; i < ninhos.size(); i++) {
+		for (int k = 0; k < ninhos[i].numFormigas(); k++) {
+			if (ninhos[i].formigaPosX(k) == x && ninhos[i].formigaPosY(k) == y) {
+				return true;
+			}
+		}
+	}
+
+	return false;
 }
 
 Mundo::~Mundo()

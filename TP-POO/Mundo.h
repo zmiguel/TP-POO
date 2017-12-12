@@ -23,13 +23,13 @@ public:
 	int getDim() const;
 	void setDim(int dim);
 	void imprime();
-	void acrescentaNinho(int x, int y);
-	void formiga(int qnts, int id);
+	void acrescentaNinho(int x, int y, int *cx,int *cy);
+	void trataFormiga(int qnts, int id);
+	bool ocupaPos(int x, int y);
 	int numNinhos();
 	string listaNinho(int id);
 	string getAsString(int *x, int *y) const;
-	int formigaPosX(int id);
-	int formigaPosY(int id);
+	
 	Mundo(int dim, int energNinhos, int perFazNovoNinho, int transFormNin, int numPosMigalhas, int energiaInicialMig, int migalhaSorteio);
 	~Mundo();
 };

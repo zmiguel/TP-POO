@@ -20,7 +20,7 @@ public:
 	int formigaPosX(int id);
 	int formigaPosY(int id);
 	int numFormigas();
-	void acrescentaFormiga(int num, int dim);
+	void acrescentaFormiga(int x, int y);
 
 	Ninho(int x, int y, int energiaInicial);
 	~Ninho();

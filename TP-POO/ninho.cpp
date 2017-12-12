@@ -33,21 +33,10 @@ string Ninho::getAsString()const {
 	return oss.str();
 }
 
-void Ninho::acrescentaFormiga(int num, int dim) {
-
-	int x;
-	int y;
-
-	// função para que as formigas criadas não se sobreponham a nada
-
-	for (int i = 0; i < num; i++) {
-
-		x = rand() % dim;
-		y = rand() % dim;
+void Ninho::acrescentaFormiga(int x, int y) {
 
 		Formiga* ob = new Formiga(x, y);
 		formigas.push_back(ob);
-	}
 }
 
 int Ninho::numFormigas() {

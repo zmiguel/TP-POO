@@ -82,10 +82,7 @@ void Interface::corre() {
 					else {
 						if (str.compare("ninho") == 0 && num < mundo->getDim() && num2 < mundo->getDim()) {
 							// introduzir condição de que um ninho introduzido não pode ter as mesmas coordenadas que outro
-							mundo -> acrescentaNinho(num, num2);
-							system("cls");
-							x = 0;
-							y = 0;
+							mundo -> acrescentaNinho(num, num2, &x, &y);
 							mundo->imprime();
 						}
 					}
@@ -100,7 +97,7 @@ void Interface::corre() {
 								iss >> num3;
 								if (!iss.fail()) {
 									if (str.compare("criaf") == 0 && num > 0 && c == 'E' && num3 <= mundo->numNinhos()) {
-										mundo->formiga(num, num3);
+										mundo->trataFormiga(num, num3);
 										mundo->imprime();
 									}
 									else {
@@ -118,8 +115,7 @@ void Interface::corre() {
 			}
 		}
 		iss.str("");
-		x = x + 2;
-		y = y + 2;
+		
 	}
 }
 
