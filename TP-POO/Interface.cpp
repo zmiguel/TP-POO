@@ -41,6 +41,8 @@ void Interface::corre() {
 		if (comandoEsp == 0) {
 			iss >> str;
 			if (str.compare("tempo") == 0) {
+				int i = 1;
+				mundo->iteracao(i);
 				cout << "\n> Passou uma iteracao" << endl;
 			}
 			else {
@@ -86,7 +88,7 @@ void Interface::corre() {
 							mundo->imprime();
 						}
 						else if(str.compare("listaposicao") == 0 && num < mundo->getDim() && num2 < mundo ->getDim()) {
-							mundo->listaPos(num, num2);
+							cout << mundo->listaPos(num, num2);
 						
 						}
 					}

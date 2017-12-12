@@ -25,11 +25,16 @@ public:
 	void imprime();
 	void acrescentaNinho(int x, int y, int *cx,int *cy);
 	void trataFormiga(int qnts, int id);
-	void listaPos(int x, int y);
+	
 	bool ocupaPos(int x, int y);
 	int numNinhos();
+
+	string listaPos(int x, int y);
 	string listaNinho(int id);
 	string getAsString(int *x, int *y) const;
+
+	void iteracao(int temp);
+
 	
 	Mundo(int dim, int energNinhos, int perFazNovoNinho, int transFormNin, int numPosMigalhas, int energiaInicialMig, int migalhaSorteio);
 	~Mundo();

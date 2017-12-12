@@ -140,22 +140,48 @@ bool Mundo::ocupaPos(int x, int y) {
 	return false;
 }
 
-void Mundo::listaPos(int x, int y) {
+string Mundo::listaPos(int x, int y) {
 
+	ostringstream oss;
 
 	for (unsigned int i = 0; i < ninhos.size(); i++) {
 		if (ninhos[i].getX() == x && ninhos[i].getY() == y) {
-			cout << ninhos[i].ninhoInfo();
+			oss << ninhos[i].ninhoInfo();
 		}
 	}
 
 	for (unsigned int i = 0; i < ninhos.size(); i++) {
 		for (int k = 0; k < ninhos[i].numFormigas(); k++) {
 			if (ninhos[i].formigaPosX(k) == x && ninhos[i].formigaPosY(k) == y) {
-				cout << ninhos[i].formigaInfo(k);
+				oss << ninhos[i].formigaInfo(k);
 			}
 		}
 	}
+
+	return oss.str();
+}
+
+void Mundo::iteracao(int temp){
+
+	int x = 0;
+	int y = 0;
+
+	for (unsigned int i = 0; i < ninhos.size(); i++) {
+		for (int k = 0; k < ninhos[i].numFormigas(); k++) {
+			if (ninhos[i].formigaPosX(k) == x && ninhos[i].formigaPosY(k) == y ) {
+				
+				
+
+
+				if (ocupaPos(x, y) == false) {
+					cout << "IN PROGRESS";
+				}
+
+
+			}
+		}
+	}
+
 }
 
 Mundo::~Mundo()

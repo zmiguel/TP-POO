@@ -6,22 +6,21 @@ int main() {
 	bool flag = false;
 	int valor;
 
-	Consola::setTextColor(Consola::VERDE);
-	Consola::gotoxy(35, 1);
-	Consola::setTextSize(18, 18);
-	cout << "TRABALHO PR햀ICO - PROGRAMA플O ORIENTADA A OBJECTOS";
-	Consola::gotoxy(47, 3);
-	cout << "1 - NOVO JOGO";
-	Consola::gotoxy(47, 4);
-	cout << "2 - CARREGAR JOGO";
-	Consola::gotoxy(47, 5);
-	cout << "3 - SAIR";
-
-	int y = 7;
 
 	while (flag == false) {
-		
-		Consola::gotoxy(45, y);
+
+		Consola::setTextColor(Consola::VERDE);
+		Consola::gotoxy(35, 1);
+		Consola::setTextSize(18, 18);
+		cout << "TRABALHO PR햀ICO - PROGRAMA플O ORIENTADA A OBJECTOS";
+		Consola::gotoxy(47, 3);
+		cout << "1 - NOVO JOGO";
+		Consola::gotoxy(47, 4);
+		cout << "2 - CARREGAR JOGO";
+		Consola::gotoxy(47, 5);
+		cout << "3 - SAIR";
+
+		Consola::gotoxy(45, 7);
 		cout << "> ";
 		string s;
 		cin >> s;
@@ -32,7 +31,8 @@ int main() {
 				flag = true;
 			}
 		}
-		y++;
+
+		system("cls");
 	}
 
 
