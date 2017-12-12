@@ -21,14 +21,17 @@ string Ninho::getAsString()const {
 
 	ostringstream oss;
 
-	oss << "Ninho com ID: " << id
-		<< "\nPosicao: (" << PosX
+	oss << "Ninho ID: " << id
+		<< " Posicao: (" << PosX
 		<< "," << PosY << ")"
-		<< "\nEnergia: "<< energiaInicial << endl;
+		<< " Energia: "<< energiaInicial;
+
 
 	for (unsigned int i = 0; i < formigas.size();i++) {
-		oss << formigas[i]->getAsString() << endl;
+		oss << formigas[i]->getAsString();
 	}
+
+	oss << endl;
 
 	return oss.str();
 }

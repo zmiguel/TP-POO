@@ -76,10 +76,10 @@ void Mundo::acrescentaNinho(int x, int y, int *cx, int *cy){
 string Mundo::getAsString(int *cx, int *cy) const{
 
 	ostringstream oss;
-	for (vector<Ninho>::const_iterator it = ninhos.begin(); it != ninhos.end(); it++) {
+	for (vector<Ninho>::const_iterator it = ninhos.begin(); it != ninhos.end(); it++) {	
+		*cx++;
+		*cy++;
 		oss << it->getAsString() << endl;
-		*cx = *cx + 3;
-		*cy = *cy + 3;
 	}
 	return oss.str();
 }

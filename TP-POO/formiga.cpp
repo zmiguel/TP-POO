@@ -22,11 +22,11 @@ int Formiga::getY() const{
 string Formiga::getAsString() {
 	ostringstream oss;
 
-	oss << "\nID: " << id
-		<< "\nEnergia" << energia
-		<< "\nRaio de Visao" << raioMov
-		<< "\nX: " << posX
-		<< "\nY: " << posY << endl;
+	oss << "\nFormiga ID: " << id
+		<< " Energia: " << energia
+		<< " Raio de Visao: " << raioMov
+		<< " (" << posX << ","
+		<< posY << ")";
 
 	string s = oss.str();
 	return s;
