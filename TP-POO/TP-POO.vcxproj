@@ -130,6 +130,9 @@
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Ninho.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="conf.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

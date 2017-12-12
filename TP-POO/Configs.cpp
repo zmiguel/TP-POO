@@ -25,10 +25,20 @@ void Configs::config() {
 	cin.clear();
 	cin.ignore(100, '\n');
 
+	cout << "Configuração do novo jogo:\n" << "Comandos:\n"
+	  << "defmundo - Define o tamanho do mundo\n"
+	  << "defen - Define energia inicial dos ninhos\n"
+	  << "defpc - Define % de energia necesaria a mais para o ninho criar uma nova formiga\n"
+	  << "defvt - Define a energia transferida entre as formigas e o ninho por iteração\n"
+	  << "defme - Define a energia inicial das novas formigas\n"
+	  << "defmi - Define a % inicial de casas com migalhas\n"
+	  << "defnm - Define o numero maximo de migalhas adicionada a casa iteração\n\n"
+	  << "file - Abrir um ficheiro com a configuração\n\n";
+
+
 	while (flag0 == true) {
 
 		comandoEsp = 0;
-
 		cout << "> ";
 		getline(cin, comando);
 		istringstream iss(comando);
@@ -53,60 +63,6 @@ void Configs::config() {
 					cout << "INICIO FALHADO! ESTAO CONFIGS EM FALTA!!!\n";
 				}
 			}
-			else if (str.compare("file") == 0) {
-			  cout << "Intruduza o nome do ficheiro: ";
-			  string fileName;
-			  string data;
-			  getline(cin, fileName);
-			  ifstream confFile (fileName);
-			  while (confFile.eof() == false) {
-				getline(confFile, data);
-				istringstream confLine(data);
-				string comd;
-				int vall;
-				confLine >> comd;
-				confLine >> vall;
-				if (comd.compare("mundo") == 0 && vall >= 10) {
-				  cout << "Mundo set " << vall << endl;
-				  defmundo = vall;
-				  flag1 = true;
-				}
-				else if (comd.compare("en") == 0 && vall > 0) {
-				  cout << "Energia Ninhos set " << vall << endl;
-				  defen = vall;
-				  flag2 = true;
-				}
-				else if (comd.compare("pc") == 0 && vall > 0) {
-				  cout << "% da energia do ninho para criar formigas novas set " << vall << endl;
-				  defpc = vall;
-				  flag3 = true;
-				}
-				else if (comd.compare("vt") == 0 && vall > 0) {
-				  cout << "Evergia tranferia por iteração entre a formiga e o ninho set " << vall << endl;
-				  defvt = vall;
-				  flag4 = true;
-				}
-				else if (comd.compare("mi") == 0 && vall > 0 && vall < 100) {
-				  cout << "% de posições com formigas set " << vall << endl;
-				  defmi = vall;
-				  flag5 = true;
-				}
-				else if (comd.compare("me") == 0 && vall > 0) {
-				  cout << "Energia inicial das novas formigas set " << vall << endl;
-				  defme = vall;
-				  flag6 = true;
-				}
-				else if (comd.compare("nm") == 0 && vall > 0) {
-				  cout << "numero de migalhas adicionadas a cada instante set " << vall << endl;
-				  defnm = vall;
-				  flag7 = true;
-				}
-
-			  }
-			  confFile.close();
-			  cout << "Ficheiro lido!!\n";
-
-			}
 			else {
 				cout << "Erro de sintaxe"<< endl;
 			}
@@ -114,9 +70,13 @@ void Configs::config() {
 		else {
 		  if (comandoEsp == 1) {
 			string str;
+			string str2;
 			int val;
 			iss >> str;
-			iss >> val;
+			iss >> str2;
+
+			stringstream numb(str2);
+			numb >> val;
 
 			if (iss.fail()) {
 			  cout << "erro!";
@@ -155,6 +115,66 @@ void Configs::config() {
 			  cout << "Numero de migalhas a serem sorteadas a cada instante: " << val << endl;
 			  defnm = val;
 			  flag7 = true;
+			}
+			else if (str.compare("executa") == 0) {
+			  string data;
+			  ifstream confFile(str2);
+			  while (confFile.eof() == false) {
+				getline(confFile, data);
+				istringstream confLine(data);
+				string comd;
+				int vall;
+				confLine >> comd;
+				confLine >> vall;
+				if (comd.compare("mundo") == 0 && vall >= 10) {
+				  cout << "Mundo set " << vall << endl;
+				  defmundo = vall;
+				  flag1 = true;
+				}
+				else if (comd.compare("en") == 0 && vall > 0) {
+				  cout << "Energia Ninhos set " << vall << endl;
+				  defen = vall;
+				  flag2 = true;
+				}
+				else if (comd.compare("pc") == 0 && vall > 0) {
+				  cout << "% da energia do ninho para criar formigas novas set " << vall << endl;
+				  defpc = vall;
+				  flag3 = true;
+				}
+				else if (comd.compare("vt") == 0 && vall > 0) {
+				  cout << "Evergia tranferia por iteração entre a formiga e o ninho set " << vall << endl;
+				  defvt = vall;
+				  flag4 = true;
+				}
+				else if (comd.compare("mi") == 0 && vall > 0 && vall < 100) {
+				  cout << "% de posições com migalhas set " << vall << endl;
+				  defmi = vall;
+				  flag5 = true;
+				}
+				else if (comd.compare("me") == 0 && vall > 0) {
+				  cout << "Energia inicial das novas formigas set " << vall << endl;
+				  defme = vall;
+				  flag6 = true;
+				}
+				else if (comd.compare("nm") == 0 && vall > 0) {
+				  cout << "numero de migalhas adicionadas a cada instante set " << vall << endl;
+				  defnm = vall;
+				  flag7 = true;
+				}
+
+			  }
+			  confFile.close();
+			  cout << "Ficheiro lido!!\n";
+			  if (flag1 == true && flag2 == true && flag3 == true && flag4 == true && flag5 == true && flag6 == true && flag7 == true) {
+				system("cls");
+				Mundo *mundo = new Mundo(defmundo, defen, defpc, defvt, defme, defmi, defnm);
+				Interface inter(mundo);
+				inter.corre();
+			  }
+			  else {
+				cout << "INICIO FALHADO! ESTAO CONFIGS EM FALTA!!!\n";
+			  }
+
 			}
 			else {
 			  flag0 = false;

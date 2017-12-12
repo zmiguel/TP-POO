@@ -7,8 +7,6 @@ Interface::Interface(Mundo * m){
 
 void Interface::corre() {
 
-	mundo->imprime();
-	
 	string comando;
 	bool flag = true;
 	char nextChar;
@@ -23,11 +21,14 @@ void Interface::corre() {
 	int y = 0;
 
 
-	while (flag == true) {
+	while (true) {
+	  mundo->imprime();
+	  Consola::gotoxy(0, 1);
+	  cout << "                    ";
 
 		comandoEsp = 0;
-		Consola::gotoxy(x, y);
-		cout << "\n> ";
+		Consola::gotoxy(0, 0);
+		cout << "para ver todos os comandos escreva [help]\n> ";
 		getline(cin, comando);
 		istringstream iss(comando);
 
@@ -39,6 +40,7 @@ void Interface::corre() {
 		}
 
 		if (comandoEsp == 0) {
+		  system("cls");
 			iss >> str;
 			if (str.compare("tempo") == 0) {
 				int i = 1;
@@ -51,13 +53,14 @@ void Interface::corre() {
 				}
 				else {
 					if (str.compare("sair") == 0) {
-						flag = false;
+						exit(0);
 					}
 				}
 			}
 		}
 		else {
 			if (comandoEsp == 1) {
+			  system("cls");
 				iss >> str;
 				iss >> num;
 				if (iss.fail()) {
@@ -75,6 +78,7 @@ void Interface::corre() {
 			}
 			else {
 				if (comandoEsp == 2) {
+				  system("cls");
 					iss >> str;
 					iss >> num;
 					iss >> num2;
@@ -95,6 +99,7 @@ void Interface::corre() {
 				}
 				else {
 					if (comandoEsp == 3) {
+					  system("cls");
 						iss >> str;
 						iss >> num;
 						if (!iss.fail()) {
