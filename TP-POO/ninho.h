@@ -17,8 +17,8 @@ public:
 	int getX()const;
 	int  getY()const;
 
-	int formigaPosX();
-	int formigaPosY();
+	int formigaPosX(int id);
+	int formigaPosY(int id);
 	int numFormigas();
 	void acrescentaFormiga(int num, int dim);
 

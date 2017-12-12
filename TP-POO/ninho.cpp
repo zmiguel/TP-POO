@@ -55,15 +55,14 @@ int Ninho::numFormigas() {
 	return formigas.size();
 }
 
-int Ninho::formigaPosX() {
+int Ninho::formigaPosX(int id) {
 
-
-
+	return formigas[id]->getX();
 }
 
-int Ninho::formigaPosY() {
+int Ninho::formigaPosY(int id) {
 
-
+	return formigas[id]->getY();
 }
 
 Ninho::~Ninho(){

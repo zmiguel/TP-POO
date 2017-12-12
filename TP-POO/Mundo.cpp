@@ -46,9 +46,8 @@ void Mundo::imprime(){
 					cout << "E";
 					flag = 1;
 				}
-			} ////// CONFUSO
+			}
 		}
-
 
 		if (flag == 0) {
 			cout << "*";
