@@ -7,7 +7,6 @@ Interface::Interface(Mundo * m){
 
 void Interface::corre() {
 
-	mundo->criaNinhos();
 	mundo->imprime();
 	
 	string comando;
@@ -18,6 +17,7 @@ void Interface::corre() {
 	int num;
 	int num2;
 	int num3;
+	char c;
 
 	int x = 0;
 	int y = 0;
@@ -65,6 +65,10 @@ void Interface::corre() {
 					if (str.compare("tempo") == 0 && num > 0) {
 						cout << "\n> Passaram " << num << " iteracoes" << endl;
 					}
+					else {
+						if (str.compare("listaninho") == 0 && num <= mundo->numNinhos())
+							cout << mundo->listaNinho(num);
+					}
 				}
 			}
 			else {
@@ -91,12 +95,16 @@ void Interface::corre() {
 						iss >> str;
 						iss >> num;
 						if (!iss.fail()) {
-							iss >> num2;
+							iss >> c;
 							if (!iss.fail()) {
 								iss >> num3;
 								if (!iss.fail()) {
-									if (str.compare("criaf") == 0) {
-
+									if (str.compare("criaf") == 0 && num > 0 && c == 'E' && num3 <= mundo->numNinhos()) {
+										mundo->formiga(num, num3);
+										mundo->imprime();
+									}
+									else {
+										printf("Erro de sintaxe");
 									}
 								
 								}

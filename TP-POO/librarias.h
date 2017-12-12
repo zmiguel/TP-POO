@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <cstdlib>
 #include <locale.h>
+#include <time.h>
 
 #include "Formiga.h"
 #include "Ninho.h"

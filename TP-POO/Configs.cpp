@@ -75,7 +75,7 @@ void Configs::config() {
 					}
 					else {
 						if (str.compare("defen") == 0 && val > 0) {
-							cout << "Numero de ninhos: " << val << endl;
+							cout << "Energia inicial dos ninhos: " << val << endl;
 							defen = val;
 							flag2 = true;
 						}

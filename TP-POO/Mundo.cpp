@@ -1,8 +1,8 @@
 #include "Mundo.h"
 
-Mundo::Mundo(int dim, int numNinhos, int perFazNovoNinho, int transFormNin, int numPosMigalhas, int energiaInicialMig, int migalhaSorteio) :dimensao(dim){
+Mundo::Mundo(int dim, int energNinhos, int perFazNovoNinho, int transFormNin, int numPosMigalhas, int energiaInicialMig, int migalhaSorteio) :dimensao(dim){
 
-	this->numNinhos = numNinhos;
+	this->energNinhos = energNinhos;
 	this->perFazNovoNinho = perFazNovoNinho;
 	this->transFormNin = transFormNin;
 	this->numPosMigalhas = numPosMigalhas;
@@ -20,23 +20,35 @@ void Mundo::setDim(int dim) {
 
 void Mundo::imprime(){
 
-	int conta = 0;
 	int flag = 0;
 	int x = 65;
 	int y = 5;
 	int xi = 65;
 	int yi = 5;
 
+
+	cout << ninhos.size();
+
 	while (x < getDim() + xi && y < getDim() + yi) {
 		Consola::gotoxy(x, y);
 		flag = 0;
 
-		for (vector<Ninho>::const_iterator it = ninhos.begin(); it != ninhos.end(); it++) {
-			if (it->getX() + xi == x && it->getY() + yi == y) {
+		for (unsigned int i = 0; i < ninhos.size(); i++) {
+			if (ninhos[i].getX() + xi == x && ninhos[i].getY() + yi == y) {
 				cout << "N";
 				flag = 1;
 			}
 		}
+
+		for (unsigned int i = 0; i < ninhos.size(); i++) {
+			for (int k = 0; k < ninhos[i].numFormigas(); k++) {
+				if (formigaPosX(k) + xi == x && formigaPosY(k) + yi == y) {
+					cout << "E";
+					flag = 1;
+				}
+			} ////// CONFUSO
+		}
+
 
 		if (flag == 0) {
 			cout << "*";
@@ -52,7 +64,7 @@ void Mundo::imprime(){
 
 void Mundo::acrescentaNinho(int x, int y){
 	
-	ninhos.push_back(Ninho(x, y));
+	ninhos.push_back(Ninho(x, y, energNinhos));
 
 }
 
@@ -67,16 +79,44 @@ string Mundo::getAsString(int *x, int *y) const{
 	return oss.str();
 }
 
-void Mundo::criaNinhos(){
-	int x;
-	int y;
+string Mundo::listaNinho(int id) {
 
-	for (int i = 0; i < numNinhos; i++) {
-		x = rand() % dimensao;
-		y = rand() % dimensao;
-
-		ninhos.push_back(Ninho(x,y));			// em falta --> condição para que não existam ninhos sobrepostos
+	ostringstream oss;
+	
+	for (unsigned int i = 0; i < ninhos.size(); i++) {
+		if (id == i + 1) {
+			oss << ninhos[i].getAsString();
+		}
 	}
+
+	return oss.str();
+}
+
+int Mundo::numNinhos() {
+
+	return ninhos.size();
+
+}
+
+void Mundo::formiga(int qnts, int id){
+	
+	int dim = getDim();
+	ninhos[id-1].acrescentaFormiga(qnts, dim);
+
+}
+
+int Mundo::formigaPosX(int id) {
+	
+	int x = ninhos[id].formigaPosX();
+
+	return x;
+}
+
+int Mundo::formigaPosY(int id) {
+
+	int y = ninhos[id].formigaPosY();
+
+	return y;
 }
 
 Mundo::~Mundo()

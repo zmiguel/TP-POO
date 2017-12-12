@@ -17,9 +17,12 @@ public:
 	int getX()const;
 	int  getY()const;
 
-	void acrescentaFormiga();
+	int formigaPosX();
+	int formigaPosY();
+	int numFormigas();
+	void acrescentaFormiga(int num, int dim);
 
-	Ninho(int x, int y);
+	Ninho(int x, int y, int energiaInicial);
 	~Ninho();
 };
 
