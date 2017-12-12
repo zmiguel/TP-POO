@@ -58,69 +58,55 @@ void Configs::config() {
 			}
 		}
 		else {
-			if (comandoEsp == 1) {
-				string str;
-				int val;
-				iss >> str;
-				iss >> val;
+		  if (comandoEsp == 1) {
+			string str;
+			int val;
+			iss >> str;
+			iss >> val;
 
-				if (iss.fail()) {
-					cout << "Ficheiro aqui";
-				}
-				else {
-					if (str.compare("defmundo") == 0 && val >= 10) {
-						cout << "Dimensao do Mundo: " << val << "x" << val << endl;
-						defmundo = val;
-						flag1 = true;
-					}
-					else {
-						if (str.compare("defen") == 0 && val > 0) {
-							cout << "Energia inicial dos ninhos: " << val << endl;
-							defen = val;
-							flag2 = true;
-						}
-						else {
-							if (str.compare("defpc") == 0 && val > 0) {
-								cout << "Valor(em percentagem) da energia inicial a partir do qual o ninho faz uma formiga: " << val << endl;
-								defpc = val;
-								flag3 = true;
-							}
-							else {
-								if (str.compare("defvt") == 0) {
-									cout << "Número de unidades de energia transferidas entre ninho e formiga por iteração: " << val << endl;
-									defvt = val;
-									flag4 = true;
-								}
-								else {
-									if (str.compare("defmi") == 0 && val > 0 && val < 100) {
-										cout << "Percentagem inicial de posicoes com migalhas: " << val << endl;
-										defmi = val;
-										flag5 = true;
-									}
-									else {
-										if (str.compare("defme") == 0 && val > 0) {
-											cout << "Energia inicial de novas migalhas: " << val << endl;
-											defme = val;
-											flag6 = true;
-										}
-										else {
-											if (str.compare("defnm") == 0 && val > 0) {
-												cout << "Numero de migalhas a serem sorteadas a cada instante: " << val << endl;
-												defnm = val;
-												flag7 = true;
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
+			if (iss.fail()) {
+			  cout << "Ficheiro aqui";
+			}
+			else if (str.compare("defmundo") == 0 && val >= 10) {
+			  cout << "Dimensao do Mundo: " << val << "x" << val << endl;
+			  defmundo = val;
+			  flag1 = true;
+			}
+			else if (str.compare("defen") == 0 && val > 0) {
+			  cout << "Energia inicial dos ninhos: " << val << endl;
+			  defen = val;
+			  flag2 = true;
+			}
+			else if (str.compare("defpc") == 0 && val > 0) {
+			  cout << "Valor(em percentagem) da energia inicial a partir do qual o ninho faz uma formiga: " << val << endl;
+			  defpc = val;
+			  flag3 = true;
+			}
+			else if (str.compare("defvt") == 0) {
+			  cout << "Número de unidades de energia transferidas entre ninho e formiga por iteração: " << val << endl;
+			  defvt = val;
+			  flag4 = true;
+			}
+			else if (str.compare("defmi") == 0 && val > 0 && val < 100) {
+			  cout << "Percentagem inicial de posicoes com migalhas: " << val << endl;
+			  defmi = val;
+			  flag5 = true;
+			}
+			else if (str.compare("defme") == 0 && val > 0) {
+			  cout << "Energia inicial de novas migalhas: " << val << endl;
+			  defme = val;
+			  flag6 = true;
+			}
+			else if (str.compare("defnm") == 0 && val > 0) {
+			  cout << "Numero de migalhas a serem sorteadas a cada instante: " << val << endl;
+			  defnm = val;
+			  flag7 = true;
 			}
 			else {
-				flag0 = false;
-				cout << "Sintaxe invalida" << endl;
+			  flag0 = false;
+			  cout << "Sintaxe invalida" << endl;
 			}
+		  }
 		}
 		iss.str("");
 	}
