@@ -14,6 +14,9 @@ class Ninho{
 	vector<Formiga*> formigas;
 public:
 	string getAsString()const;
+	string formigaInfo(int id);
+	string ninhoInfo();
+
 	int getX()const;
 	int  getY()const;
 

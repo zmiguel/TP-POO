@@ -121,7 +121,6 @@ void Mundo::trataFormiga(int qnts, int id) {
 	};
 }
 
-
 bool Mundo::ocupaPos(int x, int y) {
 
 	for (unsigned int i = 0; i < ninhos.size(); i++) {
@@ -139,6 +138,24 @@ bool Mundo::ocupaPos(int x, int y) {
 	}
 
 	return false;
+}
+
+void Mundo::listaPos(int x, int y) {
+
+
+	for (unsigned int i = 0; i < ninhos.size(); i++) {
+		if (ninhos[i].getX() == x && ninhos[i].getY() == y) {
+			cout << ninhos[i].ninhoInfo();
+		}
+	}
+
+	for (unsigned int i = 0; i < ninhos.size(); i++) {
+		for (int k = 0; k < ninhos[i].numFormigas(); k++) {
+			if (ninhos[i].formigaPosX(k) == x && ninhos[i].formigaPosY(k) == y) {
+				cout << ninhos[i].formigaInfo(k);
+			}
+		}
+	}
 }
 
 Mundo::~Mundo()

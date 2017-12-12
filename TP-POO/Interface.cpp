@@ -85,6 +85,10 @@ void Interface::corre() {
 							mundo -> acrescentaNinho(num, num2, &x, &y);
 							mundo->imprime();
 						}
+						else if(str.compare("listaposicao") == 0 && num < mundo->getDim() && num2 < mundo ->getDim()) {
+							mundo->listaPos(num, num2);
+						
+						}
 					}
 				}
 				else {

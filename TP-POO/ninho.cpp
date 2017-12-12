@@ -33,6 +33,25 @@ string Ninho::getAsString()const {
 	return oss.str();
 }
 
+string Ninho::ninhoInfo() {
+
+	ostringstream oss;
+
+	oss << "Ninho com ID: " << id
+		<< "\nPosicao: (" << PosX
+		<< "," << PosY << ")"
+		<< "\nEnergia Inicial de: " << energiaInicial << endl;
+
+	return oss.str();
+
+}
+
+string Ninho::formigaInfo(int id) {
+
+	return formigas[id]->getAsString();
+
+}
+
 void Ninho::acrescentaFormiga(int x, int y) {
 
 		Formiga* ob = new Formiga(x, y);

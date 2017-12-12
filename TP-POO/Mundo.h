@@ -25,6 +25,7 @@ public:
 	void imprime();
 	void acrescentaNinho(int x, int y, int *cx,int *cy);
 	void trataFormiga(int qnts, int id);
+	void listaPos(int x, int y);
 	bool ocupaPos(int x, int y);
 	int numNinhos();
 	string listaNinho(int id);
