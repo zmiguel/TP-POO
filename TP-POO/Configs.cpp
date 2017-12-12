@@ -50,8 +50,62 @@ void Configs::config() {
 					Interface inter(mundo);
 					inter.corre();
 				} else {
-					cout << "INICIO FALHADO! ESTAO CONFIGS EM FALTA!!!";
+					cout << "INICIO FALHADO! ESTAO CONFIGS EM FALTA!!!\n";
 				}
+			}
+			else if (str.compare("file") == 0) {
+			  cout << "Intruduza o nome do ficheiro: ";
+			  string fileName;
+			  string data;
+			  getline(cin, fileName);
+			  ifstream confFile (fileName);
+			  while (confFile.eof() == false) {
+				getline(confFile, data);
+				istringstream confLine(data);
+				string comd;
+				int vall;
+				confLine >> comd;
+				confLine >> vall;
+				if (comd.compare("mundo") == 0 && vall >= 10) {
+				  cout << "Mundo set " << vall << endl;
+				  defmundo = vall;
+				  flag1 = true;
+				}
+				else if (comd.compare("en") == 0 && vall > 0) {
+				  cout << "Energia Ninhos set " << vall << endl;
+				  defen = vall;
+				  flag2 = true;
+				}
+				else if (comd.compare("pc") == 0 && vall > 0) {
+				  cout << "% da energia do ninho para criar formigas novas set " << vall << endl;
+				  defpc = vall;
+				  flag3 = true;
+				}
+				else if (comd.compare("vt") == 0 && vall > 0) {
+				  cout << "Evergia tranferia por iteração entre a formiga e o ninho set " << vall << endl;
+				  defvt = vall;
+				  flag4 = true;
+				}
+				else if (comd.compare("mi") == 0 && vall > 0 && vall < 100) {
+				  cout << "% de posições com formigas set " << vall << endl;
+				  defmi = vall;
+				  flag5 = true;
+				}
+				else if (comd.compare("me") == 0 && vall > 0) {
+				  cout << "Energia inicial das novas formigas set " << vall << endl;
+				  defme = vall;
+				  flag6 = true;
+				}
+				else if (comd.compare("nm") == 0 && vall > 0) {
+				  cout << "numero de migalhas adicionadas a cada instante set " << vall << endl;
+				  defnm = vall;
+				  flag7 = true;
+				}
+
+			  }
+			  confFile.close();
+			  cout << "Ficheiro lido!!\n";
+
 			}
 			else {
 				cout << "Erro de sintaxe"<< endl;
@@ -65,7 +119,7 @@ void Configs::config() {
 			iss >> val;
 
 			if (iss.fail()) {
-			  cout << "Ficheiro aqui";
+			  cout << "erro!";
 			}
 			else if (str.compare("defmundo") == 0 && val >= 10) {
 			  cout << "Dimensao do Mundo: " << val << "x" << val << endl;

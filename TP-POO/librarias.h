@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <locale.h>
 #include <time.h>
+#include <fstream>
 
 #include "Formiga.h"
 #include "Ninho.h"
