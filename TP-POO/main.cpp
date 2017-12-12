@@ -6,7 +6,7 @@ int main() {
 	bool flag = false;
 	int valor;
 
-	Consola::setTextColor(Consola::VERMELHO);
+	Consola::setTextColor(Consola::VERDE);
 	Consola::gotoxy(35, 1);
 	Consola::setTextSize(18, 18);
 	cout << "TRABALHO PRÁTICO - PROGRAMAÇÃO ORIENTADA A OBJECTOS";

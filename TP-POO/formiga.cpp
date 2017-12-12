@@ -6,7 +6,7 @@ Formiga::Formiga(int x, int y){
 	this->id = i++;
 	this->posX = x;
 	this->posY = y;
-	cout << getAsString();
+	//cout << getAsString();
 }
 
 int Formiga::getX() const{

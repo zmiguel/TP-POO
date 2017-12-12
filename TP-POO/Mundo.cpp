@@ -26,7 +26,6 @@ void Mundo::imprime(){
 	int xi = 65;
 	int yi = 5;
 
-
 	cout << ninhos.size();
 
 	while (x < getDim() + xi && y < getDim() + yi) {
@@ -42,7 +41,7 @@ void Mundo::imprime(){
 
 		for (unsigned int i = 0; i < ninhos.size(); i++) {
 			for (int k = 0; k < ninhos[i].numFormigas(); k++) {
-				if (formigaPosX(k) + xi == x && formigaPosY(k) + yi == y) {
+				if (ninhos[i].formigaPosX(k) + xi == x && ninhos[i].formigaPosY(k) + yi == y) {
 					cout << "E";
 					flag = 1;
 				}
@@ -102,20 +101,6 @@ void Mundo::formiga(int qnts, int id){
 	int dim = getDim();
 	ninhos[id-1].acrescentaFormiga(qnts, dim);
 
-}
-
-int Mundo::formigaPosX(int id) {
-	
-	int x = ninhos[id].formigaPosX();
-
-	return x;
-}
-
-int Mundo::formigaPosY(int id) {
-
-	int y = ninhos[id].formigaPosY();
-
-	return y;
 }
 
 Mundo::~Mundo()
