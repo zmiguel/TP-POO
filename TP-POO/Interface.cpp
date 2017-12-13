@@ -40,13 +40,13 @@ void Interface::corre() {
 		}
 
 		if (comandoEsp == 0) {
-		  system("cls");
+		  //system("cls");
 		  Consola::gotoxy(0, 2);
 			iss >> str;
 			if (str.compare("tempo") == 0) {
 				int i = 1;
 				mundo->iteracao(i);
-				cout << "\n> Passou uma iteracao" << endl;
+				mundo->imprime();
 			}
 			else {
 				if (str.compare("listamundo") == 0) {
@@ -54,6 +54,7 @@ void Interface::corre() {
 				}
 				else {
 					if (str.compare("sair") == 0) {
+						delete mundo;
 						exit(0);
 					}
 				}
@@ -70,7 +71,7 @@ void Interface::corre() {
 				}
 				else {
 					if (str.compare("tempo") == 0 && num > 0) {
-						cout << "\n> Passaram " << num << " iteracoes" << endl;
+						mundo->iteracao(num);
 					}
 					else {
 						if (str.compare("listaninho") == 0 && num <= mundo->numNinhos())
@@ -96,13 +97,12 @@ void Interface::corre() {
 						}
 						else if(str.compare("listaposicao") == 0 && num < mundo->getDim() && num2 < mundo ->getDim()) {
 							cout << mundo->listaPos(num, num2);
-						
 						}
 					}
 				}
 				else {
 					if (comandoEsp == 3) {
-					  system("cls");
+					  //system("cls");
 					  Consola::gotoxy(0, 2);
 						iss >> str;
 						iss >> num;

@@ -2,11 +2,8 @@
 
 int Formiga::i = 1;
 
-Formiga::Formiga(int x, int y){
+Formiga::Formiga(int x, int y):posX(x), posY(y){
 	this->id = i++;
-	this->posX = x;
-	this->posY = y;
-	//cout << getAsString();
 }
 
 int Formiga::getX() const{
@@ -17,6 +14,26 @@ int Formiga::getX() const{
 int Formiga::getY() const{
 
 	return posY;
+}
+
+int Formiga::getVisao() {
+
+	return raioVisao;
+}
+
+int Formiga::getMov() {
+
+	return raioMov;
+}
+
+void Formiga::setX(int x) {
+
+	posX = x;
+}
+
+void Formiga::setY(int y) {
+
+	posY = y;
 }
 
 string Formiga::getAsString() {

@@ -15,6 +15,12 @@ public:
 	Formiga(int x, int y);
 	int getX()const;
 	int  getY()const;
+	int getVisao();
+	int getMov();
+
+	void setX(int x);
+	void setY(int y);
+
 	string getAsString();
 };
 

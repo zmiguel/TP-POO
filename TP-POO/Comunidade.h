@@ -1,8 +1,9 @@
 #pragma once
 #include "librarias.h"
 
-class Comunidade
-{
+class Comunidade{
+
+
 public:
 	Comunidade();
 	~Comunidade();

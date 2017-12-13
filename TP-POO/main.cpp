@@ -6,6 +6,8 @@ int main() {
 	bool flag = false;
 	int valor;
 
+	srand(time(NULL));
+
 
 	while (flag == false) {
 

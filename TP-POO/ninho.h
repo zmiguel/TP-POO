@@ -18,12 +18,18 @@ public:
 	string ninhoInfo();
 
 	int getX()const;
-	int  getY()const;
+	int getY()const;
+
+	void formigaSetX(int id, int x);
+	void formigaSetY(int id, int y);
 
 	int formigaPosX(int id);
 	int formigaPosY(int id);
 	int numFormigas();
 	void acrescentaFormiga(int x, int y);
+
+	int formigaMov(int id);
+	int formigaVisao(int id);
 
 	Ninho(int x, int y, int energiaInicial);
 	~Ninho();

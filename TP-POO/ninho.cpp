@@ -76,6 +76,26 @@ int Ninho::formigaPosY(int id) {
 	return formigas[id]->getY();
 }
 
+void Ninho::formigaSetX(int id, int x) {
+
+	formigas[id]->setX(x);
+}
+
+void Ninho::formigaSetY(int id, int y) {
+
+	formigas[id]->setY(y);
+}
+
+int Ninho::formigaVisao(int id) {
+
+	return formigas[id]->getVisao();
+}
+
+int Ninho::formigaMov(int id) {
+
+	return formigas[id]->getMov();
+}
+
 Ninho::~Ninho(){
 
 }

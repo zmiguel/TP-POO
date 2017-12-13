@@ -34,6 +34,7 @@ public:
 	string getAsString(int *x, int *y) const;
 
 	void iteracao(int temp);
+	void regraPasseia(int id, int idn);
 
 	
 	Mundo(int dim, int energNinhos, int perFazNovoNinho, int transFormNin, int numPosMigalhas, int energiaInicialMig, int migalhaSorteio);
