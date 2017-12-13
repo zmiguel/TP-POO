@@ -7,19 +7,19 @@ int main() {
 	int valor;
 
 	srand(time(NULL));
+	Consola::setScreenSize(128, 32);
+	Consola::setTextColor(Consola::VERDE);
 
 
 	while (flag == false) {
-
-		Consola::setTextColor(Consola::VERDE);
-		Consola::gotoxy(35, 1);
+		Consola::gotoxy(39, 1);
 		Consola::setTextSize(18, 18);
 		cout << "TRABALHO PRÁTICO - PROGRAMAÇÃO ORIENTADA A OBJECTOS";
-		Consola::gotoxy(47, 3);
+		Consola::gotoxy(50, 3);
 		cout << "1 - NOVO JOGO";
-		Consola::gotoxy(47, 4);
+		Consola::gotoxy(50, 4);
 		cout << "2 - CARREGAR JOGO";
-		Consola::gotoxy(47, 5);
+		Consola::gotoxy(50, 5);
 		cout << "3 - SAIR";
 
 		Consola::gotoxy(45, 7);
@@ -34,7 +34,7 @@ int main() {
 			}
 		}
 
-		system("cls");
+		Consola::clrscr();
 	}
 
 

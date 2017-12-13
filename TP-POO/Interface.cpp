@@ -40,7 +40,6 @@ void Interface::corre() {
 		}
 
 		if (comandoEsp == 0) {
-		  //system("cls");
 		  Consola::gotoxy(0, 2);
 			iss >> str;
 			if (str.compare("tempo") == 0) {
@@ -62,7 +61,7 @@ void Interface::corre() {
 		}
 		else {
 			if (comandoEsp == 1) {
-			  system("cls");
+				Consola::clrscr();
 			  Consola::gotoxy(0, 2);
 				iss >> str;
 				iss >> num;
@@ -81,7 +80,7 @@ void Interface::corre() {
 			}
 			else {
 				if (comandoEsp == 2) {
-				  system("cls");
+					Consola::clrscr();
 				  Consola::gotoxy(0, 2);
 					iss >> str;
 					iss >> num;
@@ -102,7 +101,6 @@ void Interface::corre() {
 				}
 				else {
 					if (comandoEsp == 3) {
-					  //system("cls");
 					  Consola::gotoxy(0, 2);
 						iss >> str;
 						iss >> num;

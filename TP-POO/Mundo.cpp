@@ -25,13 +25,16 @@ void Mundo::imprime(){
 	int y = 5;
 	int xi = 65;
 	int yi = 5;
+	int itt = 0;
 
 	while (x < getDim() + xi && y < getDim() + yi) {
-		Consola::gotoxy(x, y);
+		Consola::setTextColor(Consola::CYAN);
+		Consola::gotoxy(x+itt*2, y);
 		flag = 0;
 
 		for (unsigned int i = 0; i < ninhos.size(); i++) {
 			if (ninhos[i].getX() + xi == x && ninhos[i].getY() + yi == y) {
+				Consola::setTextColor(Consola::VERMELHO);
 				cout << "N";
 				flag = 1;
 			}
@@ -40,6 +43,8 @@ void Mundo::imprime(){
 		for (unsigned int i = 0; i < ninhos.size(); i++) {
 			for (int k = 0; k < ninhos[i].numFormigas(); k++) {
 				if (ninhos[i].formigaPosX(k) + xi == x && ninhos[i].formigaPosY(k) + yi == y) {
+					Consola::setBackgroundColor(Consola::BRANCO);
+					Consola::setTextColor(Consola::VERMELHO);
 					cout << "E";
 					flag = 1;
 				}
@@ -50,12 +55,17 @@ void Mundo::imprime(){
 			cout << "*";
 		}
 
-		if (x - xi == getDim() - 1) {
+		if (x - xi == getDim()- 1) {
 			x = xi - 1;
+			itt = -1;
 			y++;
 		}
 		x++;
+		itt++;
+		Consola::setBackgroundColor(Consola::PRETO);
+
 	}
+	Consola::setTextColor(Consola::VERDE);
 }
 
 void Mundo::acrescentaNinho(int x, int y, int *cx, int *cy){

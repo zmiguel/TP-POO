@@ -33,7 +33,7 @@ void Configs::config() {
 	  << "defme - Define a energia inicial das novas formigas\n"
 	  << "defmi - Define a % inicial de casas com migalhas\n"
 	  << "defnm - Define o numero maximo de migalhas adicionada a casa iteração\n\n"
-	  << "file - Abrir um ficheiro com a configuração\n\n";
+	  << "executa <ficheiro> - Inicia um novo mundo com as configs do ficheiro\n\n";
 
 
 	while (flag0 == true) {
@@ -55,7 +55,7 @@ void Configs::config() {
 			iss >> str;
 			if (str.compare("inicio") == 0) {
 				if (flag1 == true && flag2 == true && flag3 == true && flag4 == true && flag5 == true && flag6 == true && flag7 == true) {
-					system("cls");
+					Consola::clrscr();
 					Mundo *mundo = new Mundo(defmundo, defen, defpc, defvt, defme, defmi, defnm);
 					Interface inter(mundo);
 					inter.corre();
@@ -166,7 +166,7 @@ void Configs::config() {
 			  confFile.close();
 			  cout << "Ficheiro lido!!\n";
 			  if (flag1 == true && flag2 == true && flag3 == true && flag4 == true && flag5 == true && flag6 == true && flag7 == true) {
-				system("cls");
+				Consola::clrscr();
 				Mundo *mundo = new Mundo(defmundo, defen, defpc, defvt, defme, defmi, defnm);
 				Interface inter(mundo);
 				inter.corre();
