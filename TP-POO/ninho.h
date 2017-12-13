@@ -22,11 +22,14 @@ public:
 
 	void formigaSetX(int id, int x);
 	void formigaSetY(int id, int y);
+	void formigaSetEner(int id, int e);
 
 	int formigaPosX(int id);
 	int formigaPosY(int id);
+	int formigaEnerg(int id);
+
 	int numFormigas();
-	void acrescentaFormiga(int x, int y);
+	void acrescentaFormiga(int x, int y, int e);
 
 	int formigaMov(int id);
 	int formigaVisao(int id);

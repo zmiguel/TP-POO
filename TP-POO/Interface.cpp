@@ -8,8 +8,6 @@ Interface::Interface(Mundo * m){
 void Interface::corre() {
 
 	string comando;
-	bool flag = true;
-	char nextChar;
 	int comandoEsp = 0;
 	string str;
 	int num;
@@ -19,7 +17,6 @@ void Interface::corre() {
 
 	int x = 0;
 	int y = 2;
-
 
 	while (true) {
 	  mundo->imprime();
@@ -33,13 +30,13 @@ void Interface::corre() {
 		istringstream iss(comando);
 
 		for (int i = 0; i < int(comando.length()); i++) {
-			nextChar = comando.at(i);
 			if (isspace(comando[i])) {
 				comandoEsp++;
 			}
 		}
 
 		if (comandoEsp == 0) {
+		  Consola::clrscr();
 		  Consola::gotoxy(0, 2);
 			iss >> str;
 			if (str.compare("tempo") == 0) {
@@ -90,7 +87,6 @@ void Interface::corre() {
 					}
 					else {
 						if (str.compare("ninho") == 0 && num < mundo->getDim() && num2 < mundo->getDim()) {
-							// introduzir condição de que um ninho introduzido não pode ter as mesmas coordenadas que outro
 							mundo -> acrescentaNinho(num, num2, &x, &y);
 							mundo->imprime();
 						}
@@ -101,6 +97,7 @@ void Interface::corre() {
 				}
 				else {
 					if (comandoEsp == 3) {
+					  Consola::clrscr();
 					  Consola::gotoxy(0, 2);
 						iss >> str;
 						iss >> num;

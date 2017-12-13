@@ -4,5 +4,5 @@
 class Configs {
 
 public:
-	void config();
+	void config(int valor);
 };

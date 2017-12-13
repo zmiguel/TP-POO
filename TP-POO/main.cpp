@@ -37,13 +37,14 @@ int main() {
 		Consola::clrscr();
 	}
 
+	Configs c;
 
 	switch (valor) {
 	
-	case 1: Configs c;
-			c.config();
+	case 1: c.config(valor);
 			break;
-	case 2: cout << "Not yet";
+	case 2: c.config(valor);
+			break;
 	case 3: exit(0);
 	}
 

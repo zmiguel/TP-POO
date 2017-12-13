@@ -146,7 +146,7 @@ void Mundo::trataFormiga(int qnts, int id) {
 
 		if (ocupaPos(x, y) == false) {
 
-			ninhos[id - 1].acrescentaFormiga(x, y);
+			ninhos[id - 1].acrescentaFormiga(x, y, 150);
 			qnts--;
 		}
 	};
@@ -173,25 +173,11 @@ bool Mundo::ocupaPos(int x, int y) {
 
 void Mundo::iteracao(int temp){
 
-	int x = 0;
-	int y = 0;
-
-	while (x < getDim() && y < getDim()) {
-
 		for (unsigned int i = 0; i < ninhos.size(); i++) {
 			for (int k = 0; k < ninhos[i].numFormigas(); k++) {
-				if (ninhos[i].formigaPosX(k) == x && ninhos[i].formigaPosY(k) == y ) {	
-					regraPasseia(i, k);
-				}
+				regraPasseia(i, k);
 			}
 		}
-
-		if (x == getDim() - 1) {
-			x = -1;
-			y++;
-		}
-		x++;	
-	}
 }
 
 void Mundo::regraPasseia(int idn, int idf) {
@@ -201,18 +187,26 @@ void Mundo::regraPasseia(int idn, int idf) {
 	int y = 0;
 
 	int xi = ninhos[idn].formigaPosX(idf); // Posição Inicial X
-	int yi = ninhos[idn].formigaPosY(idf); // Posição Innicial Y
+	int yi = ninhos[idn].formigaPosY(idf); // Posição Inicial Y
 
 	int movX = ninhos[idn].formigaMov(idf); // RAIO DE MOVIMENTO (FORMIGA EXPLORADORA)
 	int movY = ninhos[idn].formigaMov(idf); // RAIO DE MOVIMENTO (FORMIGA EXPLORADORA)
 
 		while (flag == false) {
-			x = xi + (rand() % (movX + 10) + (-movX));	//NOVA POSIÇÃO X = POSIÇÃO INICIAL + (NÚMERO RANDOM ENTRE RAIO DE VISÃO E - (RAIO DE VIÃO))
-			y = yi + (rand() % (movY + 10) + (-movY));	//NOVA POSIÇÃO Y = POSIÇÃO INICIAL + (NÚMERO RANDOM ENTRE RAIO DE VISÃO E - (RAIO DE VIÃO))
-			if (x >= 0 && x < getDim() && y >= 0 && y < getDim() && ocupaPos(x,y) == false) { // NOVA POSIÇÃO É ACEITA SEGUNDO AS CONDIÇÕES
+			x = xi + (rand() % (movX + 10) + (-movX));											//NOVA POSIÇÃO X = POSIÇÃO INICIAL + (NÚMERO RANDOM ENTRE RAIO DE VISÃO E - (RAIO DE VIÃO))
+			y = yi + (rand() % (movY + 10) + (-movY));											//NOVA POSIÇÃO Y = POSIÇÃO INICIAL + (NÚMERO RANDOM ENTRE RAIO DE VISÃO E - (RAIO DE VIÃO))
+			if (x >= 0 && x < getDim() && y >= 0 && y < getDim() && ocupaPos(x,y) == false) {	// NOVA POSIÇÃO É ACEITA SEGUNDO AS CONDIÇÕES
 				flag = true;
 				ninhos[idn].formigaSetX(idf, x);
-				ninhos[idn].formigaSetY(idf, y); // implementar perda de energia
+				ninhos[idn].formigaSetY(idf, y);
+
+				int movEX = x - xi;
+				int movEY = y - yi;
+
+				int energGasta = abs(movEX) + abs(movEY);
+				int energInicial = ninhos[idn].formigaEnerg(idf);
+				int energAtual = energInicial - energGasta;
+				ninhos[idn].formigaSetEner(idf, energAtual);
 			}
 		}
 }
