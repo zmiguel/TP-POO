@@ -192,23 +192,14 @@ void Mundo::regraPasseia(int idn, int idf) {
 
 				int movEX = x - xi;
 				int movEY = y - yi;
-				
-				cout << idn << " " << idf << endl;
 
 				int energGasta = abs(movEX) + abs(movEY);
-				cout << "EG: " << energGasta << "\n";
 				int energInicial = ninhos[idn].formigaEnerg(idf);
-				cout << "EI: " << energInicial << "\n";
 				int energAtual = energInicial - energGasta;
-				cout << "EA: " << energAtual << "\n" << endl;
 				ninhos[idn].formigaSetEner(idf, energAtual);
 			}
 		}
-
 }
-
-
-
 
 Mundo::~Mundo()
 {

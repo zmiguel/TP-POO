@@ -223,4 +223,4 @@ void Configs::config(int valor) {
 				}
 			}
 		}
-	}
+}
