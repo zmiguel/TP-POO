@@ -2,7 +2,7 @@
 
 int Formiga::i = 1;
 
-Formiga::Formiga(int x, int y):posX(x), posY(y){
+Formiga::Formiga(int x, int y, int e):posX(x), posY(y), energia(e){
 	this->id = i++;
 }
 
@@ -16,6 +16,10 @@ int Formiga::getY() const{
 	return posY;
 }
 
+int Formiga::getEner() {
+	return energia;
+}
+
 int Formiga::getVisao() {
 
 	return raioVisao;
@@ -24,6 +28,11 @@ int Formiga::getVisao() {
 int Formiga::getMov() {
 
 	return raioMov;
+}
+
+void Formiga::setEner(int e) {
+
+	energia = e;
 }
 
 void Formiga::setX(int x) {

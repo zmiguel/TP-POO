@@ -55,9 +55,9 @@ string Ninho::formigaInfo(int id) {
 
 }
 
-void Ninho::acrescentaFormiga(int x, int y) {
+void Ninho::acrescentaFormiga(int x, int y, int e) {
 
-		Formiga* ob = new Formiga(x, y);
+		Formiga* ob = new Formiga(x, y, e);
 		formigas.push_back(ob);
 }
 
@@ -94,6 +94,16 @@ int Ninho::formigaVisao(int id) {
 int Ninho::formigaMov(int id) {
 
 	return formigas[id]->getMov();
+}
+
+int Ninho::formigaEnerg(int id) {
+
+	return formigas[id]->getEner();
+}
+
+void Ninho::formigaSetEner(int id, int e) {
+
+	formigas[id]->setEner(e);
 }
 
 Ninho::~Ninho(){
