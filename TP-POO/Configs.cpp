@@ -221,8 +221,6 @@ void Configs::config(int valor) {
 					Interface inter(mundo);
 					inter.corre();
 				}
-<<<<<<< HEAD
-
 			  }
 			  confFile.close();
 			  cout << "Ficheiro lido!!\n";
@@ -235,9 +233,6 @@ void Configs::config(int valor) {
 			  else {
 				cout << "INICIO FALHADO! ESTAO CONFIGS EM FALTA!!!\n";
 			  }
-
-=======
->>>>>>> master
 			}
-		}
+		
 }
