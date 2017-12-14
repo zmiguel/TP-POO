@@ -36,8 +36,8 @@ void Interface::corre() {
 		}
 
 		if (comandoEsp == 0) {
-		  Consola::clrscr();
-		  Consola::gotoxy(0, 2);
+			Consola::clrscr();
+			Consola::gotoxy(0, 2);
 			iss >> str;
 			if (str.compare("tempo") == 0) {
 				int i = 1;
@@ -59,7 +59,7 @@ void Interface::corre() {
 		else {
 			if (comandoEsp == 1) {
 				Consola::clrscr();
-			  Consola::gotoxy(0, 2);
+				Consola::gotoxy(0, 2);
 				iss >> str;
 				iss >> num;
 				if (iss.fail()) {
@@ -78,7 +78,7 @@ void Interface::corre() {
 			else {
 				if (comandoEsp == 2) {
 					Consola::clrscr();
-				  Consola::gotoxy(0, 2);
+					Consola::gotoxy(0, 2);
 					iss >> str;
 					iss >> num;
 					iss >> num2;

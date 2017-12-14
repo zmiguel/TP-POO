@@ -35,6 +35,7 @@ public:
 
 	void iteracao(int temp);
 	void regraPasseia(int id, int idn);
+	void energiaIteracao(int movEX, int movEY, int idn, int idf);
 
 	
 	Mundo(int dim, int energNinhos, int perFazNovoNinho, int transFormNin, int numPosMigalhas, int energiaInicialMig, int migalhaSorteio);

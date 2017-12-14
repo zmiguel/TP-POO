@@ -28,13 +28,13 @@ void Mundo::imprime(){
 	int itt = 0;
 
 	while (x < getDim() + xi && y < getDim() + yi) {
-		Consola::setTextColor(Consola::CYAN);
+		Consola::setTextColor(Consola::AMARELO);
 		Consola::gotoxy(x+itt*2, y);
 		flag = 0;
 
 		for (unsigned int i = 0; i < ninhos.size(); i++) {
 			if (ninhos[i].getX() + xi == x && ninhos[i].getY() + yi == y) {
-				Consola::setTextColor(Consola::VERMELHO);
+				Consola::setTextColor(i + 7);
 				cout << "N";
 				flag = 1;
 			}
@@ -43,8 +43,7 @@ void Mundo::imprime(){
 		for (unsigned int i = 0; i < ninhos.size(); i++) {
 			for (int k = 0; k < ninhos[i].numFormigas(); k++) {
 				if (ninhos[i].formigaPosX(k) + xi == x && ninhos[i].formigaPosY(k) + yi == y) {
-					Consola::setBackgroundColor(Consola::BRANCO);
-					Consola::setTextColor(Consola::VERMELHO);
+					Consola::setTextColor(i + 7);
 					cout << "E";
 					flag = 1;
 				}
@@ -79,7 +78,6 @@ void Mundo::acrescentaNinho(int x, int y, int *cx, int *cy){
 		cout << "\n Foi tentado ser criado um ninho numa posição já ocupada!";
 		*cx = *cx + 4;
 		*cy = *cy + 4;
-
 	}
 }
 
@@ -131,7 +129,6 @@ string Mundo::listaPos(int x, int y) {
 int Mundo::numNinhos() {
 
 	return ninhos.size();
-
 }
 
 void Mundo::trataFormiga(int qnts, int id) {
@@ -173,11 +170,13 @@ bool Mundo::ocupaPos(int x, int y) {
 
 void Mundo::iteracao(int temp){
 
-		for (unsigned int i = 0; i < ninhos.size(); i++) {
-			for (int k = 0; k < ninhos[i].numFormigas(); k++) {
-				regraPasseia(i, k);
+	for (int it = 0; it < temp; it++) {
+		for (unsigned int n = 0; n < ninhos.size(); n++) {
+			for (int f = 0; f < ninhos[n].numFormigas(); f++) {
+				regraPasseia(n, f);
 			}
 		}
+	}
 }
 
 void Mundo::regraPasseia(int idn, int idf) {
@@ -202,13 +201,22 @@ void Mundo::regraPasseia(int idn, int idf) {
 
 				int movEX = x - xi;
 				int movEY = y - yi;
-
-				int energGasta = abs(movEX) + abs(movEY);
-				int energInicial = ninhos[idn].formigaEnerg(idf);
-				int energAtual = energInicial - energGasta;
-				ninhos[idn].formigaSetEner(idf, energAtual);
+				energiaIteracao(movEX, movEY, idn, idf);
 			}
 		}
+}
+
+void Mundo::energiaIteracao(int movEX, int movEY, int idn, int idf) {
+
+	int energGasta = abs(movEX) + abs(movEY);
+	int energInicial = ninhos[idn].formigaEnerg(idf);
+	int energAtual = energInicial - energGasta;
+	ninhos[idn].formigaSetEner(idf, energAtual);
+
+	if (energAtual <= 0) {
+		ninhos[idn].mataFormiga(idf);
+	}
+
 }
 
 Mundo::~Mundo()

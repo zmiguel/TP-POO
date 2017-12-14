@@ -30,6 +30,7 @@ public:
 
 	int numFormigas();
 	void acrescentaFormiga(int x, int y, int e);
+	void mataFormiga(int id);
 
 	int formigaMov(int id);
 	int formigaVisao(int id);

@@ -50,9 +50,7 @@ string Ninho::ninhoInfo() {
 }
 
 string Ninho::formigaInfo(int id) {
-
 	return formigas[id]->getAsString();
-
 }
 
 void Ninho::acrescentaFormiga(int x, int y, int e) {
@@ -62,7 +60,6 @@ void Ninho::acrescentaFormiga(int x, int y, int e) {
 }
 
 int Ninho::numFormigas() {
-
 	return formigas.size();
 }
 
@@ -104,6 +101,11 @@ int Ninho::formigaEnerg(int id) {
 void Ninho::formigaSetEner(int id, int e) {
 
 	formigas[id]->setEner(e);
+}
+
+void Ninho::mataFormiga(int id) {
+	delete formigas[id];
+	formigas.erase(formigas.begin() + id);
 }
 
 Ninho::~Ninho(){
