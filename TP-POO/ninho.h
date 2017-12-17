@@ -15,10 +15,11 @@ class Ninho{
 public:
 	string getAsString()const;
 	string formigaInfo(int id);
-	string ninhoInfo();
+	string ninhoInfo() const;
 
 	int getX()const;
 	int getY()const;
+	int getID()const;
 
 	void formigaSetX(int id, int x);
 	void formigaSetY(int id, int y);
@@ -29,13 +30,13 @@ public:
 	int formigaEnerg(int id);
 
 	int numFormigas();
-	void acrescentaFormiga(int x, int y, int e);
+	void acrescentaFormiga(int x, int y);
 	void mataFormiga(int id);
 
 	int formigaMov(int id);
 	int formigaVisao(int id);
 
-	Ninho(int x, int y, int energiaInicial);
+	Ninho(int x, int y, int energia);
 	~Ninho();
 };
 

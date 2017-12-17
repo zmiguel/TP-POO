@@ -46,7 +46,7 @@ void Interface::corre() {
 			}
 			else {
 				if (str.compare("listamundo") == 0) {
-					cout << mundo->getAsString(&x, &y);
+					cout << mundo->getAsString();
 				}
 				else {
 					if (str.compare("sair") == 0) {
@@ -129,10 +129,5 @@ void Interface::corre() {
 	}
 }
 
-
-
-Interface::~Interface()
-{
-
-
+Interface::~Interface(){
 }

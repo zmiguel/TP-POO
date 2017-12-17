@@ -5,14 +5,13 @@ class Formiga {
 
 	int id;
 	static int i;
-	int energia = 150;
+	int energia;
 	int raioVisao = 10;
 	int raioMov = 8;
-
 	int posX;
 	int posY;
 public:
-	Formiga(int x, int y, int e);
+	Formiga(int x, int y);
 	int getX()const;
 	int  getY()const;
 	int getVisao();

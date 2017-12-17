@@ -81,13 +81,11 @@ void Mundo::acrescentaNinho(int x, int y, int *cx, int *cy){
 	}
 }
 
-string Mundo::getAsString(int *cx, int *cy) const{
+string Mundo::getAsString() const{
 
 	ostringstream oss;
 	for (vector<Ninho>::const_iterator it = ninhos.begin(); it != ninhos.end(); it++) {	
-		*cx++;
-		*cy++;
-		oss << it->getAsString() << endl;
+		oss << it->ninhoInfo() << endl;
 	}
 	return oss.str();
 }
@@ -143,7 +141,7 @@ void Mundo::trataFormiga(int qnts, int id) {
 
 		if (ocupaPos(x, y) == false) {
 
-			ninhos[id - 1].acrescentaFormiga(x, y, 150);
+			ninhos[id - 1].acrescentaFormiga(x, y);
 			qnts--;
 		}
 	};
@@ -171,7 +169,7 @@ bool Mundo::ocupaPos(int x, int y) {
 void Mundo::iteracao(int temp){
 
 	for (int it = 0; it < temp; it++) {
-		for (unsigned int n = 0; n < ninhos.size(); n++) {
+		for (unsigned n = 0; n < ninhos.size(); n++) {
 			for (int f = 0; f < ninhos[n].numFormigas(); f++) {
 				regraPasseia(n, f);
 			}
@@ -208,15 +206,15 @@ void Mundo::regraPasseia(int idn, int idf) {
 
 void Mundo::energiaIteracao(int movEX, int movEY, int idn, int idf) {
 
-	int energGasta = abs(movEX) + abs(movEY);
+	int energGasta = abs(movEX) + abs(movEY) + 1;
 	int energInicial = ninhos[idn].formigaEnerg(idf);
 	int energAtual = energInicial - energGasta;
+	
 	ninhos[idn].formigaSetEner(idf, energAtual);
 
 	if (energAtual <= 0) {
 		ninhos[idn].mataFormiga(idf);
 	}
-
 }
 
 Mundo::~Mundo()

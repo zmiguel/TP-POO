@@ -2,8 +2,9 @@
 
 int Formiga::i = 1;
 
-Formiga::Formiga(int x, int y, int e):posX(x), posY(y), energia(e){
+Formiga::Formiga(int x, int y):posX(x), posY(y){
 	this->id = i++;
+	this->energia = 200;
 }
 
 int Formiga::getX() const{

@@ -6,12 +6,10 @@ class Interface;
 
 class Mundo{
 
-	//Mundo composição perante os ninhos
-	//Ninhos são de agregação perante as formigas
 	vector<Ninho> ninhos;
 
 	int dimensao;
-	int energNinhos; // colocar const
+	int energNinhos;
 	int perFazNovoNinho;
 	int transFormNin;
 	int numPosMigalhas;
@@ -31,7 +29,7 @@ public:
 
 	string listaPos(int x, int y);
 	string listaNinho(int id);
-	string getAsString(int *x, int *y) const;
+	string getAsString() const;
 
 	void iteracao(int temp);
 	void regraPasseia(int id, int idn);

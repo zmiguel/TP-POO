@@ -17,6 +17,10 @@ int Ninho::getY() const{
 	return PosY;
 }
 
+int Ninho::getID() const {
+	return id;
+}
+
 string Ninho::getAsString()const {
 
 	ostringstream oss;
@@ -36,26 +40,27 @@ string Ninho::getAsString()const {
 	return oss.str();
 }
 
-string Ninho::ninhoInfo() {
+string Ninho::ninhoInfo() const{
 
 	ostringstream oss;
 
-	oss << "Ninho com ID: " << id
-		<< "\nPosicao: (" << PosX
+	oss << "Ninho ID: " << id
+		<< " Posicao: (" << PosX
 		<< "," << PosY << ")"
-		<< "\nEnergia Inicial de: " << energiaInicial << endl;
+		<< " Energia: " << energiaInicial
+		<< "\nNúmero de formigas do ninho:  " << formigas.size()
+		<< endl;
 
 	return oss.str();
-
 }
 
 string Ninho::formigaInfo(int id) {
 	return formigas[id]->getAsString();
 }
 
-void Ninho::acrescentaFormiga(int x, int y, int e) {
+void Ninho::acrescentaFormiga(int x, int y) {
 
-		Formiga* ob = new Formiga(x, y, e);
+		Formiga* ob = new Formiga(x, y);
 		formigas.push_back(ob);
 }
 
