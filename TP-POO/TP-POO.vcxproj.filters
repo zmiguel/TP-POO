@@ -39,6 +39,15 @@
     <ClInclude Include="Comunidade.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Elementos.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Regra.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Migalha.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -63,6 +72,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Comunidade.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Elementos.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Regra.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Migalha.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

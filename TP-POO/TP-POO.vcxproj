@@ -114,21 +114,27 @@
     <ClCompile Include="Comunidade.cpp" />
     <ClCompile Include="Configs.cpp" />
     <ClCompile Include="Consola.cpp" />
+    <ClCompile Include="Elementos.cpp" />
     <ClCompile Include="Formiga.cpp" />
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Migalha.cpp" />
     <ClCompile Include="Mundo.cpp" />
     <ClCompile Include="Ninho.cpp" />
+    <ClCompile Include="Regra.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Comunidade.h" />
     <ClInclude Include="Configs.h" />
     <ClInclude Include="Consola.h" />
+    <ClInclude Include="Elementos.h" />
     <ClInclude Include="Formiga.h" />
     <ClInclude Include="Interface.h" />
     <ClInclude Include="librarias.h" />
+    <ClInclude Include="Migalha.h" />
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Ninho.h" />
+    <ClInclude Include="Regra.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="conf.txt" />

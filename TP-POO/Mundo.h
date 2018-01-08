@@ -2,41 +2,65 @@
 #include "librarias.h"
 
 class Ninho;
+class Migalha;
 class Interface;
+class Elementos;
 
 class Mundo{
 
-	vector<Ninho> ninhos;
+	vector<Ninho*> ninhos;
+	vector<Migalha*> migalhas;
+	vector<Elementos*> elementos;
 
 	int dimensao;
 	int energNinhos;
 	int perFazNovoNinho;
 	int transFormNin;
-	int numPosMigalhas;
+	int percentagemPosMig;
 	int energiaInicialMig;
 	int migalhaSorteio;
 
 public:
 
 	int getDim() const;
+	void acrescentaUmaMigalha(int x, int y);
+	void acrescentaMigalhas();
+	int numNinhos();
+
+	bool confirmaNinho(int id);
+
+	void acrescentaNinho(int x, int y);
+
 	void setDim(int dim);
-	void imprime();
-	void acrescentaNinho(int x, int y, int *cx,int *cy);
-	void trataFormiga(int qnts, int id);
 	
 	bool ocupaPos(int x, int y);
-	int numNinhos();
+
+	char ocupaPosChar(int x, int y);
+	
+	void migalhasPerdeIteracao();
+
+	void sorteiaMigalha();
+
+	void trataFormiga(int qnts, int id, char c);
+
+	void assassinaFormiga(int x, int y);
+	void acrescentaFormiga(char denom, int idN, int x, int y);
+	void acrescentaEnergiaFormiga(int x, int y, int energia);
+	void inseticida(int id);
+
+	void acrescentaEnergiaNinho(int idN, int energia);
 
 	string listaPos(int x, int y);
 	string listaNinho(int id);
 	string getAsString() const;
 
 	void iteracao(int temp);
-	void regraPasseia(int id, int idn);
-	void energiaIteracao(int movEX, int movEY, int idn, int idf);
+
+	void elementosAtualiza();
 
 	
 	Mundo(int dim, int energNinhos, int perFazNovoNinho, int transFormNin, int numPosMigalhas, int energiaInicialMig, int migalhaSorteio);
 	~Mundo();
+	vector<Elementos*> getMundo();
 };
 

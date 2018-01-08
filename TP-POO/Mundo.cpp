@@ -1,14 +1,17 @@
 #include "Mundo.h"
 
-Mundo::Mundo(int dim, int energNinhos, int perFazNovoNinho, int transFormNin, int numPosMigalhas, int energiaInicialMig, int migalhaSorteio) :dimensao(dim){
+Mundo::Mundo(int dim, int energNinhos, int perFazNovoNinho, int transFormNin, int percentagemPosMigalhas, int energiaInicialMig, int migalhaSorteio){
 
+	this->dimensao = dim;
 	this->energNinhos = energNinhos;
 	this->perFazNovoNinho = perFazNovoNinho;
 	this->transFormNin = transFormNin;
-	this->numPosMigalhas = numPosMigalhas;
+	this->percentagemPosMig = percentagemPosMigalhas;
 	this->energiaInicialMig = energiaInicialMig;
 	this->migalhaSorteio = migalhaSorteio;
 }
+
+//------------GET'S & SET'S----------------//
 
 int Mundo::getDim() const{
 	return dimensao;
@@ -18,85 +21,38 @@ void Mundo::setDim(int dim) {
 	dimensao = dim;
 }
 
-void Mundo::imprime(){
+vector<Elementos*> Mundo::getMundo() {
 
-	int flag = 0;
-	int x = 65;
-	int y = 5;
-	int xi = 65;
-	int yi = 5;
-	int itt = 0;
+	vector <Elementos*> aux;
 
-	while (x < getDim() + xi && y < getDim() + yi) {
-		Consola::setTextColor(Consola::AMARELO);
-		Consola::gotoxy(x+itt*2, y);
-		flag = 0;
-
-		for (unsigned int i = 0; i < ninhos.size(); i++) {
-			if (ninhos[i].getX() + xi == x && ninhos[i].getY() + yi == y) {
-				Consola::setTextColor(i + 7);
-				cout << "N";
-				flag = 1;
-			}
-		}
-
-		for (unsigned int i = 0; i < ninhos.size(); i++) {
-			for (int k = 0; k < ninhos[i].numFormigas(); k++) {
-				if (ninhos[i].formigaPosX(k) + xi == x && ninhos[i].formigaPosY(k) + yi == y) {
-					Consola::setTextColor(i + 7);
-					cout << "E";
-					flag = 1;
-				}
-			}
-		}
-
-		if (flag == 0) {
-			cout << "*";
-		}
-
-		if (x - xi == getDim()- 1) {
-			x = xi - 1;
-			itt = -1;
-			y++;
-		}
-		x++;
-		itt++;
-		Consola::setBackgroundColor(Consola::PRETO);
-
+	for (unsigned int i = 0; i != elementos.size(); i++) {
+		aux.push_back(elementos[i]);
 	}
-	Consola::setTextColor(Consola::VERDE);
+
+	return aux;
 }
 
-void Mundo::acrescentaNinho(int x, int y, int *cx, int *cy){
-	
-	if (ocupaPos(x, y) == false) {
-		ninhos.push_back(Ninho(x, y, energNinhos));
-		*cx = *cx + 2;
-		*cy = *cy + 2;
-	}
-	else {
-		cout << "\n Foi tentado ser criado um ninho numa posição já ocupada!";
-		*cx = *cx + 4;
-		*cy = *cy + 4;
-	}
-}
 
-string Mundo::getAsString() const{
+//---------------LISTAGENS------------------//
+
+string Mundo::getAsString() const {
 
 	ostringstream oss;
-	for (vector<Ninho>::const_iterator it = ninhos.begin(); it != ninhos.end(); it++) {	
-		oss << it->ninhoInfo() << endl;
+
+	for (unsigned int i = 0; i < ninhos.size(); i++) {
+		oss << ninhos[i]->getAsString();
 	}
+
 	return oss.str();
 }
 
 string Mundo::listaNinho(int id) {
 
 	ostringstream oss;
-	
+
 	for (unsigned int i = 0; i < ninhos.size(); i++) {
-		if (id == i + 1) {
-			oss << ninhos[i].getAsString();
+		if (id == ninhos[i]->getID()) {
+			oss << ninhos[i]->getAsString();
 		}
 	}
 
@@ -108,114 +64,349 @@ string Mundo::listaPos(int x, int y) {
 	ostringstream oss;
 
 	for (unsigned int i = 0; i < ninhos.size(); i++) {
-		if (ninhos[i].getX() == x && ninhos[i].getY() == y) {
-			oss << ninhos[i].ninhoInfo();
+		if (ninhos[i]->getX() == x && ninhos[i]->getY() == y) {
+			oss << ninhos[i]->ninhoInfo();
 		}
 	}
 
 	for (unsigned int i = 0; i < ninhos.size(); i++) {
-		for (int k = 0; k < ninhos[i].numFormigas(); k++) {
-			if (ninhos[i].formigaPosX(k) == x && ninhos[i].formigaPosY(k) == y) {
-				oss << ninhos[i].formigaInfo(k);
+		for (int k = 0; k < ninhos[i]->numFormigas(); k++) {
+			if (ninhos[i]->formigaPosX(k) == x && ninhos[i]->formigaPosY(k) == y) {
+				oss << ninhos[i]->formigaInfo(k);
 			}
 		}
 	}
+
+	for (unsigned int i = 0; i < migalhas.size(); i++) {
+		if (migalhas[i]->getPosX() == x && migalhas[i]->getPosY() == y) {
+			oss << migalhas[i]->getAsString();
+		}
+	}
+
 
 	return oss.str();
 }
 
-int Mundo::numNinhos() {
 
+//--------------MIGALHAS--------------//
+
+void Mundo::acrescentaUmaMigalha(int x, int y) {
+
+	if (x < getDim() && y < getDim() && ocupaPos(x, y) == false) {
+
+		Migalha* ob = new Migalha(x, y, energiaInicialMig);
+		migalhas.push_back(ob);
+
+		Elementos * obj = new Elementos(ob->getPosX(), ob->getPosY(), 'M', ob->getId());
+		elementos.push_back(obj);
+	}
+	else {
+		cout << "Posicao ja ocupada para acrescentar uma migalha"<< endl;
+	}
+}
+
+void Mundo::acrescentaMigalhas() {
+
+	float numPosOcup = dimensao * dimensao * percentagemPosMig / 100;
+
+	while (numPosOcup > 0) {
+		
+		int x = rand() % getDim();
+		int y = rand() % getDim();
+
+		if (x < getDim() && y < getDim() && ocupaPos(x,y) == false) {
+
+			Migalha* ob = new Migalha(x, y, energiaInicialMig);
+			migalhas.push_back(ob);
+
+			Elementos * obj = new Elementos(ob->getPosX(), ob->getPosY(), 'M', ob->getId());
+			elementos.push_back(obj);
+
+			numPosOcup--;
+		}
+	}
+}
+
+void Mundo::migalhasPerdeIteracao() {
+
+	int energiaDecrementa = 1;
+
+	for (unsigned int i = 0; i < migalhas.size(); i++) {
+		migalhas[i]->setEnergia(migalhas[i]->getEnergia() - 1);
+	}
+
+	for (unsigned int i = 0; i < migalhas.size(); i++) {
+
+		if (migalhas[i]->getEnergia() < energiaInicialMig * 0.1) {
+			delete migalhas[i];
+			migalhas.erase(migalhas.begin() + i);
+			i = 0;
+		}
+
+	}
+
+	if (migalhas.size() == 1 && migalhas[0]->getEnergia() < energiaInicialMig * 0.1) {
+		delete migalhas[0];
+		migalhas.erase(migalhas.begin());
+	}
+
+	//melhorar
+
+}
+
+void Mundo::sorteiaMigalha() {
+	
+	int sorteio = rand() % migalhaSorteio;
+
+	while (sorteio > 0) {
+
+		int x = rand() % getDim();
+		int y = rand() % getDim();
+
+		if (x < getDim() && y < getDim() && ocupaPos(x, y) == false) {
+
+			Migalha* ob = new Migalha(x, y, energiaInicialMig);
+			migalhas.push_back(ob);
+
+			Elementos * obj = new Elementos(ob->getPosX(), ob->getPosY(), 'M', ob->getId());
+			elementos.push_back(obj);
+
+			sorteio--;
+		}
+	}
+}
+
+
+//---------------NINHOS-----------------//
+
+int Mundo::numNinhos() {
 	return ninhos.size();
 }
 
-void Mundo::trataFormiga(int qnts, int id) {
+bool Mundo::confirmaNinho(int id) {
+
+	for (unsigned int i = 0; i < numNinhos(); i++) {
+		if (ninhos[i]->getID() == id) {
+			return true;
+		}
+	}
+	return false;
+}
+
+void Mundo::acrescentaNinho(int x, int y){
+	
+	if (ocupaPos(x, y) == false) {
+		Ninho* ob = new Ninho(x, y, energNinhos);
+		ninhos.push_back(ob);
+
+
+		for (unsigned i = 0; i < ninhos.size(); i++) {
+			ninhos[i]->setPosVetor(i);
+		}
+
+
+		Elementos * obj = new Elementos(x, y, 'N', ob->getID());
+		elementos.push_back(obj);
+	}
+	else {
+		cout << "\n\n\n Foi tentado ser criado um ninho numa posição já ocupada!";
+	}
+}
+
+void Mundo::inseticida(int id) {
+
+	for (unsigned n = 0; n < ninhos.size(); n++) {
+		if (ninhos[n]->getID() == id) {
+			delete ninhos[n];
+			ninhos.erase(ninhos.begin() + n);
+		}
+	}
+
+	for (unsigned i = 0; i < ninhos.size(); i++) {
+		ninhos[i]->setPosVetor(i);
+	}
+	
+	elementosAtualiza();
+}  
+
+void Mundo::acrescentaEnergiaNinho(int idN, int energia) {
+
+	int pos;
+
+	for (unsigned n = 0; n < ninhos.size(); n++) {
+		if (ninhos[n]->getID() == idN) {
+			pos = n;
+		}
+	}
+
+	int power = ninhos[pos]->getEnergia() + energia;
+	ninhos[pos]->setEnergia(power);
+}
+
+//---------------FORMIGAS---------------//
+
+void Mundo::trataFormiga(int qnts, int id, char c) {
 
 	int dim = getDim();
-	int x;
-	int y;
+	int x = rand() % dim;
+	int y = rand() % dim;
+	int pos;
+
+	for (unsigned int i = 0; i < ninhos.size(); i++) {
+		if (ninhos[i]->getID() == id) {
+			pos = ninhos[i]->getPosVetor();
+			break;
+		}
+	}
+
 
 	while (qnts != 0) {
-		x = rand() % dim;
-		y = rand() % dim;
 
-		if (ocupaPos(x, y) == false) {
-
-			ninhos[id - 1].acrescentaFormiga(x, y);
-			qnts--;
+		while (ocupaPos(x, y) == true) {
+			x = rand() % dim;
+			y = rand() % dim;
 		}
+
+		if (c == 'C') {
+			ninhos[pos]->acrescentaFormiga(x, y, c, id);
+		}
+
+		if(c == 'E'){
+			ninhos[pos]->acrescentaFormiga(x, y, c, id);
+		}
+
+		if (c == 'V') {
+			ninhos[pos]->acrescentaFormiga(x, y, c, id);
+		}
+
+		if (c == 'A') {
+			ninhos[pos]->acrescentaFormiga(x, y, c, id);
+		}
+
+		qnts--;
+
+		elementosAtualiza();
 	};
+}
+
+void Mundo::assassinaFormiga(int x, int y) {
+	
+	for (unsigned int i = 0; i < elementos.size(); i++) {
+		if (elementos[i]->getPosX() == x && elementos[i]->getPosY() == y && elementos[i]->getDenom() != 'N' && elementos[i]->getDenom() != 'M') {
+			
+			for (unsigned n = 0; n < ninhos.size(); n++) {
+					ninhos[n]->assassinaProcura(elementos[i]->getPosX(), elementos[i]->getPosY());
+			}
+		}
+	}
+	elementosAtualiza();
+}
+
+void Mundo::acrescentaFormiga(char denom, int idN, int x, int y) {
+
+	int pos;
+
+	for (unsigned n = 0; n < ninhos.size(); n++) {
+		if (ninhos[n]->getID() == idN) {
+			pos = n;
+			break;
+		}
+	}
+	
+	cout << denom<< endl;
+	cout << idN << endl;
+	cout << x << endl;
+	cout << y << endl;
+
+
+	if (ocupaPos(x, y) == false) {
+		ninhos[pos]->acrescentaFormiga(x, y, denom, idN);
+	}
+
+	elementosAtualiza();
+
+}
+
+void Mundo::acrescentaEnergiaFormiga(int x, int y, int energia) {
+
+	int pos;
+	int power;
+
+	for (unsigned int i = 0; i < ninhos.size(); i++){
+		for (unsigned int j = 0; j < ninhos[i]->numFormigas(); j++) {
+			if (ninhos[i]->formigaPosX(j) == x && ninhos[i]->formigaPosY(j) == y) {
+				power = ninhos[i]->formigaEnerg(j) + energia;
+				ninhos[i]->formigaSetEner(j, power);
+				break;
+			}
+		}
+	}
+}
+
+//---------------ELEMENTOS---------------//
+
+void Mundo::elementosAtualiza() {
+
+	for (vector< Elementos*>::iterator it = elementos.begin(); it != elementos.end(); ++it) {
+		delete (*it);
+	}
+
+	elementos.clear();
+
+	for (unsigned int i = 0; i < ninhos.size(); i++) {
+		Elementos * obj = new Elementos(ninhos[i]->getX(), ninhos[i]->getY(), ninhos[i]->getDenom(), ninhos[i]->getID());
+		elementos.push_back(obj);
+		for (unsigned k = 0; k < ninhos[i]->numFormigas(); k++) {
+			Elementos * obj = new Elementos(ninhos[i]->formigaPosX(k), ninhos[i]->formigaPosY(k), ninhos[i]->getFormigaDenom(k), ninhos[i]->getID());
+			elementos.push_back(obj);
+		}
+	}
+
+	for (unsigned int m = 0; m < migalhas.size(); m++) {
+		Elementos * obj = new Elementos(migalhas[m]->getPosX(), migalhas[m]->getPosY(), 'M', migalhas[m]->getId());
+		elementos.push_back(obj);
+	}
 }
 
 bool Mundo::ocupaPos(int x, int y) {
 
-	for (unsigned int i = 0; i < ninhos.size(); i++) {
-		if (ninhos[i].getX() == x && ninhos[i].getY() == y) {
+	for (unsigned int i = 0; i < elementos.size(); i++) {
+		if (elementos[i]->getPosX() == x && elementos[i]->getPosY() == y) {
 			return true;
 		}
 	}
-
-	for (unsigned int i = 0; i < ninhos.size(); i++) {
-		for (int k = 0; k < ninhos[i].numFormigas(); k++) {
-			if (ninhos[i].formigaPosX(k) == x && ninhos[i].formigaPosY(k) == y) {
-				return true;
-			}
-		}
-	}
-
 	return false;
 }
+
+char Mundo::ocupaPosChar(int x, int y) {
+
+	for (unsigned int i = 0; i < elementos.size(); i++) {
+		if (elementos[i]->getPosX() == x && elementos[i]->getPosY() == y) {
+			return elementos[i]->getDenom();
+		}
+	}
+	return '0';
+}
+
+
+//---------------ITERAÇÃO---------------//
 
 void Mundo::iteracao(int temp){
 
 	for (int it = 0; it < temp; it++) {
 		for (unsigned n = 0; n < ninhos.size(); n++) {
-			for (int f = 0; f < ninhos[n].numFormigas(); f++) {
-				regraPasseia(n, f);
+			for (int f = 0; f < ninhos[n]->numFormigas(); f++) {
+				ninhos[n]->regras(f, getDim(), elementos);
+				elementosAtualiza();
 			}
 		}
+		migalhasPerdeIteracao();
+		sorteiaMigalha();
+		elementosAtualiza();
 	}
 }
 
-void Mundo::regraPasseia(int idn, int idf) {
 
-	bool flag = false;
-	int x = 0;
-	int y = 0;
-
-	int xi = ninhos[idn].formigaPosX(idf); // Posição Inicial X
-	int yi = ninhos[idn].formigaPosY(idf); // Posição Inicial Y
-
-	int movX = ninhos[idn].formigaMov(idf); // RAIO DE MOVIMENTO (FORMIGA EXPLORADORA)
-	int movY = ninhos[idn].formigaMov(idf); // RAIO DE MOVIMENTO (FORMIGA EXPLORADORA)
-
-		while (flag == false) {
-			x = xi + (rand() % (movX + 10) + (-movX));											//NOVA POSIÇÃO X = POSIÇÃO INICIAL + (NÚMERO RANDOM ENTRE RAIO DE VISÃO E - (RAIO DE VIÃO))
-			y = yi + (rand() % (movY + 10) + (-movY));											//NOVA POSIÇÃO Y = POSIÇÃO INICIAL + (NÚMERO RANDOM ENTRE RAIO DE VISÃO E - (RAIO DE VIÃO))
-			if (x >= 0 && x < getDim() && y >= 0 && y < getDim() && ocupaPos(x,y) == false) {	// NOVA POSIÇÃO É ACEITA SEGUNDO AS CONDIÇÕES
-				flag = true;
-				ninhos[idn].formigaSetX(idf, x);
-				ninhos[idn].formigaSetY(idf, y);
-
-				int movEX = x - xi;
-				int movEY = y - yi;
-				energiaIteracao(movEX, movEY, idn, idf);
-			}
-		}
-}
-
-void Mundo::energiaIteracao(int movEX, int movEY, int idn, int idf) {
-
-	int energGasta = abs(movEX) + abs(movEY) + 1;
-	int energInicial = ninhos[idn].formigaEnerg(idf);
-	int energAtual = energInicial - energGasta;
-	
-	ninhos[idn].formigaSetEner(idf, energAtual);
-
-	if (energAtual <= 0) {
-		ninhos[idn].mataFormiga(idf);
-	}
-}
 
 Mundo::~Mundo()
 {

@@ -18,10 +18,13 @@ void Interface::corre() {
 	int x = 0;
 	int y = 2;
 
+	mundo->acrescentaMigalhas();
+
 	while (true) {
-	  mundo->imprime();
-	  Consola::gotoxy(0, 1);
-	  cout << "                    ";
+		
+		imprime();
+		Consola::gotoxy(0, 1);
+		cout << "                    ";
 
 		comandoEsp = 0;
 		Consola::gotoxy(0, 0);
@@ -42,7 +45,7 @@ void Interface::corre() {
 			if (str.compare("tempo") == 0) {
 				int i = 1;
 				mundo->iteracao(i);
-				mundo->imprime();
+				imprime();
 			}
 			else {
 				if (str.compare("listamundo") == 0) {
@@ -70,9 +73,18 @@ void Interface::corre() {
 						mundo->iteracao(num);
 					}
 					else {
-						if (str.compare("listaninho") == 0 && num <= mundo->numNinhos())
+						if (str.compare("listaninho") == 0) {
 							cout << mundo->listaNinho(num);
+						}
+						else {
+							if (str.compare("inseticida") == 0 && mundo->confirmaNinho(num) == true) {
+								mundo->inseticida(num);
+							}
+						
+						}
 					}
+
+
 				}
 			}
 			else {
@@ -87,11 +99,20 @@ void Interface::corre() {
 					}
 					else {
 						if (str.compare("ninho") == 0 && num < mundo->getDim() && num2 < mundo->getDim()) {
-							mundo -> acrescentaNinho(num, num2, &x, &y);
-							mundo->imprime();
+							mundo -> acrescentaNinho(num, num2);
+							imprime();
 						}
 						else if(str.compare("listaposicao") == 0 && num < mundo->getDim() && num2 < mundo ->getDim()) {
 							cout << mundo->listaPos(num, num2);
+						}
+						else if (str.compare("migalha") == 0 && num < mundo->getDim() && num2 < mundo ->getDim()) {
+							mundo->acrescentaUmaMigalha(num, num2);
+						}
+						else if (str.compare("mata") == 0 && num < mundo->getDim() && num2 < mundo->getDim()) {
+							mundo->assassinaFormiga(num, num2);
+						}
+						else if (str.compare("energninho") && num2 > 0) {
+							mundo->acrescentaEnergiaNinho(num, num2);
 						}
 					}
 				}
@@ -100,15 +121,26 @@ void Interface::corre() {
 					  Consola::clrscr();
 					  Consola::gotoxy(0, 2);
 						iss >> str;
+
+					if (str.compare("energformiga") == 0) {
+						iss >> num;
+						iss >> num2;
+						iss >> num3;
+						
+						
+						mundo->acrescentaEnergiaFormiga(num, num2, num3);
+					}
+
+
 						iss >> num;
 						if (!iss.fail()) {
 							iss >> c;
 							if (!iss.fail()) {
 								iss >> num3;
 								if (!iss.fail()) {
-									if (str.compare("criaf") == 0 && num > 0 && c == 'E' && num3 <= mundo->numNinhos()) {
-										mundo->trataFormiga(num, num3);
-										mundo->imprime();
+									if (str.compare("criaf") == 0 && num > 0 && (c == 'E' || c == 'C'  || c=='V' || c == 'A' || c == 'T')) {
+										mundo->trataFormiga(num, num3, c);
+										imprime();
 									}
 									else {
 										printf("Erro de sintaxe");
@@ -120,14 +152,77 @@ void Interface::corre() {
 						}
 					
 					}
-				
+					else {
+						if (comandoEsp == 4) {
+							Consola::clrscr();
+							Consola::gotoxy(0, 2);
+								iss >> str;
+								iss >> c;
+								if (!iss.fail()) {
+									iss >> num;
+									if (!iss.fail()) {
+										iss >> num2;
+										if (!iss.fail()) {
+											iss >> num3;
+											if (!iss.fail()) {
+												if (str.compare("cria1") == 0) { // CONDITIONSSSSS
+													mundo->acrescentaFormiga(c, num, num2, num3);
+													imprime();
+												}
+											}
+										}	
+									}					
+								}	
+						}
+					}
 				}
 			}
 		}
 		iss.str("");
-		
 	}
 }
+
+void Interface::imprime() {
+
+	int flag = 0;
+	int x = 65;
+	int y = 5;
+	int xi = 65;
+	int yi = 5;
+	int itt = 0;
+
+	vector <Elementos*> aux = mundo->getMundo();
+
+	while (x < mundo->getDim() + xi && y < mundo->getDim() + yi) {
+		Consola::setTextColor(Consola::AMARELO);
+		Consola::gotoxy(x + itt * 2, y);
+		flag = 0;
+
+		for (unsigned int i = 0; i < aux.size(); i++) {
+			if (aux[i]->getPosX() + xi == x && aux[i]->getPosY() + yi == y) {
+
+				flag = 1;
+				Consola::setTextColor(aux[i]->getIDCor() + 1);
+				cout << aux[i]->getDenom();
+			}
+		}
+
+		if (flag == 0) {
+			cout << "*";
+		}
+
+		if (x - xi == mundo->getDim() - 1) {
+			x = xi - 1;
+			itt = -1;
+			y++;
+		}
+		x++;
+		itt++;
+		Consola::setBackgroundColor(Consola::PRETO);
+	}
+	Consola::setTextColor(Consola::VERDE);
+}
+
 
 Interface::~Interface(){
 }

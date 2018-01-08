@@ -9,6 +9,7 @@ class Interface{
 public:
 	Interface(Mundo * m);
 	void corre();
+	void imprime();
 	~Interface();
 };
 

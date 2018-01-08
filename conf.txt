@@ -1,7 +1,0 @@
-mundo	12
-en	5
-pc	10
-vt	2
-mi	5
-me	1
-nm	3

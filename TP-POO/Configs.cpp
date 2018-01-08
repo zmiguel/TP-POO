@@ -55,7 +55,7 @@ void Configs::config(int valor) {
 				if (str.compare("inicio") == 0) {
 					if (flag1 == true && flag2 == true && flag3 == true && flag4 == true && flag5 == true && flag6 == true && flag7 == true) {
 						Consola::clrscr();
-						Mundo *mundo = new Mundo(defmundo, defen, defpc, defvt, defme, defmi, defnm);
+						Mundo *mundo = new Mundo(defmundo, defen, defpc, defvt, defmi, defme, defnm);
 						Interface inter(mundo);
 						inter.corre();
 					}
@@ -189,7 +189,7 @@ void Configs::config(int valor) {
 						flag4 = true;
 					}
 					else if (comd.compare("mi") == 0 && vall > 0 && vall < 100) {
-						cout << "% de posi��es com migalhas set " << vall << endl;
+						cout << "% de positions com migalhas set " << vall << endl;
 						defmi = vall;
 						flag5 = true;
 					}
@@ -208,7 +208,7 @@ void Configs::config(int valor) {
 				cout << "Ficheiro lido!!\n";
 				if (flag1 == true && flag2 == true && flag3 == true && flag4 == true && flag5 == true && flag6 == true && flag7 == true) {
 					Consola::clrscr();
-					Mundo *mundo = new Mundo(defmundo, defen, defpc, defvt, defme, defmi, defnm);
+					Mundo *mundo = new Mundo(defmundo, defen, defpc, defvt, defmi, defme, defnm);
 					Interface inter(mundo);
 					inter.corre();
 				}

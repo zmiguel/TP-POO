@@ -1,7 +1,7 @@
-mundo	12
-en	150
-pc	10
-vt	2
-mi	5
-me	1
-nm	3
+mundo 12
+en 200
+pc 10
+vt 1
+mi 10
+me 25
+nm 2
