@@ -195,6 +195,14 @@ void Interface::imprime() {
 
 	while (x < mundo->getDim() + xi && y < mundo->getDim() + yi) {
 		Consola::setTextColor(Consola::AMARELO);
+		if (itt == 0) {
+			Consola::gotoxy(x + itt * 2 - 5, y);
+			cout << y-yi;
+		}
+		if (yi - y == 0) {
+			Consola::gotoxy(x + itt * 2, y - 2);
+			cout << itt;
+		}
 		Consola::gotoxy(x + itt * 2, y);
 		flag = 0;
 
@@ -210,6 +218,7 @@ void Interface::imprime() {
 		if (flag == 0) {
 			cout << "*";
 		}
+		
 
 		if (x - xi == mundo->getDim() - 1) {
 			x = xi - 1;
