@@ -2,12 +2,13 @@
 
 int Elementos::i = 1;
 
-Elementos::Elementos(int x, int y, char denominacao, int idCor) {
+Elementos::Elementos(int x, int y, char denominacao, int idCor, int energia) {
 
 	this->denominacao = denominacao;
 	this->x = x;
 	this->y = y;
 	this->idCor = idCor;
+	this->energia = energia;
 	this->id = i++;
 
 }
