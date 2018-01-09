@@ -429,7 +429,7 @@ void Mundo::setEnergias() {
 		
 		if (i->getDenom() != 'M'  && i->getDenom() != 'N') {
 			for (Ninho *n : ninhos) {
-				for (unsigned int k = 0; k < n->numFormigas(); k++) {
+				for (int k = 0; k < n->numFormigas(); k++) {
 					if (n->formigaPosX(k) == i->getPosX() && n->formigaPosY(k) == i->getPosY()) {
 						n->formigaSetEner(k, i->getEnergia());
 					}

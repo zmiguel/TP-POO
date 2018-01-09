@@ -100,7 +100,7 @@ void RegraComeMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, 
 	}
 
 	if (denom == 'E') {
-		dentada = 0.6;
+		dentada = (float) 0.6;
 	}
 
 
@@ -108,28 +108,28 @@ void RegraComeMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, 
 
 		if (i->getDenom() == 'M' && (i->getPosX() == *x - 1 && i->getPosY() == *y)) {
 			energiaInicial = i->getEnergia();
-			energia = energiaInicial * (1 - dentada);
+			energia = (int) round(energiaInicial * (1 - dentada));
 			i->setEnergia(energia);
 			break;
 		}
 
 		if (i->getDenom() == 'M' && (i->getPosX() == *x + 1 && i->getPosY() == *y)) {
 			energiaInicial = i->getEnergia();
-			energia = energiaInicial * (1 - dentada);
+			energia = (int)round(energiaInicial * (1 - dentada));
 			i->setEnergia(energia);
 			break;
 		}
 
 		if (i->getDenom() == 'M' && (i->getPosX() == *x && i->getPosY() == *y - 1)) {
 			energiaInicial = i->getEnergia();
-			energia = energiaInicial * (1 - dentada);
+			energia = (int)round(energiaInicial * (1 - dentada));
 			i->setEnergia(energia);
 			break;
 		}
 
 		if (i->getDenom() == 'M' && (i->getPosX() == *x && i->getPosY() == *y + 1)) {
 			energiaInicial = i->getEnergia();
-			energia = energiaInicial * (1 - dentada);
+			energia = (int)round(energiaInicial * (1 - dentada));
 			i->setEnergia(energia);
 			break;
 		}
