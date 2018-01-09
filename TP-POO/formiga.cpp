@@ -120,7 +120,8 @@ void Formiga::acrescentaRegras() {
 	}
 
 	if (getDenom() == 'C') {
-		//Regra * rF = new RegraFoge;
+		Regra * rF = new RegraFoge;
+		regras.push_back(rF);
 		//Regra * rCM = new RegraComeMigalha;
 		//Regra * rPM = new RegraProcuraMigalha;
 		//Regra * rVPN = new RegraVaiParaNinho;
@@ -165,7 +166,7 @@ void Formiga::cumpreRegras(int dim, vector <Elementos*> elem, int x, int y, int 
 
 	for (unsigned int i = 0; i < regras.size(); i++) {
 			
-		if (regras[i]->condicao(&x, &y, dim, elem)){
+		if (regras[i]->condicao(&x, &y, dim, elem, getVisao())){
 			
 			regras[i]->acao(&x, &y, dim, elem, getMov(), getVisao());
 
@@ -177,8 +178,6 @@ void Formiga::cumpreRegras(int dim, vector <Elementos*> elem, int x, int y, int 
 
 			int movEX = iniX - xOcup;
 			int movEY = iniY - yOcup;
-
-
 
 			energiaIteracao(movEX, movEY);
 			break;

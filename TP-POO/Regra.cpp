@@ -20,7 +20,7 @@ bool Regra::ocupaPos(int x, int y, vector<Elementos*> elem) {
 }
 
 
-bool RegraPasseia::condicao(int * x, int * y, int dim, vector<Elementos*> elem)
+bool RegraPasseia::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis)
 {
 	return true;
 }
@@ -48,7 +48,7 @@ void RegraPasseia::acao(int * x, int * y, int dim, vector<Elementos*> elem, int 
 
 
 
-bool RegraComeMigalha::condicao(int * x, int * y, int dim, vector<Elementos*> elem)
+bool RegraComeMigalha::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis)
 {
 	for (Elementos* i : elem) {
 
@@ -145,3 +145,90 @@ void RegraComeMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, 
 		}
 	}
 }
+
+
+bool RegraFoge::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis){
+
+	int id;
+
+	for (Elementos* i : elem) {
+		if (i->getPosX() == *x && i->getPosY() == *y) {
+			id = i->getIDCor();
+		}
+	}
+
+	for (Elementos* i : elem) {
+		
+		if (i->getDenom() != 'N' && i->getDenom() != 'M' && i->getIDCor() != id) {
+		
+			if (i->getPosX() <= *x + vis && i->getPosX() >= *x - vis && i->getPosY() <= *y + vis && i->getPosY() >= *y - vis) {
+			
+					return true;
+			}
+		}
+	}
+	return false;
+}
+
+void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis) {
+
+	int id;
+	bool flag = false;
+
+	for (Elementos* i : elem) {
+		if (i->getPosX() == *x && i->getPosY() == *y) {
+			id = i->getIDCor();
+		}
+	}
+
+	for (Elementos* i : elem) {
+
+		if (i->getDenom() != 'N' && i->getDenom() != 'M' && i->getIDCor() != id) {
+
+			if (i->getPosX() <= *x + vis && i->getPosX() >= *x - vis && i->getPosY() <= *y + vis && i->getPosY() >= *y - vis) {
+				
+				int px = *x - i->getPosX();
+				int py = *y - i->getPosY();
+
+	
+				if (px > 0 && py > 0) {
+					//topesq
+					while (mov > 0) {
+						int tempX = *x + mov;
+						int tempY = *y + mov;
+
+
+						if (tempX > dim || tempY > dim) {
+							mov--;
+						}
+						else {
+							if (ocupaPos(tempX, tempY, elem) == false) {
+								*x = tempX;
+								*y = tempY;
+							}
+							else {
+								mov--;
+							}
+						}
+
+						if (mov == 0)
+						{
+							while (flag == false) {
+								*x = tempX + (rand() % (mov + 10) + (-mov));
+								*y = tempX + (rand() % (mov + 10) + (-mov));
+								if (*x >= 0 && *x < dim && *y >= 0 && *y < dim && ocupaPos(*x, *y, elem) == false) {
+									flag = true;
+								}
+								else {
+									*x = tempX;
+									*y = tempY;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}
+

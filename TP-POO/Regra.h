@@ -10,7 +10,7 @@ class Regra{
 		~Regra();
 		Regra();
 	
-		virtual bool condicao(int *x, int *y, int dim, vector <Elementos*> elem) = 0;
+		virtual bool condicao(int *x, int *y, int dim, vector <Elementos*> elem, int vis) = 0;
 		virtual void acao(int *x, int *y, int dim, vector <Elementos*> elem, int mov, int vis) = 0;
 
 		bool ocupaPos(int x, int y, vector<Elementos*> elem);
@@ -23,7 +23,7 @@ class RegraPasseia :public Regra {
 	public:
 		RegraPasseia() :Regra() {}
 
-		bool condicao(int *x, int *y, int dim, vector <Elementos*> elem);
+		bool condicao(int *x, int *y, int dim, vector <Elementos*> elem, int vis);
 
 		void acao(int *x, int *y, int dim, vector <Elementos*> elem, int mov, int vis);
 };
@@ -33,13 +33,9 @@ class RegraFoge : public Regra {
 	public:
 		RegraFoge() :Regra() {}
 
-		bool condicao() {
-			return true;
-			
-		}
-		void acao() {}
+		bool condicao(int *x, int *y, int dim, vector <Elementos*> elem, int vis);
 
-			
+		void acao(int *x, int *y, int dim, vector <Elementos*> elem, int mov, int vis);		
 };
 
 class RegraProtege : public Regra {
@@ -83,7 +79,7 @@ class RegraComeMigalha : public Regra {
 public:
 	RegraComeMigalha() :Regra() {}
 
-	bool condicao(int *x, int *y, int dim, vector <Elementos*> elem);
+	bool condicao(int *x, int *y, int dim, vector <Elementos*> elem, int vis);
 
 	void acao(int *x, int *y, int dim, vector <Elementos*> elem, int mov, int vis);
 
