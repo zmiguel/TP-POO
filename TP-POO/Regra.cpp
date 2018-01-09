@@ -72,7 +72,7 @@ bool RegraComeMigalha::condicao(int * x, int * y, int dim, vector<Elementos*> el
 
 void RegraComeMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis)
 {
-	cout << "Come!\n";
+	cout << "Come! -> " << *x << " "<< *y << endl;
 
 	for (Elementos* i : elem) {
 

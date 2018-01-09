@@ -180,7 +180,8 @@ void Mundo::sorteiaMigalha() {
 //---------------NINHOS-----------------//
 
 int Mundo::numNinhos() {
-	return ninhos.size();
+	int size = ninhos.size();
+	return size;
 }
 
 bool Mundo::confirmaNinho(int id) {
