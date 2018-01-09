@@ -36,9 +36,6 @@
     <ClInclude Include="Consola.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Comunidade.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Elementos.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -69,9 +66,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Consola.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Comunidade.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Elementos.cpp">

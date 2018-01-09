@@ -107,45 +107,68 @@ bool Formiga::ocupaPos(int x, int y, vector<Elementos*> elem) {
 	return false;
 }
 
-void Formiga::preencheRegras() {
-	
-	if (getDenom() == 'E') {
-		Regra* ob = new Regra(false); //REGRA FOGE
-		regras.push_back(ob);
-		Regra* ob1 = new Regra(false); //REGRA PROTEGE
-		regras.push_back(ob1);
-		Regra* ob2 = new Regra(false); //REGRA ASSALTA
-		regras.push_back(ob2);
-		Regra* ob3 = new Regra(false); //REGRA PERSEGUE
-		regras.push_back(ob3);
-		Regra* ob4 = new Regra(true); //REGRA COME MIGALHA
-		regras.push_back(ob4);
-		Regra* ob5 = new Regra(false); //REGRA PROCURA MIGALHA
-		regras.push_back(ob5);
-		Regra* ob6 = new Regra(false); //REGRA VAI PARA NINHO
-		regras.push_back(ob6);
-		Regra* ob7 = new Regra(true); //REGRA PASSEIA
-		regras.push_back(ob7);
-	}
-}
-
-void Formiga::regrasPercorre(int dim, vector <Elementos*> elem, int x, int y, int idF) {
+void Formiga::acrescentaRegras() {
 	
 	bool flag = false;
-	bool flag1 = false;
+	int i = 1;
+
+	if (getDenom() == 'E') {
+		Regra * rCM = new RegraComeMigalha;
+		regras.push_back(rCM);
+		Regra * rP = new RegraPasseia;
+		regras.push_back(rP);
+	}
+
+	/*if (getDenom() == 'A') {
+		Regra * rA = new RegraAssalta;
+		Regra * rPe = new RegraPersegue;
+		Regra * rCM = new RegraComeMigalha;
+		Regra * rPM = new RegraProcuraMigalha;
+		Regra * rP = new RegraPasseia;
+	}
+
+	if (getDenom() == 'C') {
+		Regra * rF = new RegraFoge;
+		Regra * rCM = new RegraComeMigalha;
+		Regra * rPM = new RegraProcuraMigalha;
+		Regra * rVPN = new RegraVaiParaNinho;
+		Regra * rP = new RegraPasseia;
+	}
+
+	if (getDenom() == 'V') {
+		Regra * rPr = new RegraProtege;
+		Regra * rCM = new RegraComeMigalha;
+		Regra * rPM = new RegraProcuraMigalha;
+		Regra * rP = new RegraPasseia;
+	}*/
+
+		/*/
+		C - RegraFoge														RegraComeMigalha	RegraProcuraMigalha		RegraVaiParaNinho	RegraPasseia
+		V -					RegraProtege									RegraComeMigalha	RegraProcuraMigalha							RegraPasseia
+		A -									RegraAssalta	RegraPersegue	RegraComeMigalha	RegraProcuraMigalha							RegraPasseia
+		E -																	RegraComeMigalha												RegraPasseia
+		/*/
+}
+
+void Formiga::cumpreRegras(int dim, vector <Elementos*> elem, int x, int y, int idF) {
+	
 	int iniX = x;
 	int iniY = y;
 
 	int *xi = &x;
 	int *yi = &y;
 
-	for (unsigned int i = 0; i < regras.size(); i++) {
-		flag = regras[i]->getRegras(i, xi, yi, dim, elem, getMov(), getVisao());
-		int xOcup = *xi;
-		int yOcup = *yi;
+	int teste = 1;
 
-		if (flag == true) {
-				
+	for (unsigned int i = 0; i < regras.size(); i++) {
+			
+		if (regras[i]->condicao(&x, &y, dim, elem)){
+			
+			regras[i]->acao(&x, &y, dim, elem, getMov(), getVisao());
+
+			int xOcup = *xi;
+			int yOcup = *yi;
+
 			setX(xOcup);
 			setY(yOcup);
 
@@ -153,6 +176,7 @@ void Formiga::regrasPercorre(int dim, vector <Elementos*> elem, int x, int y, in
 			int movEY = iniY - yOcup;
 
 			energiaIteracao(movEX, movEY);
+			break;
 		}
 	}
 }

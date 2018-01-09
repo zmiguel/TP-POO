@@ -42,8 +42,10 @@ public:
 	
 	string getAsString();
 	bool ocupaPos(int x, int y, vector <Elementos*> elem);
-	void preencheRegras();
-	void regrasPercorre(int dim, vector<Elementos*> elem, int x, int y, int idF);
+
+	void acrescentaRegras();
+	void cumpreRegras(int dim, vector<Elementos*> elem, int x, int y, int idF);
+	
 	void energiaIteracao(int movEX, int movEY);
 };
 
@@ -53,11 +55,8 @@ class Exploradora : public Formiga {
 	public:
 
 		Exploradora(int posX, int posY, char denom):Formiga(posX,posY,denom) {
-			
+			acrescentaRegras();
 		}
-
-
-
 };
 
 

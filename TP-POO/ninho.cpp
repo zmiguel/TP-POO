@@ -107,6 +107,7 @@ int Ninho::getPosVetor() {
 	return posVetor;
 }
 
+
 //-------------FORMIGAS (GETS & SETS)------------------//
 
 int Ninho::formigaPosX(int id) {
@@ -168,25 +169,24 @@ int Ninho::suaFormigaPos(int x, int y) {
 }
 
 
-
 //-------------FORMIGAS------------------//
-
 
 void Ninho::acrescentaFormiga(int x, int y, char c, int idN) {
 
-	Formiga* formiga1 = new Exploradora(x, y, c);
+	if (c == 'E') {
+		Formiga* formiga1 = new Exploradora(x, y, c);
 
-	formiga1->setEnerInicial(200);
-	formiga1->setMov(8);
-	formiga1->setVisao(10);
-	formiga1->setIdNinho(idN);
-	formiga1->preencheRegras();
-	formigas.push_back(formiga1);
+		formiga1->setEnerInicial(200);
+		formiga1->setMov(8);
+		formiga1->setVisao(10);
+		formiga1->setIdNinho(idN);
+		formigas.push_back(formiga1);
+	}
 }
 
 void Ninho::regras(int idF, int dim, vector <Elementos*> elem) {
 
-	formigas[idF]->regrasPercorre(dim, elem, formigas[idF]->getX(), formigas[idF]->getY(), idF);
+	formigas[idF]->cumpreRegras(dim, elem, formigas[idF]->getX(), formigas[idF]->getY(), idF);
 
 	if (formigas[idF]->getEner() <= 0) {
 		mataFormiga(idF);

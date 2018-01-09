@@ -107,7 +107,7 @@ void Mundo::acrescentaUmaMigalha(int x, int y) {
 
 void Mundo::acrescentaMigalhas() {
 
-	float numPosOcup = dimensao * dimensao * percentagemPosMig / 100;
+	int numPosOcup = dimensao * dimensao * percentagemPosMig / 100;
 
 	while (numPosOcup > 0) {
 		
@@ -329,7 +329,6 @@ void Mundo::acrescentaFormiga(char denom, int idN, int x, int y) {
 
 void Mundo::acrescentaEnergiaFormiga(int x, int y, int energia) {
 
-	int pos;
 	int power;
 
 	for (unsigned int i = 0; i < ninhos.size(); i++){

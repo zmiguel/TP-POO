@@ -15,7 +15,6 @@
 #include "Mundo.h"
 #include "Interface.h"
 #include "Consola.h"
-#include "Comunidade.h"
 #include "Elementos.h"
 #include "Regra.h"
 #include "Migalha.h"
