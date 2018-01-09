@@ -6,7 +6,7 @@ int main() {
 	bool flag = false;
 	int valor;
 
-	srand(time(NULL));
+	srand((unsigned int) time(NULL));
 	Consola::setScreenSize(128, 32);
 	Consola::setTextColor(Consola::VERDE);
 

@@ -180,17 +180,17 @@ void Mundo::sorteiaMigalha() {
 //---------------NINHOS-----------------//
 
 int Mundo::numNinhos() {
-	int size = ninhos.size();
-	return size;
+	return (int) ninhos.size();
 }
 
 bool Mundo::confirmaNinho(int id) {
 
-	for (unsigned int i = 0; i < numNinhos(); i++) {
-		if (ninhos[i]->getID() == id) {
+	for (Ninho* i : ninhos) {
+		if (i->getID() == id) {
 			return true;
 		}
 	}
+
 	return false;
 }
 
@@ -333,7 +333,7 @@ void Mundo::acrescentaEnergiaFormiga(int x, int y, int energia) {
 	int power;
 
 	for (unsigned int i = 0; i < ninhos.size(); i++){
-		for (unsigned int j = 0; j < ninhos[i]->numFormigas(); j++) {
+		for (int j = 0; j < ninhos[i]->numFormigas(); j++) {
 			if (ninhos[i]->formigaPosX(j) == x && ninhos[i]->formigaPosY(j) == y) {
 				power = ninhos[i]->formigaEnerg(j) + energia;
 				ninhos[i]->formigaSetEner(j, power);
@@ -356,7 +356,7 @@ void Mundo::elementosAtualiza() {
 	for (unsigned int i = 0; i < ninhos.size(); i++) {
 		Elementos * obj = new Elementos(ninhos[i]->getX(), ninhos[i]->getY(), ninhos[i]->getDenom(), ninhos[i]->getID(), ninhos[i]->getEnergia());
 		elementos.push_back(obj);
-		for (unsigned k = 0; k < ninhos[i]->numFormigas(); k++) {
+		for (int k = 0; k < ninhos[i]->numFormigas(); k++) {
 			Elementos * obj = new Elementos(ninhos[i]->formigaPosX(k), ninhos[i]->formigaPosY(k), ninhos[i]->getFormigaDenom(k), ninhos[i]->getID(), ninhos[i]->formigaEnerg(k));
 			elementos.push_back(obj);
 		}

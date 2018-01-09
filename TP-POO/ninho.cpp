@@ -25,8 +25,7 @@ int Ninho::getID() const {
 }
 
 int Ninho::numFormigas() {
-	int size = formigas.size();
-	return size;
+	return (int) formigas.size();
 }
 
 char Ninho::getDenom() {
