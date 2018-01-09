@@ -6,8 +6,6 @@ class Mundo;
 
 class Regra{
 
-	protected:
-
 	public:
 		~Regra();
 		Regra();
