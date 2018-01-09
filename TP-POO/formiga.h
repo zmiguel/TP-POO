@@ -59,5 +59,13 @@ class Exploradora : public Formiga {
 		}
 };
 
+class Cuidadora : public Formiga {
+
+public:
+
+	Cuidadora(int posX, int posY, char denom) :Formiga(posX, posY, denom) {
+		acrescentaRegras();
+	}
+};
 
 

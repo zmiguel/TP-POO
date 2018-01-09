@@ -119,6 +119,15 @@ void Formiga::acrescentaRegras() {
 		regras.push_back(rP);
 	}
 
+	if (getDenom() == 'C') {
+		//Regra * rF = new RegraFoge;
+		//Regra * rCM = new RegraComeMigalha;
+		//Regra * rPM = new RegraProcuraMigalha;
+		//Regra * rVPN = new RegraVaiParaNinho;
+		Regra * rP = new RegraPasseia;
+		regras.push_back(rP);
+	}
+
 	/*if (getDenom() == 'A') {
 		Regra * rA = new RegraAssalta;
 		Regra * rPe = new RegraPersegue;
@@ -127,13 +136,7 @@ void Formiga::acrescentaRegras() {
 		Regra * rP = new RegraPasseia;
 	}
 
-	if (getDenom() == 'C') {
-		Regra * rF = new RegraFoge;
-		Regra * rCM = new RegraComeMigalha;
-		Regra * rPM = new RegraProcuraMigalha;
-		Regra * rVPN = new RegraVaiParaNinho;
-		Regra * rP = new RegraPasseia;
-	}
+	
 
 	if (getDenom() == 'V') {
 		Regra * rPr = new RegraProtege;

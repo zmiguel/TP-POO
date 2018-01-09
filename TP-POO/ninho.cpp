@@ -182,14 +182,22 @@ void Ninho::acrescentaFormiga(int x, int y, char c, int idN) {
 		formiga1->setIdNinho(idN);
 		formigas.push_back(formiga1);
 	}
+
+	if (c == 'C') {
+		Formiga* formiga1 = new Cuidadora(x, y, c);
+		
+		formiga1->setEnerInicial(100);
+		formiga1->setMov(3);
+		formiga1->setVisao(5);
+		formiga1->setIdNinho(idN);
+		formigas.push_back(formiga1);
+	
+	}
 }
 
 void Ninho::regras(int idF, int dim, vector <Elementos*> elem) {
 
 	formigas[idF]->cumpreRegras(dim, elem, formigas[idF]->getX(), formigas[idF]->getY(), idF);
-	
-
-
 
 	if (formigas[idF]->getEner() <= 0) {
 		mataFormiga(idF);
