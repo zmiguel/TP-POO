@@ -25,30 +25,9 @@ class RegraPasseia :public Regra {
 	public:
 		RegraPasseia() :Regra() {}
 
-			bool condicao(int *x, int *y, int dim, vector <Elementos*> elem) {
-				return true;
-			}
-	
-			void acao(int *x, int *y, int dim, vector <Elementos*> elem, int mov, int vis) {
-		
-				bool flag = false;
+		bool condicao(int *x, int *y, int dim, vector <Elementos*> elem);
 
-				int xi = *x; 
-				int yi = *y;; 
-
-				while (flag == false) {
-
-					*x = xi + (rand() % (mov + 10) + (-mov));															
-					*y = yi + (rand() % (mov + 10) + (-mov));															
-					if (*x >= 0 && *x < dim && *y >= 0 && *y < dim && ocupaPos(*x, *y, elem) == false) {				
-						flag = true;
-					}
-					else {
-						*x = xi;
-						*y = yi;
-					}
-				}
-			}
+		void acao(int *x, int *y, int dim, vector <Elementos*> elem, int mov, int vis);
 };
 
 class RegraFoge : public Regra {
@@ -106,36 +85,10 @@ class RegraComeMigalha : public Regra {
 public:
 	RegraComeMigalha() :Regra() {}
 
-	bool condicao(int *x, int *y, int dim, vector <Elementos*> elem) {
-		
-		for (unsigned int i = 0; i < elem.size(); i++) {
-			
-			if (elem[i]->getDenom() == 'M' && (elem[i]->getPosX() == *x - 1 && elem[i]->getPosY() == *y)) {
-				return true;
-			}
+	bool condicao(int *x, int *y, int dim, vector <Elementos*> elem);
 
-			if (elem[i]->getDenom() == 'M' && (elem[i]->getPosX() == *x + 1 && elem[i]->getPosY() == *y)) {
-				return true;
-			}
+	void acao(int *x, int *y, int dim, vector <Elementos*> elem, int mov, int vis);
 
-			if (elem[i]->getDenom() == 'M' && (elem[i]->getPosX() == *x && elem[i]->getPosY() == *y - 1)) {
-				return true;
-			}
-
-			if (elem[i]->getDenom() == 'M' && (elem[i]->getPosX() == *x && elem[i]->getPosY() == *y + 1)) {
-				return true;
-			}
-		
-		}
-		
-		return false;
-	}
-
-
-	void acao(int *x, int *y, int dim, vector <Elementos*> elem, int mov, int vis) {
-
-		cout << "Come!\n";
-	};
 };
 
 class RegraProcuraMigalha : public Regra {
