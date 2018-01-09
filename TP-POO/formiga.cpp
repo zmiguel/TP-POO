@@ -160,10 +160,6 @@ void Formiga::cumpreRegras(int dim, vector <Elementos*> elem, int x, int y, int 
 
 	int teste = 1;
 
-	
-
-
-
 	for (unsigned int i = 0; i < regras.size(); i++) {
 			
 		if (regras[i]->condicao(&x, &y, dim, elem)){
@@ -178,6 +174,8 @@ void Formiga::cumpreRegras(int dim, vector <Elementos*> elem, int x, int y, int 
 
 			int movEX = iniX - xOcup;
 			int movEY = iniY - yOcup;
+
+
 
 			energiaIteracao(movEX, movEY);
 			break;

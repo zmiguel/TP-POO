@@ -397,6 +397,7 @@ void Mundo::iteracao(int temp){
 		for (unsigned n = 0; n < ninhos.size(); n++) {
 			for (int f = 0; f < ninhos[n]->numFormigas(); f++) {
 				ninhos[n]->regras(f, getDim(), elementos);
+				setEnergias();
 				elementosAtualiza();
 			}
 		}
@@ -406,6 +407,37 @@ void Mundo::iteracao(int temp){
 	}
 }
 
+void Mundo::setEnergias() {
+
+	for (Elementos *i : elementos) {
+		
+		if (i->getDenom() == 'M') {
+			for (Migalha *m : migalhas) {
+				if (i->getPosX() == m->getPosX() && i->getPosY() == m->getPosY()) {
+					m->setEnergia(i->getEnergia());
+				}
+			}
+		}
+
+		if (i->getDenom() == 'M') {
+			for (Ninho *n : ninhos) {
+				if (i->getPosX() == n->getX() && i->getPosY() == n->getY()) {
+					n->setEnergia(i->getEnergia());
+				}
+			}
+		}
+		
+		if (i->getDenom() != 'M'  && i->getDenom() != 'N') {
+			for (Ninho *n : ninhos) {
+				for (unsigned int k = 0; k < n->numFormigas(); k++) {
+					if (n->formigaPosX(k) == i->getPosX() && n->formigaPosY(k) == i->getPosY()) {
+						n->formigaSetEner(k, i->getEnergia());
+					}
+				}
+			}
+		}
+	}
+}
 
 
 Mundo::~Mundo()

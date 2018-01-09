@@ -187,6 +187,9 @@ void Ninho::acrescentaFormiga(int x, int y, char c, int idN) {
 void Ninho::regras(int idF, int dim, vector <Elementos*> elem) {
 
 	formigas[idF]->cumpreRegras(dim, elem, formigas[idF]->getX(), formigas[idF]->getY(), idF);
+	
+
+
 
 	if (formigas[idF]->getEner() <= 0) {
 		mataFormiga(idF);

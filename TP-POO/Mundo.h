@@ -41,6 +41,8 @@ public:
 
 	void sorteiaMigalha();
 
+	void setEnergias();
+
 	void trataFormiga(int qnts, int id, char c);
 
 	void assassinaFormiga(int x, int y);

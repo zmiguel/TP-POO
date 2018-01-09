@@ -31,6 +31,11 @@ int Elementos::getIDCor() {
 	return idCor;
 }
 
+int Elementos::getEnergia()
+{
+	return energia;
+}
+
 char Elementos::getDenom() {
 
 	return denominacao;
@@ -44,6 +49,11 @@ void Elementos::setPosX(int xi)
 void Elementos::setPosY(int yi)
 {
 	y = yi;
+}
+
+void Elementos::setEnergia(int e)
+{
+	energia = e;
 }
 
 void Elementos::setId(int idE) {

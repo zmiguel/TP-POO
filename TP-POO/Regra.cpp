@@ -19,6 +19,7 @@ bool Regra::ocupaPos(int x, int y, vector<Elementos*> elem) {
 	return false;
 }
 
+
 bool RegraPasseia::condicao(int * x, int * y, int dim, vector<Elementos*> elem)
 {
 	return true;
@@ -45,6 +46,8 @@ void RegraPasseia::acao(int * x, int * y, int dim, vector<Elementos*> elem, int 
 	}
 }
 
+
+
 bool RegraComeMigalha::condicao(int * x, int * y, int dim, vector<Elementos*> elem)
 {
 	for (Elementos* i : elem) {
@@ -70,32 +73,75 @@ bool RegraComeMigalha::condicao(int * x, int * y, int dim, vector<Elementos*> el
 	return false;
 }
 
-void RegraComeMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis)
-{
-	cout << "Come! -> " << *x << " "<< *y << endl;
+void RegraComeMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis){
+	
+	char denom;
+	float dentada;
+	int energiaInicial;
+	int energia;
+
+	for (Elementos* i : elem) {
+		if (i->getPosX() == *x && i->getPosY() == *y) {
+			denom = i->getDenom();
+			break;
+		}
+	}
+
+	if (denom == 'C') {
+		dentada = 0.5;
+	}
+
+	if (denom == 'A') {
+		dentada = 0.25;
+	}
+
+	if (denom == 'V') {
+		dentada = 0.75;
+	}
+
+	if (denom == 'E') {
+		dentada = 0.6;
+	}
+
 
 	for (Elementos* i : elem) {
 
 		if (i->getDenom() == 'M' && (i->getPosX() == *x - 1 && i->getPosY() == *y)) {
-			
+			energiaInicial = i->getEnergia();
+			energia = energiaInicial * (1 - dentada);
+			i->setEnergia(energia);
 			break;
 		}
 
 		if (i->getDenom() == 'M' && (i->getPosX() == *x + 1 && i->getPosY() == *y)) {
-			
+			energiaInicial = i->getEnergia();
+			energia = energiaInicial * (1 - dentada);
+			i->setEnergia(energia);
 			break;
 		}
 
 		if (i->getDenom() == 'M' && (i->getPosX() == *x && i->getPosY() == *y - 1)) {
-			
+			energiaInicial = i->getEnergia();
+			energia = energiaInicial * (1 - dentada);
+			i->setEnergia(energia);
 			break;
 		}
 
 		if (i->getDenom() == 'M' && (i->getPosX() == *x && i->getPosY() == *y + 1)) {
-			
+			energiaInicial = i->getEnergia();
+			energia = energiaInicial * (1 - dentada);
+			i->setEnergia(energia);
 			break;
 		}
 
+		
 	}
-
+			
+	for (Elementos* i : elem) {
+		if (i->getPosX() == *x && i->getPosY() == *y) {
+			energia = energiaInicial - energia + (i->getEnergia());
+			i->setEnergia(energia);
+			break;
+		}
+	}
 }

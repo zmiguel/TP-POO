@@ -21,10 +21,12 @@ public:
 
 	int getID();
 	int getIDCor();
+	int getEnergia();
 	char getDenom();
 
 	void setPosX(int x);
 	void setPosY(int y);
+	void setEnergia(int e);
 
 	void setId(int idE);
 
