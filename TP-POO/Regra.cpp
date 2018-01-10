@@ -592,9 +592,15 @@ void RegraProcuraMigalha::acao(int * x, int * y, int dim, vector<Elementos*> ele
 bool RegraVaiParaNinho::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis) {
 
 	bool flag = false;
+	int id;
 
 	for (Elementos * i : elem) {
-		if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY()) == true && i->getDenom() == 'N') {
+		if (i->getPosX() == *x && i->getPosY() == *y)
+			id = i->getIDCor();
+	}
+
+	for (Elementos * i : elem) {
+		if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY()) == true && i->getDenom() == 'N' && i->getIDCor() == id) {
 			flag = true;
 		}
 	}
@@ -614,8 +620,53 @@ bool RegraVaiParaNinho::condicao(int * x, int * y, int dim, vector<Elementos*> e
 
 void RegraVaiParaNinho::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis) {
 
+	bool flag = false;
+	int id;
+
+	for (Elementos * i : elem) {
+		if (i->getPosX() == *x && i->getPosY() == *y)
+			id = i->getIDCor();
+	}
+
+	for (Elementos * i : elem) {
+		if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY()) == true && i->getDenom() == 'N' && i->getIDCor() == id) {
+			flag = true;
+		}
+	}
+
+	for (Elementos * i : elem) {
+		if (i->getPosX() == *x && i->getPosY() == *y) {
+			if (i->getEnergia() > i->getEnergiaInicial() || i->getEnergiaInicial() * 0.5 > i->getEnergia()) {
+				if (i->getItt() > 10 && flag == true) {
+					
+					for (Elementos * j : elem) {
+					
+						if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY()) == true && i->getDenom() == 'N' && i->getIDCor() == id) {
+							if (estaMov(*x, *y, mov, i->getPosX(), i->getPosY()) == true) {
+								*x = i->getPosX();
+								*y = i->getPosY();
+							}
+							else {
+								
+							
+							
+							}
 
 
+
+						}
+					
+					}
+					
+
+
+
+
+
+				}
+			}
+		}
+	}
 
 
 
