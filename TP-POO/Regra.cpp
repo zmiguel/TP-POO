@@ -106,7 +106,7 @@ void RegraComeMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, 
 	int energiaInicial;
 	int energia;
 
-	cout << "[REGRA] Come Migalha";
+	cout << "[REGRA] Come Migalha"<< endl;
 	for (Elementos* i : elem) {
 		if (i->getPosX() == *x && i->getPosY() == *y && i->getDenom() != 'N') {
 			denom = i->getDenom();
