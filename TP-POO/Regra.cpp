@@ -589,8 +589,37 @@ void RegraProcuraMigalha::acao(int * x, int * y, int dim, vector<Elementos*> ele
 }
 
 
+bool RegraVaiParaNinho::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis) {
+
+	bool flag = false;
+
+	for (Elementos * i : elem) {
+		if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY()) == true && i->getDenom() == 'N') {
+			flag = true;
+		}
+	}
+
+	for (Elementos * i : elem) {
+		if (i->getPosX() == *x && i->getPosY() == *y) {
+			if (i->getEnergia() > i->getEnergiaInicial() || i->getEnergiaInicial() * 0.5 > i->getEnergia()) {
+				if (i->getItt() > 10 && flag == true) {	
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+}
+
+void RegraVaiParaNinho::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis) {
 
 
+
+
+
+
+}
 
 bool RegraFoge::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis){
 

@@ -144,7 +144,8 @@ void Formiga::acrescentaRegras() {
 		regras.push_back(rCM);
 		Regra * rPM = new RegraProcuraMigalha;
 		regras.push_back(rPM);
-		//Regra * rVPN = new RegraVaiParaNinho;
+		Regra * rVPN = new RegraVaiParaNinho;
+		regras.push_back(rVPN);
 		Regra * rP = new RegraPasseia;
 		regras.push_back(rP);
 	}

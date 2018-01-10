@@ -42,6 +42,10 @@ int Elementos::getEnergiaInicial() {
 	return energiaInicial;
 }
 
+int Elementos::getItt() {
+	return iteracao;
+}
+
 char Elementos::getDenom() {
 
 	return denominacao;
@@ -65,6 +69,8 @@ void Elementos::setEnergia(int e)
 void Elementos::setId(int idE) {
 	id = idE;
 }
+
+
 
 void Elementos::setEnergiaInicial(int eI) {
 

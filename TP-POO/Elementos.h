@@ -24,6 +24,7 @@ public:
 	int getIDCor();
 	int getEnergia();
 	int getEnergiaInicial();
+	int getItt();
 	char getDenom();
 
 	void setPosX(int x);

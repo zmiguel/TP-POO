@@ -108,9 +108,7 @@ class RegraVaiParaNinho : public Regra {
 public:
 	RegraVaiParaNinho() :Regra() {}
 
-	bool condicao() {}
-	void acao() {
+	bool condicao(int *x, int *y, int dim, vector <Elementos*> elem, int vis);
 
-		cout << "algo";
-	};
+	void acao(int *x, int *y, int dim, vector <Elementos*> elem, int mov, int vis);
 };
