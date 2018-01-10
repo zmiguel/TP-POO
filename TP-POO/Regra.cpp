@@ -634,6 +634,7 @@ void RegraVaiParaNinho::acao(int * x, int * y, int dim, vector<Elementos*> elem,
 	for (Elementos * i : elem) {
 		if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY()) == true && i->getDenom() == 'N' && i->getIDCor() == id) {
 			flag = true;
+			cout << "vou para o ninho!" << endl;
 		}
 	}
 
@@ -644,15 +645,15 @@ void RegraVaiParaNinho::acao(int * x, int * y, int dim, vector<Elementos*> elem,
 					
 					for (Elementos * j : elem) {
 					
-						if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY()) == true && i->getDenom() == 'N' && i->getIDCor() == id) {
-							if (estaMov(*x, *y, mov, i->getPosX(), i->getPosY()) == true) {
-								*x = i->getPosX();
-								*y = i->getPosY();
+						if (estaVisao(*x, *y, vis, j->getPosX(), j->getPosY()) == true && j->getDenom() == 'N' && j->getIDCor() == id) {
+							if (estaMov(*x, *y, mov, j->getPosX(), j->getPosY()) == true) {
+								*x = j->getPosX();
+								*y = j->getPosY();
 							}
 							else {
 								
-								int px = i->getPosX() - *x;
-								int py = i->getPosY() - *y;
+								int px = j->getPosX() - *x;
+								int py = j->getPosY() - *y;
 								cout << px << ", " << py << endl;
 								
 								if (px > 0 && py > 0) {
