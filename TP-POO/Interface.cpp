@@ -200,6 +200,7 @@ void Interface::imprime() {
 
 	while (x < mundo->getDim() + xi && y < mundo->getDim() + yi) {
 		Consola::setTextColor(Consola::AMARELO);
+		//imprime reguas
 		if (itt == 0) {
 			Consola::gotoxy(x + itt * 2 - 5, y);
 			cout << y-yi;
@@ -208,20 +209,23 @@ void Interface::imprime() {
 			Consola::gotoxy(x + itt * 2, y - 2);
 			cout << itt;
 		}
+		//end imprime reguas
 		Consola::gotoxy(x + itt * 2, y);
 		flag = 0;
 
-		for (unsigned int i = 0; i < aux.size(); i++) {
-			if (aux[i]->getPosX() + xi == x && aux[i]->getPosY() + yi == y) {
 
-				flag = 1;
-				Consola::setTextColor(aux[i]->getIDCor() + 1);
+		for (Elementos* a : aux) {//ve todos os elementos
+			if (a->getPosX() + xi == x && a->getPosY() + yi == y) { // verifica se o elemento está na posição onde o corsor está
+				if (mundo->ocupaPos(a->getPosX(), a->getPosY()) == false) { //verifica se a posição ja está ocupada
+					flag = 1;
+					Consola::setTextColor(a->getIDCor() + 1);
 
-				if (aux[i]->getEnergia() > aux[i]->getEnergiaInicial() * 0.5) {
-					cout << aux[i]->getDenom();
-				}
-				else {
-					putchar(tolower(aux[i]->getDenom()));
+					if (a->getEnergia() > a->getEnergiaInicial()*.5) {
+						cout << a->getDenom();
+					}
+					else {
+						cout << tolower(a->getDenom());
+					}
 				}
 			}
 		}
