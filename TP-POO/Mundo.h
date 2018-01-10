@@ -36,6 +36,8 @@ public:
 	
 	bool ocupaPos(int x, int y);
 
+	bool ocupaPos2(int x, int y);
+
 	char ocupaPosChar(int x, int y);
 	
 	void migalhasPerdeIteracao();

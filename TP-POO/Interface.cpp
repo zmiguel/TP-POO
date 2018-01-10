@@ -216,7 +216,7 @@ void Interface::imprime() {
 
 		for (Elementos* a : aux) {//ve todos os elementos
 			if (a->getPosX() + xi == x && a->getPosY() + yi == y) { // verifica se o elemento está na posição onde o corsor está
-				if (mundo->ocupaPos(a->getPosX(), a->getPosY()) == false) { //verifica se a posição ja está ocupada
+				if (mundo->ocupaPos2(a->getPosX(), a->getPosY()) == false) { //verifica se a posição ja está ocupada
 					flag = 1;
 					Consola::setTextColor(a->getIDCor() + 1);
 
@@ -224,7 +224,7 @@ void Interface::imprime() {
 						cout << a->getDenom();
 					}
 					else {
-						cout << tolower(a->getDenom());
+						putchar(tolower(a->getDenom()));
 					}
 				}
 			}

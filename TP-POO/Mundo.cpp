@@ -383,6 +383,31 @@ bool Mundo::ocupaPos(int x, int y) {
 	return false;
 }
 
+bool Mundo::ocupaPos2(int x, int y) {
+
+	bool flag = false;
+	int xx = -1;
+	int yy = -1;
+
+	for (Elementos*e : elementos) {
+		if (e->getPosX() == x && e->getPosY() == y) {
+			flag = true;
+			xx = e->getPosX();
+			yy = e->getPosY();
+			break;
+		}
+	}
+
+	for (Elementos*f : elementos) {
+		if (f->getPosX() == x && f->getPosY() == y && flag == true && xx != f->getPosX() && yy != f->getPosY()) {
+			return true;
+		}
+	}
+
+	return false;
+
+}
+
 char Mundo::ocupaPosChar(int x, int y) {
 
 	for (unsigned int i = 0; i < elementos.size(); i++) {
