@@ -19,6 +19,32 @@ bool Regra::ocupaPos(int x, int y, vector<Elementos*> elem) {
 	return false;
 }
 
+bool Regra::estaVisao(int x, int y, int vis, int xp, int yp) {
+	int xmax = x + vis;
+	int xmim = x - vis;
+	int ymax = y + vis;
+	int ymim = y - vis;
+	if (xp >= xmim && xp <= xmax && yp >= ymim && yp <= ymax) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool Regra::estaMov(int x, int y, int mov, int xp, int yp) {
+	int xmax = x + mov;
+	int xmim = x - mov;
+	int ymax = y + mov;
+	int ymim = y - mov;
+	if (xp >= xmim && xp <= xmax && yp >= ymim && yp <= ymax) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 
 bool RegraPasseia::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis)
 {
@@ -147,6 +173,70 @@ void RegraComeMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, 
 }
 
 
+bool RegraProcuraMigalha::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis)
+{
+	for (Elementos* i : elem) {
+		if (i->getDenom() == 'M') {
+			if (i->getPosX() <= *x + vis && i->getPosX() >= *x - vis && i->getPosY() <= *y + vis && i->getPosY() >= *y - vis) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+void RegraProcuraMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis) {
+
+	int xi = *x;
+	int yi = *y;
+
+	//vars para procurara mais energia
+	int bestX = 0;
+	int bestY = 0;
+	int BestEnerg = 0;
+
+	for (Elementos* i : elem) {
+		if (i->getDenom() == 'M') {
+			if (i->getPosX() <= *x + vis && i->getPosX() >= *x - vis && i->getPosY() <= *y + vis && i->getPosY() >= *y - vis) {
+				if (i->getEnergia() > BestEnerg) {
+					bestX = i->getPosX();
+					bestY = i->getPosY();
+					BestEnerg = i->getEnergia();
+				}
+			}
+		}
+	}
+	for (Elementos* i : elem) {
+		if (bestX == i->getPosX() && bestY == i->getPosY()) {
+			cout << "encontrei a melhor\n";
+			if (estaVisao(xi, yi, vis, bestX + 1, bestY) == true && ocupaPos(bestX + 1, bestY, elem) == false && estaMov(xi, yi, mov, bestX + 1, bestY) == true && bestX + 1 < dim && bestY < dim && bestX +1 >= 0 && bestY >= 0) {
+				*x = bestX + 1;
+				*y = bestY;
+				break;
+			}
+			if (estaVisao(xi, yi, vis, bestX - 1, bestY) == true && ocupaPos(bestX - 1, bestY, elem) == false && estaMov(xi, yi, mov, bestX - 1, bestY) == true && bestX - 1 < dim && bestY < dim && bestX - 1 >= 0 && bestY >= 0) {
+				*x = bestX - 1;
+				*y = bestY;
+				break;
+			}
+			if (estaVisao(xi, yi, vis, bestX, bestY + 1) == true && ocupaPos(bestX, bestY + 1, elem) == false && estaMov(xi, yi, mov, bestX, bestY + 1) == true && bestX < dim && bestY + 1 < dim && bestX >= 0 && bestY + 1 >= 0) {
+				*x = bestX;
+				*y = bestY + 1;
+				break;
+			}
+			if (estaVisao(xi, yi, vis, bestX, bestY - 1) == true && ocupaPos(bestX, bestY - 1, elem) == false && estaMov(xi, yi, mov, bestX, bestY - 1) == true && bestX < dim && bestY - 1 < dim && bestX >= 0 && bestY - 1 >= 0) {
+				*x = bestX;
+				*y = bestY - 1;
+				break;
+			}
+
+		}
+	}
+	
+}
+
+
+
 bool RegraFoge::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis){
 
 	int id;
@@ -176,6 +266,7 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 	bool flag = false;
 	int xi = *x;
 	int yi = *y;
+	int movi = mov;
 
 
 	for (Elementos* i : elem) {
@@ -185,6 +276,9 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 	}
 
 	for (Elementos* i : elem) {
+		if (flag == true) {
+			break;
+		}
 
 		if (i->getDenom() != 'N' && i->getDenom() != 'M' && i->getIDCor() != id) {
 
@@ -192,6 +286,7 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 				
 				int px = *x - i->getPosX();
 				int py = *y - i->getPosY();
+				cout << px << ", " << py << endl;
 
 	
 				if (px > 0 && py > 0) {
@@ -201,13 +296,14 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 						int tempY = *y + mov;
 
 
-						if (tempX > dim || tempY > dim) {
+						if (tempX >= dim || tempY >= dim || tempX < 0 || tempY < 0) {
 							mov--;
 						}
 						else {
 							if (ocupaPos(tempX, tempY, elem) == false) {
 								*x = tempX;
 								*y = tempY;
+								flag = true;
 								break;
 							}
 							else {
@@ -217,10 +313,9 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 
 						if (mov == 0)
 						{
-							mov = 3;
 							while (flag == false) {
-								*x = xi + (rand() % (mov + 10) + (-mov));
-								*y = yi + (rand() % (mov + 10) + (-mov));
+								*x = xi + (rand() % (movi + 10) + (-movi));
+								*y = yi + (rand() % (movi + 10) + (-movi));
 								if (*x >= 0 && *x < dim && *y >= 0 && *y < dim && ocupaPos(*x, *y, elem) == false) {
 									flag = true;
 									break;
@@ -243,13 +338,14 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 						int tempY = *y - mov;
 
 
-						if (tempX > dim || tempY > dim) {
+						if (tempX >= dim || tempY >= dim || tempX < 0 || tempY < 0) {
 							mov--;
 						}
 						else {
 							if (ocupaPos(tempX, tempY, elem) == false) {
 								*x = tempX;
 								*y = tempY;
+								flag = true;
 								break;
 							}
 							else {
@@ -259,10 +355,9 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 
 						if (mov == 0)
 						{
-							mov = 3;
 							while (flag == false) {
-								*x = xi + (rand() % (mov + 10) + (-mov));
-								*y = yi + (rand() % (mov + 10) + (-mov));
+								*x = xi + (rand() % (movi + 10) + (-movi));
+								*y = yi + (rand() % (movi + 10) + (-movi));
 								if (*x >= 0 && *x < dim && *y >= 0 && *y < dim && ocupaPos(*x, *y, elem) == false) {
 									flag = true;
 									break;
@@ -278,20 +373,21 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 						}
 					}
 				}
-				else if (px > 0 && py > 0) {
+				else if (px < 0 && py > 0) {
 					//topdir
 					while (mov > 0) {
 						int tempX = *x - mov;
 						int tempY = *y + mov;
 
 
-						if (tempX > dim || tempY > dim) {
+						if (tempX >= dim || tempY >= dim || tempX < 0 || tempY < 0) {
 							mov--;
 						}
 						else {
 							if (ocupaPos(tempX, tempY, elem) == false) {
 								*x = tempX;
 								*y = tempY;
+								flag = true;
 								break;
 							}
 							else {
@@ -301,10 +397,9 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 
 						if (mov == 0)
 						{
-							mov = 3;
 							while (flag == false) {
-								*x = xi + (rand() % (mov + 10) + (-mov));
-								*y = yi + (rand() % (mov + 10) + (-mov));
+								*x = xi + (rand() % (movi + 10) + (-movi));
+								*y = yi + (rand() % (movi + 10) + (-movi));
 								if (*x >= 0 && *x < dim && *y >= 0 && *y < dim && ocupaPos(*x, *y, elem) == false) {
 									flag = true;
 									break;
@@ -320,20 +415,21 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 						}
 					}
 				}
-				else if (px > 0 && py > 0) {
+				else if (px < 0 && py < 0) {
 					//baixodir
 					while (mov > 0) {
 						int tempX = *x - mov;
 						int tempY = *y - mov;
 
 
-						if (tempX > dim || tempY > dim) {
+						if (tempX >= dim || tempY >= dim || tempX < 0 || tempY < 0) {
 							mov--;
 						}
 						else {
 							if (ocupaPos(tempX, tempY, elem) == false) {
 								*x = tempX;
 								*y = tempY;
+								flag = true;
 								break;
 							}
 							else {
@@ -343,10 +439,9 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 
 						if (mov == 0)
 						{
-							mov = 3;
 							while (flag == false) {
-								*x = xi + (rand() % (mov + 10) + (-mov));
-								*y = yi + (rand() % (mov + 10) + (-mov));
+								*x = xi + (rand() % (movi + 10) + (-movi));
+								*y = yi + (rand() % (movi + 10) + (-movi));
 								if (*x >= 0 && *x < dim && *y >= 0 && *y < dim && ocupaPos(*x, *y, elem) == false) {
 									flag = true;
 									break;
@@ -369,13 +464,14 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 						int tempY = *y + mov;
 
 
-						if (tempX > dim || tempY > dim) {
+						if (tempX >= dim || tempY >= dim || tempX < 0 || tempY < 0) {
 							mov--;
 						}
 						else {
 							if (ocupaPos(tempX, tempY, elem) == false) {
 								*x = tempX;
 								*y = tempY;
+								flag = true;
 								break;
 							}
 							else {
@@ -385,10 +481,9 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 
 						if (mov == 0)
 						{
-							mov = 3;
 							while (flag == false) {
-								*x = xi + (rand() % (mov + 10) + (-mov));
-								*y = yi + (rand() % (mov + 10) + (-mov));
+								*x = xi + (rand() % (movi + 10) + (-movi));
+								*y = yi + (rand() % (movi + 10) + (-movi));
 								if (*x >= 0 && *x < dim && *y >= 0 && *y < dim && ocupaPos(*x, *y, elem) == false) {
 									flag = true;
 									break;
@@ -411,13 +506,14 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 						int tempY = *y - mov;
 
 
-						if (tempX > dim || tempY > dim) {
+						if (tempX >= dim || tempY >= dim || tempX < 0 || tempY < 0) {
 							mov--;
 						}
 						else {
 							if (ocupaPos(tempX, tempY, elem) == false) {
 								*x = tempX;
 								*y = tempY;
+								flag = true;
 								break;
 							}
 							else {
@@ -427,10 +523,9 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 
 						if (mov == 0)
 						{
-							mov = 3;
 							while (flag == false) {
-								*x = xi + (rand() % (mov + 10) + (-mov));
-								*y = yi + (rand() % (mov + 10) + (-mov));
+								*x = xi + (rand() % (movi + 10) + (-movi));
+								*y = yi + (rand() % (movi + 10) + (-movi));
 								if (*x >= 0 && *x < dim && *y >= 0 && *y < dim && ocupaPos(*x, *y, elem) == false) {
 									flag = true;
 									break;
@@ -453,13 +548,14 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 						int tempY = *y;
 
 
-						if (tempX > dim || tempY > dim) {
+						if (tempX >= dim || tempY >= dim || tempX < 0 || tempY < 0) {
 							mov--;
 						}
 						else {
 							if (ocupaPos(tempX, tempY, elem) == false) {
 								*x = tempX;
 								*y = tempY;
+								flag = true;
 								break;
 							}
 							else {
@@ -469,10 +565,9 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 
 						if (mov == 0)
 						{
-							mov = 3;
 							while (flag == false) {
-								*x = xi + (rand() % (mov + 10) + (-mov));
-								*y = yi + (rand() % (mov + 10) + (-mov));
+								*x = xi + (rand() % (movi + 10) + (-movi));
+								*y = yi + (rand() % (movi + 10) + (-movi));
 								if (*x >= 0 && *x < dim && *y >= 0 && *y < dim && ocupaPos(*x, *y, elem) == false) {
 									flag = true;
 									break;
@@ -495,13 +590,14 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 						int tempY = *y;
 
 
-						if (tempX > dim || tempY > dim) {
+						if (tempX >= dim || tempY >= dim || tempX < 0 || tempY < 0) {
 							mov--;
 						}
 						else {
 							if (ocupaPos(tempX, tempY, elem) == false) {
 								*x = tempX;
 								*y = tempY;
+								flag = true;
 								break;
 							}
 							else {
@@ -511,10 +607,9 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 
 						if (mov == 0)
 						{
-							mov = 3;
 							while (flag == false) {
-								*x = xi + (rand() % (mov + 10) + (-mov));
-								*y = yi + (rand() % (mov + 10) + (-mov));
+								*x = xi + (rand() % (movi + 10) + (-movi));
+								*y = yi + (rand() % (movi + 10) + (-movi));
 								if (*x >= 0 && *x < dim && *y >= 0 && *y < dim && ocupaPos(*x, *y, elem) == false) {
 									flag = true;
 									break;

@@ -122,8 +122,10 @@ void Formiga::acrescentaRegras() {
 	if (getDenom() == 'C') {
 		Regra * rF = new RegraFoge;
 		regras.push_back(rF);
-		//Regra * rCM = new RegraComeMigalha;
-		//Regra * rPM = new RegraProcuraMigalha;
+		Regra * rCM = new RegraComeMigalha;
+		regras.push_back(rCM);
+		Regra * rPM = new RegraProcuraMigalha;
+		regras.push_back(rPM);
 		//Regra * rVPN = new RegraVaiParaNinho;
 		Regra * rP = new RegraPasseia;
 		regras.push_back(rP);

@@ -15,6 +15,10 @@ class Regra{
 
 		bool ocupaPos(int x, int y, vector<Elementos*> elem);
 
+		bool estaVisao(int x, int y, int vis, int xp, int yp);
+
+		bool estaMov(int x, int y, int mov, int xp, int yp);
+
 };
 
 
@@ -95,6 +99,8 @@ public:
 
 		cout << "algo";
 	};
+	bool condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis);
+	void acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis);
 };
 
 class RegraVaiParaNinho : public Regra {
