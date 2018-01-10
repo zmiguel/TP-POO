@@ -209,7 +209,7 @@ void RegraProcuraMigalha::acao(int * x, int * y, int dim, vector<Elementos*> ele
 	for (Elementos* i : elem) {
 		if (bestX == i->getPosX() && bestY == i->getPosY()) {
 			cout << "encontrei a melhor\n";
-			if (estaVisao(xi, yi, vis, bestX + 1, bestY) == true && ocupaPos(bestX + 1, bestY, elem) == false && estaMov(xi, yi, mov, bestX + 1, bestY) == true && bestX + 1 < dim && bestY < dim && bestX +1 >= 0 && bestY >= 0) {
+			if (estaVisao(xi, yi, vis, bestX + 1, bestY) == true && ocupaPos(bestX + 1, bestY, elem) == false && estaMov(xi, yi, mov, bestX + 1, bestY) == true && bestX + 1 < dim && bestY < dim && bestX + 1 >= 0 && bestY >= 0) {
 				*x = bestX + 1;
 				*y = bestY;
 				break;

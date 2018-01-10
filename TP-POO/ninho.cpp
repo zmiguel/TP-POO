@@ -168,6 +168,12 @@ int Ninho::suaFormigaPos(int x, int y) {
 	return -1;
 }
 
+int Ninho::formigaEnergiaInicial(int idF) {
+
+	return formigas[idF]->getEnergiaInicial();
+}
+
+
 
 //-------------FORMIGAS------------------//
 

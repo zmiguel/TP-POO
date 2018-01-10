@@ -2,13 +2,14 @@
 
 int Elementos::i = 1;
 
-Elementos::Elementos(int x, int y, char denominacao, int idCor, int energia) {
+Elementos::Elementos(int x, int y, char denominacao, int idCor, int energia, int energiaInicial) {
 
 	this->denominacao = denominacao;
 	this->x = x;
 	this->y = y;
 	this->idCor = idCor;
 	this->energia = energia;
+	this->energiaInicial = energiaInicial;
 	this->id = i++;
 
 }
@@ -36,6 +37,11 @@ int Elementos::getEnergia()
 	return energia;
 }
 
+int Elementos::getEnergiaInicial() {
+	
+	return energiaInicial;
+}
+
 char Elementos::getDenom() {
 
 	return denominacao;
@@ -58,6 +64,12 @@ void Elementos::setEnergia(int e)
 
 void Elementos::setId(int idE) {
 	id = idE;
+}
+
+void Elementos::setEnergiaInicial(int eI) {
+
+	energiaInicial = eI;
+
 }
 
 Elementos::~Elementos()

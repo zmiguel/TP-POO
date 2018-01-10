@@ -97,8 +97,7 @@ void Mundo::acrescentaUmaMigalha(int x, int y) {
 		Migalha* ob = new Migalha(x, y, energiaInicialMig);
 		migalhas.push_back(ob);
 
-		Elementos * obj = new Elementos(ob->getPosX(), ob->getPosY(), 'M', ob->getId(), ob->getEnergia());
-		elementos.push_back(obj);
+		elementosAtualiza();
 	}
 	else {
 		cout << "Posicao ja ocupada para acrescentar uma migalha"<< endl;
@@ -119,8 +118,7 @@ void Mundo::acrescentaMigalhas() {
 			Migalha* ob = new Migalha(x, y, energiaInicialMig);
 			migalhas.push_back(ob);
 
-			Elementos * obj = new Elementos(ob->getPosX(), ob->getPosY(), 'M', ob->getId(), ob->getEnergia());
-			elementos.push_back(obj);
+			elementosAtualiza();
 
 			numPosOcup--;
 		}
@@ -168,8 +166,7 @@ void Mundo::sorteiaMigalha() {
 			Migalha* ob = new Migalha(x, y, energiaInicialMig);
 			migalhas.push_back(ob);
 
-			Elementos * obj = new Elementos(ob->getPosX(), ob->getPosY(), 'M', ob->getId(), ob->getEnergia());
-			elementos.push_back(obj);
+			elementosAtualiza();
 
 			sorteio--;
 		}
@@ -205,9 +202,7 @@ void Mundo::acrescentaNinho(int x, int y){
 			ninhos[i]->setPosVetor(i);
 		}
 
-
-		Elementos * obj = new Elementos(x, y, 'N', ob->getID(), ob->getEnergia());
-		elementos.push_back(obj);
+		elementosAtualiza();
 	}
 	else {
 		cout << "\n\n\n Foi tentado ser criado um ninho numa posição já ocupada!";
@@ -286,6 +281,7 @@ void Mundo::trataFormiga(int qnts, int id, char c) {
 
 		qnts--;
 
+		
 		elementosAtualiza();
 	};
 }
@@ -354,16 +350,16 @@ void Mundo::elementosAtualiza() {
 	elementos.clear();
 
 	for (unsigned int i = 0; i < ninhos.size(); i++) {
-		Elementos * obj = new Elementos(ninhos[i]->getX(), ninhos[i]->getY(), ninhos[i]->getDenom(), ninhos[i]->getID(), ninhos[i]->getEnergia());
+		Elementos * obj = new Elementos(ninhos[i]->getX(), ninhos[i]->getY(), ninhos[i]->getDenom(), ninhos[i]->getID(), ninhos[i]->getEnergia(), ninhos[i]->getEnergia());
 		elementos.push_back(obj);
 		for (int k = 0; k < ninhos[i]->numFormigas(); k++) {
-			Elementos * obj = new Elementos(ninhos[i]->formigaPosX(k), ninhos[i]->formigaPosY(k), ninhos[i]->getFormigaDenom(k), ninhos[i]->getID(), ninhos[i]->formigaEnerg(k));
+			Elementos * obj = new Elementos(ninhos[i]->formigaPosX(k), ninhos[i]->formigaPosY(k), ninhos[i]->getFormigaDenom(k), ninhos[i]->getID(), ninhos[i]->formigaEnerg(k), ninhos[i]->formigaEnergiaInicial(k));
 			elementos.push_back(obj);
 		}
 	}
 
 	for (unsigned int m = 0; m < migalhas.size(); m++) {
-		Elementos * obj = new Elementos(migalhas[m]->getPosX(), migalhas[m]->getPosY(), 'M', migalhas[m]->getId(), migalhas[m]->getEnergia());
+		Elementos * obj = new Elementos(migalhas[m]->getPosX(), migalhas[m]->getPosY(), 'M', migalhas[m]->getId(), migalhas[m]->getEnergia(), migalhas[m]->getEnergia());
 		elementos.push_back(obj);
 	}
 }

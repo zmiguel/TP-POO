@@ -211,7 +211,13 @@ void Interface::imprime() {
 
 				flag = 1;
 				Consola::setTextColor(aux[i]->getIDCor() + 1);
-				cout << aux[i]->getDenom();
+
+				if (aux[i]->getEnergia() > aux[i]->getEnergiaInicial() * 0.5) {
+					cout << aux[i]->getDenom();
+				}
+				else {
+					putchar(tolower(aux[i]->getDenom()));
+				}
 			}
 		}
 

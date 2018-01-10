@@ -11,10 +11,11 @@ class Elementos {
 	int y;
 	int idCor;
 	int energia;
+	int energiaInicial;
 
 public:
 
-	Elementos(int x, int y, char denominacao, int idCor, int energia);
+	Elementos(int x, int y, char denominacao, int idCor, int energia, int energiaInicial);
 
 	int getPosX();
 	int getPosY();
@@ -22,6 +23,7 @@ public:
 	int getID();
 	int getIDCor();
 	int getEnergia();
+	int getEnergiaInicial();
 	char getDenom();
 
 	void setPosX(int x);
@@ -29,6 +31,8 @@ public:
 	void setEnergia(int e);
 
 	void setId(int idE);
+
+	void setEnergiaInicial(int eI);
 
 	~Elementos();
 };

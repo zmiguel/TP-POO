@@ -24,6 +24,7 @@ char Formiga::getDenom() {
 
 void Formiga::setEnerInicial(int e)
 {
+	energiaInicial = e;
 	energia = e;
 }
 
@@ -39,6 +40,9 @@ int Formiga::getIdNinho() {
 	return idNinho;
 }
 
+int Formiga::getEnergiaInicial() {
+	return energiaInicial;
+}
 
 //---------POSIÇÕES-----------//
 

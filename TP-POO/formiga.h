@@ -31,6 +31,7 @@ public:
 	void setEner(int e);
 	void setIdNinho(int i);
 	int getIdNinho();
+	int getEnergiaInicial();
 	void setX(int x);
 	void setY(int y);
 	void setEnerInicial(int e);

@@ -45,6 +45,9 @@ public:
 
 	int suaFormigaPos(int x, int y);
 
+	int formigaEnergiaInicial(int idF);
+
+
 	int formigaPosX(int id);
 	int formigaPosY(int id);
 	int formigaEnerg(int id);
