@@ -52,6 +52,8 @@ public:
 
 		cout << "algo";
 	};
+	bool condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis);
+	void acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis);
 };
 
 class RegraAssalta : public Regra {

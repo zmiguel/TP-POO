@@ -143,9 +143,20 @@ void Formiga::acrescentaRegras() {
 		Regra * rCM = new RegraComeMigalha;
 		regras.push_back(rCM);
 		Regra * rPM = new RegraProcuraMigalha;
-		regras.push_back(rPM);
+		regras.push_back(rCM);
 		Regra * rVPN = new RegraVaiParaNinho;
 		regras.push_back(rVPN);
+		Regra * rP = new RegraPasseia;
+		regras.push_back(rP);
+	}
+
+	if (getDenom() == 'V') {
+		Regra * rPr = new RegraProtege;
+		regras.push_back(rPr);
+		Regra * rCM = new RegraComeMigalha;
+		regras.push_back(rCM);
+		Regra * rPM = new RegraProcuraMigalha;
+		regras.push_back(rCM);
 		Regra * rP = new RegraPasseia;
 		regras.push_back(rP);
 	}
@@ -156,23 +167,18 @@ void Formiga::acrescentaRegras() {
 		Regra * rCM = new RegraComeMigalha;
 		Regra * rPM = new RegraProcuraMigalha;
 		Regra * rP = new RegraPasseia;
-	}
+	}*/
 
 	
 
-	if (getDenom() == 'V') {
-		Regra * rPr = new RegraProtege;
-		Regra * rCM = new RegraComeMigalha;
-		Regra * rPM = new RegraProcuraMigalha;
-		Regra * rP = new RegraPasseia;
-	}*/
+	
 
-		/*/
+		/*
 		C - RegraFoge														RegraComeMigalha	RegraProcuraMigalha		RegraVaiParaNinho	RegraPasseia
 		V -					RegraProtege									RegraComeMigalha	RegraProcuraMigalha							RegraPasseia
 		A -									RegraAssalta	RegraPersegue	RegraComeMigalha	RegraProcuraMigalha							RegraPasseia
 		E -																	RegraComeMigalha												RegraPasseia
-		/*/
+		*/
 }
 
 void Formiga::cumpreRegras(int dim, vector <Elementos*> elem, int x, int y, int idF) {

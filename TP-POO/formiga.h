@@ -73,4 +73,13 @@ public:
 	}
 };
 
+class Vigilante : public Formiga {
+
+public:
+
+	Vigilante(int posX, int posY, char denom) :Formiga(posX, posY, denom) {
+		acrescentaRegras();
+	}
+};
+
 

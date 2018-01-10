@@ -215,6 +215,16 @@ void Ninho::acrescentaFormiga(int x, int y, char c, int idN) {
 		formigas.push_back(formiga1);
 	
 	}
+
+	if (c == 'V') {
+		Formiga* formiga1 = new Vigilante(x, y, c);
+
+		formiga1->setEnerInicial(150);
+		formiga1->setMov(5);
+		formiga1->setVisao(7);
+		formiga1->setIdNinho(idN);
+		formigas.push_back(formiga1);
+	}
 }
 
 void Ninho::regras(int idF, int dim, vector <Elementos*> elem) {
