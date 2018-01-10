@@ -416,8 +416,16 @@ void Mundo::iteracao(int temp){
 	for (int it = 0; it < temp; it++) {
 		for (unsigned n = 0; n < ninhos.size(); n++) {
 			for (int f = 0; f < ninhos[n]->numFormigas(); f++) {
-				ninhos[n]->regras(f, getDim(), elementos);
-				setEnergias();
+				
+				if (ninhos[n]->formigaEstaNinho(ninhos[n]->formigaPosX(f), ninhos[n]->formigaPosY(f)) == true && (ninhos[n]->formigaEnerg(f) > ninhos[n]->formigaEnergiaInicial(f) || ninhos[n]->formigaEnerg(f) < ninhos[n]->formigaEnergiaInicial(f) * 0.5) && ninhos[n]->getEnergia() > 1) {
+		
+					ninhos[n]->interacaoNinho(f, transFormNin);
+					
+				}else{
+					ninhos[n]->regras(f, getDim(), elementos);
+					setEnergias();
+				}
+				
 				elementosAtualiza();
 			}
 		}

@@ -242,6 +242,39 @@ void Ninho::assassinaProcura(int x, int y) {
 	}
 }
 
+bool Ninho::formigaEstaNinho(int x, int y) {
+
+		if (x == getX() && y == getY()) {
+			return true;
+		
+		}
+		else {
+			return false;
+		}
+
+}
+
+
+//---------------NINHO----------------//
+
+void Ninho::interacaoNinho(int idF, int transferencia) {
+	
+	if (formigas[idF]->getEner() > formigas[idF]->getEnergiaInicial()) {
+		if (transferencia < formigas[idF]->getEner()) {
+			formigas[idF]->setEner(formigas[idF]->getEner() - transferencia);
+			setEnergia(getEnergia() + transferencia);
+		}
+	}
+	else if (formigas[idF]->getEner() < formigas[idF]->getEnergiaInicial() * 0.5) {
+		if (getEnergia() - transferencia > 0) {
+			formigas[idF]->setEner(formigas[idF]->getEner() + transferencia);
+			setEnergia(getEnergia() - transferencia);
+		}
+	}
+}
+
+
+
 Ninho::~Ninho(){
 
 }

@@ -61,6 +61,8 @@ public:
 
 	void assassinaProcura(int x, int y);
 
+	bool formigaEstaNinho(int x, int y);
+
 	void acrescentaFormiga(int x, int y, char c, int idN);
 
 	void regras(int idN, int dim, vector<Elementos*> elem);
@@ -69,6 +71,7 @@ public:
 	int formigaVisao(int id);
 
 	Ninho(int x, int y, int energia);
+	void interacaoNinho(int idF, int transferencia);
 	~Ninho();
 };
 
