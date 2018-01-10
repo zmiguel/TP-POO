@@ -5,6 +5,7 @@ Interface::Interface(Mundo * m){
 	mundo = m;
 }
 
+
 void Interface::corre() {
 
 	string comando;
@@ -139,8 +140,10 @@ void Interface::corre() {
 								iss >> num3;
 								if (!iss.fail()) {
 									if (str.compare("criaf") == 0 && num > 0 && (c == 'E' || c == 'C'  || c=='V' || c == 'A' || c == 'T')) {
-										mundo->trataFormiga(num, num3, c);
-										imprime();
+										if (mundo->existeNinhoID(num3) == true) {
+											mundo->trataFormiga(num, num3, c);
+											imprime();
+										}
 									}
 									else {
 										printf("Erro de sintaxe");
@@ -165,9 +168,11 @@ void Interface::corre() {
 										if (!iss.fail()) {
 											iss >> num3;
 											if (!iss.fail()) {
-												if (str.compare("cria1") == 0) { // CONDITIONSSSSS
-													mundo->acrescentaFormiga(c, num, num2, num3);
-													imprime();
+												if (str.compare("cria1") == 0 && (c == 'E' || c == 'C' || c == 'V' || c == 'A' || c == 'T') && num > 0 && num2 >= 0 && num2 < mundo->getDim() && num3 >= 0 && num3 < mundo->getDim()) { // CONDITIONSSSSS
+													if (mundo->existeNinhoID(num)) {
+														mundo->acrescentaFormiga(c, num, num2, num3);
+														imprime();
+													}
 												}
 											}
 										}	

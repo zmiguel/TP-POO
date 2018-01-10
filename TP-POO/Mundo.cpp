@@ -176,6 +176,15 @@ void Mundo::sorteiaMigalha() {
 
 //---------------NINHOS-----------------//
 
+bool Mundo::existeNinhoID(int id) {
+	for (Ninho *n : ninhos) {
+		if (n->getID() == id) {
+			return true;
+		}
+	}
+	return false;
+}
+
 int Mundo::numNinhos() {
 	return (int) ninhos.size();
 }

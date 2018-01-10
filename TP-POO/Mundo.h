@@ -25,6 +25,7 @@ public:
 	int getDim() const;
 	void acrescentaUmaMigalha(int x, int y);
 	void acrescentaMigalhas();
+	bool existeNinhoID(int id);
 	int numNinhos();
 
 	bool confirmaNinho(int id);
