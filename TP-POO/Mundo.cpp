@@ -350,16 +350,16 @@ void Mundo::elementosAtualiza() {
 	elementos.clear();
 
 	for (unsigned int i = 0; i < ninhos.size(); i++) {
-		Elementos * obj = new Elementos(ninhos[i]->getX(), ninhos[i]->getY(), ninhos[i]->getDenom(), ninhos[i]->getID(), ninhos[i]->getEnergia(), ninhos[i]->getEnergia());
+		Elementos * obj = new Elementos(ninhos[i]->getX(), ninhos[i]->getY(), ninhos[i]->getDenom(), ninhos[i]->getID(), ninhos[i]->getEnergia(), ninhos[i]->getEnergia(), 0);
 		elementos.push_back(obj);
 		for (int k = 0; k < ninhos[i]->numFormigas(); k++) {
-			Elementos * obj = new Elementos(ninhos[i]->formigaPosX(k), ninhos[i]->formigaPosY(k), ninhos[i]->getFormigaDenom(k), ninhos[i]->getID(), ninhos[i]->formigaEnerg(k), ninhos[i]->formigaEnergiaInicial(k));
+			Elementos * obj = new Elementos(ninhos[i]->formigaPosX(k), ninhos[i]->formigaPosY(k), ninhos[i]->getFormigaDenom(k), ninhos[i]->getID(), ninhos[i]->formigaEnerg(k), ninhos[i]->formigaEnergiaInicial(k), ninhos[i]->formigaGetIt(k));
 			elementos.push_back(obj);
 		}
 	}
 
 	for (unsigned int m = 0; m < migalhas.size(); m++) {
-		Elementos * obj = new Elementos(migalhas[m]->getPosX(), migalhas[m]->getPosY(), 'M', migalhas[m]->getId(), migalhas[m]->getEnergia(), migalhas[m]->getEnergia());
+		Elementos * obj = new Elementos(migalhas[m]->getPosX(), migalhas[m]->getPosY(), 'M', migalhas[m]->getId(), migalhas[m]->getEnergia(), migalhas[m]->getEnergia(), 0);
 		elementos.push_back(obj);
 	}
 }
@@ -397,9 +397,17 @@ void Mundo::iteracao(int temp){
 				elementosAtualiza();
 			}
 		}
+
+		iteracaoAtualiza();
 		migalhasPerdeIteracao();
 		sorteiaMigalha();
 		elementosAtualiza();
+	}
+}
+
+void Mundo::iteracaoAtualiza() {
+	for (Ninho * n : ninhos) {
+		n->setIteracaoFormiga();
 	}
 }
 

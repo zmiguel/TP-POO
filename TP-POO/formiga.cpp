@@ -5,6 +5,7 @@ int Formiga::i = 1;
 Formiga::Formiga(int x, int y, char c):posX(x), posY(y){
 	this->id = i++;
 	this->denom = c;
+	this->itNinho = 0;
 }
 
 //--------CARACTERISTICAS-------//
@@ -44,6 +45,17 @@ int Formiga::getEnergiaInicial() {
 	return energiaInicial;
 }
 
+void Formiga::setIt(int it)
+{
+	itNinho = it;
+}
+
+int Formiga::getIt()
+{
+	return itNinho;
+}
+
+
 //---------POSIÇÕES-----------//
 
 void Formiga::setX(int x) {
@@ -69,10 +81,11 @@ string Formiga::getAsString() {
 	
 	ostringstream oss;
 
-	oss << "\nFormiga ID: " << id
+	oss << "\nFormiga " << denom 
+		<< " ID: " << id
 		<< " Energia: " << energia
 		<< " (" << posX << ","
-		<< posY << ")";
+		<< posY << ")" << " I: " << itNinho;
 
 	return oss.str();
 }
@@ -99,6 +112,7 @@ void Formiga::setMov(int m)
 {
 	mov = m;
 }
+
 
 bool Formiga::ocupaPos(int x, int y, vector<Elementos*> elem) {
 

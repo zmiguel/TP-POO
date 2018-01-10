@@ -58,6 +58,8 @@ public:
 
 	void iteracao(int temp);
 
+	void iteracaoAtualiza();
+
 	void elementosAtualiza();
 
 	

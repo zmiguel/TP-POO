@@ -12,10 +12,10 @@ class Elementos {
 	int idCor;
 	int energia;
 	int energiaInicial;
-
+	int iteracao;
 public:
 
-	Elementos(int x, int y, char denominacao, int idCor, int energia, int energiaInicial);
+	Elementos(int x, int y, char denominacao, int idCor, int energia, int energiaInicial, int iteracao);
 
 	int getPosX();
 	int getPosY();

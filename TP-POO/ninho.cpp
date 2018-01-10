@@ -60,6 +60,19 @@ void Ninho::setEnergia(int e) {
 	energia = e;
 }
 
+void Ninho::setIteracaoFormiga() {
+
+	for (Formiga *f : formigas) {	
+		if (getX() == f->getX() && getY() == f->getY()) {
+			f->setIt(0);
+		}
+		else {
+			f->setIt(f->getIt() + 1);
+		}
+	}
+
+}
+
 
 //------------GET'S & SET'S (FORMIGA)------------//
 
@@ -173,6 +186,9 @@ int Ninho::formigaEnergiaInicial(int idF) {
 	return formigas[idF]->getEnergiaInicial();
 }
 
+int Ninho::formigaGetIt(int idF) {
+	return formigas[idF]->getIt();
+}
 
 
 //-------------FORMIGAS------------------//

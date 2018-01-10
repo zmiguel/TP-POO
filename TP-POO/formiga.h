@@ -17,6 +17,8 @@ class Formiga {
 	int energia;
 	int idNinho;
 
+	int itNinho;
+
 	vector<Regra*> regras;
 
 public:
@@ -38,6 +40,8 @@ public:
 	void setVisao(int v);
 	void setMov(int m);
 
+	void setIt(int it);
+	int getIt();
 	int getMov();
 	int getVisao();
 	

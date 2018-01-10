@@ -26,6 +26,7 @@ public:
 	void setPosVetor(int pos);
 	int getEnergia();
 	void setEnergia(int e);
+	void setIteracaoFormiga();
 	int getPosVetor();
 	string ninhoInfo() const;
 
@@ -46,6 +47,8 @@ public:
 	int suaFormigaPos(int x, int y);
 
 	int formigaEnergiaInicial(int idF);
+
+	int formigaGetIt(int idF);
 
 
 	int formigaPosX(int id);

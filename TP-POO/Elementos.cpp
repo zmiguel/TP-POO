@@ -2,7 +2,7 @@
 
 int Elementos::i = 1;
 
-Elementos::Elementos(int x, int y, char denominacao, int idCor, int energia, int energiaInicial) {
+Elementos::Elementos(int x, int y, char denominacao, int idCor, int energia, int energiaInicial, int it) {
 
 	this->denominacao = denominacao;
 	this->x = x;
@@ -11,7 +11,7 @@ Elementos::Elementos(int x, int y, char denominacao, int idCor, int energia, int
 	this->energia = energia;
 	this->energiaInicial = energiaInicial;
 	this->id = i++;
-
+	this->iteracao = it;
 }
 
 int Elementos::getPosX() {
