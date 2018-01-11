@@ -69,5 +69,6 @@ public:
 	Mundo(int dim, int energNinhos, int perFazNovoNinho, int transFormNin, int numPosMigalhas, int energiaInicialMig, int migalhaSorteio);
 	~Mundo();
 	vector<Elementos*> getMundo();
+	void setTransferencia(int t);
 };
 

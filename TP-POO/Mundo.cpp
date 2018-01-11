@@ -32,7 +32,10 @@ vector<Elementos*> Mundo::getMundo() {
 	return aux;
 }
 
+void Mundo::setTransferencia(int t) {
 
+	transFormNin = t;
+}
 //---------------LISTAGENS------------------//
 
 string Mundo::getAsString() const {

@@ -81,11 +81,13 @@ void Interface::corre() {
 							if (str.compare("inseticida") == 0 && mundo->confirmaNinho(num) == true) {
 								mundo->inseticida(num);
 							}
-						
+							else {
+								if (str.compare("defvt") == 0 && num >= 1) {
+									mundo->setTransferencia(num);
+								}
+							}
 						}
 					}
-
-
 				}
 			}
 			else {
