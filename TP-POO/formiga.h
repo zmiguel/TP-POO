@@ -91,4 +91,14 @@ public:
 	}
 };
 
+class Toxica : public Formiga {
+
+public:
+
+	Toxica(int posX, int posY, char denom) :Formiga(posX, posY, denom) {
+		acrescentaRegras();
+	}
+};
+
+
 
