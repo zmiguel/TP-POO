@@ -174,15 +174,23 @@ void Formiga::acrescentaRegras() {
 		regras.push_back(rP);
 	}
 
-	
-
-	
+	if (getDenom() == 'H') {
+		//Regra *rC = new RegraCura;
+		//regras.push_back(rC);
+		Regra * rCM = new RegraComeMigalha;
+		regras.push_back(rCM);
+		Regra * rPM = new RegraProcuraMigalha;
+		regras.push_back(rPM);
+		Regra * rP = new RegraPasseia;
+		regras.push_back(rP);
+	}
 
 		/*
-		C - RegraFoge														RegraComeMigalha	RegraProcuraMigalha		RegraVaiParaNinho	RegraPasseia
-		V -					RegraProtege									RegraComeMigalha	RegraProcuraMigalha							RegraPasseia
-		A -									RegraAssalta	RegraPersegue	RegraComeMigalha	RegraProcuraMigalha							RegraPasseia
-		E -																	RegraComeMigalha												RegraPasseia
+		C -					RegraFoge														RegraComeMigalha	RegraProcuraMigalha		RegraVaiParaNinho	RegraPasseia
+		V -									RegraProtege									RegraComeMigalha	RegraProcuraMigalha							RegraPasseia
+		A -													RegraAssalta	RegraPersegue	RegraComeMigalha	RegraProcuraMigalha							RegraPasseia
+		E -																					RegraComeMigalha												RegraPasseia
+		H - RegraCura																		RegraComeMigalha	RegraProcuraMigalha							RegraPasseia
 		*/
 }
 
