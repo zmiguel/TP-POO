@@ -223,7 +223,6 @@ void Formiga::energiaIteracao(int movEX, int movEY) {
 
 	if (getDenom() == 'A') {
 		energGasta = 1 + 2*( abs(movEX) + abs(movEY));
-	
 	}
 	else {
 		energGasta = 1 + abs(movEX) + abs(movEY);
