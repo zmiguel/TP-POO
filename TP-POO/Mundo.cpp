@@ -250,6 +250,7 @@ void Mundo::acrescentaEnergiaNinho(int idN, int energia) {
 
 	int power = ninhos[pos]->getEnergia() + energia;
 	ninhos[pos]->setEnergia(power);
+	elementosAtualiza();
 }
 
 //---------------FORMIGAS---------------//

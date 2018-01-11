@@ -114,7 +114,7 @@ void Interface::corre() {
 						else if (str.compare("mata") == 0 && num < mundo->getDim() && num2 < mundo->getDim()) {
 							mundo->assassinaFormiga(num, num2);
 						}
-						else if (str.compare("energninho") && num2 > 0) {
+						else if (str.compare("energninho") == 0 && num2 > 0) {
 							mundo->acrescentaEnergiaNinho(num, num2);
 						}
 					}
