@@ -26,7 +26,7 @@ void Configs::config(int valor) {
 
 	if (valor == 1) {
 
-		cout << "Configura��o do novo jogo:\n" << "Comandos:\n"
+		cout << "Configuracao do novo jogo:\n" << "Comandos:\n"
 			<< "defmundo - Define o tamanho do mundo\n"
 			<< "defen - Define energia inicial dos ninhos\n"
 			<< "defpc - Define % de energia necesaria a mais para o ninho criar uma nova formiga\n"

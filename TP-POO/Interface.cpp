@@ -77,6 +77,26 @@ void Interface::corre() {
 					}
 				}
 			}
+			if (str.compare("help") == 0) {
+				cout << "Ajuda:"
+					<< "ninho <x> <y> - Cria novo ninho em X,Y\n"
+					<< "criaf <num> <tipo> <ninho> - cria NUM formigas tipo ninho\n"
+					<< "cria1 <tipo> <ninho> <x> <y> - cria 1 formiga de TIPO\n\t do NINHO em X,Y\n"
+					<< "migalha <x> <y> - cria migalha em X,Y\n"
+					<< "foca <linha> <coluna> - NAO FUNCIONA\n"
+					<< "tempo (x) - faz X iteracoes, 1 se X nao for fornecido\n"
+					<< "energninho <ninho> <energ> - adiciona ENERG ao NINHO\n"
+					<< "energformiga <x> <y> <energ> - adiciona ENERG a formiga X,Y\n"
+					<< "mata <x> <y> - mata a formiga X,Y\n"
+					<< "inseticida <n> - mata o ninho id N e todas as suas formigas\n"
+					<< "listamundo - lista todos os elementos no mundo\n"
+					<< "listaninho <n> - lista info sobre o ninho N e as formigas\n"
+					<< "listaposicao <x> <y> - indica que elementos estao\n\t presentes nesta posicao\n"
+					<< "guarda <nome> - guarda o estado atual do jogo com o NOME\n"
+					<< "muda <nome> - muda o estado atual para o estado NOME\n"
+					<< "apaga <nome> - apaga o estado NOME\n"
+					<< "sair - sai do programa";
+			}
 		}
 		else {
 			if (comandoEsp == 1) {

@@ -54,7 +54,6 @@ bool RegraPasseia::condicao(int * x, int * y, int dim, vector<Elementos*> elem, 
 void RegraPasseia::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis)
 {
 	bool flag = false;
-	cout << "[REGRA] Passeia" << endl;
 	int xi = *x;
 	int yi = *y;
 
@@ -106,7 +105,6 @@ void RegraComeMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, 
 	int energiaInicial;
 	int energia;
 
-	cout << "[REGRA] Come Migalha"<< endl;
 	for (Elementos* i : elem) {
 		if (i->getPosX() == *x && i->getPosY() == *y && i->getDenom() != 'N') {
 			denom = i->getDenom();
@@ -192,7 +190,6 @@ void RegraProcuraMigalha::acao(int * x, int * y, int dim, vector<Elementos*> ele
 	int xi = *x;
 	int yi = *y;
 
-	cout << "[REGRA] Procura Migalha" << endl;
 	//vars para procurara mais energia
 	int bestX = 0;
 	int bestY = 0;
@@ -243,7 +240,6 @@ void RegraProcuraMigalha::acao(int * x, int * y, int dim, vector<Elementos*> ele
 
 			int px = i->getPosX() - *x;
 			int py = i->getPosY() - *y;
-			cout << px << ", " << py << endl;
 
 
 			if (px > 0 && py > 0) {
@@ -633,7 +629,6 @@ void RegraVaiParaNinho::acao(int * x, int * y, int dim, vector<Elementos*> elem,
 	int xi = *x;
 	int yi = *y;
 	int movi = mov;
-	cout << "[REGRA] Vai Para Ninho" << endl;
 
 	for (Elementos * i : elem) {
 		if (i->getPosX() == *x && i->getPosY() == *y)
@@ -661,17 +656,13 @@ void RegraVaiParaNinho::acao(int * x, int * y, int dim, vector<Elementos*> elem,
 						}
 					
 						if (estaVisao(xi,yi, vis, j->getPosX(), j->getPosY()) == true && j->getDenom() == 'N' && j->getIDCor() == id) {
-							cout << "Vi o ninho!" << endl;
 							if (estaMov(xi, yi, mov, j->getPosX(), j->getPosY()) == true) {
 								*x = j->getPosX();
 								*y = j->getPosY();
-								cout << "estou a entrar no ninho!" << endl;
 							}
 							else {
-								cout << "vou para o ninho!" << endl;
 								int px = j->getPosX() - *x;
 								int py = j->getPosY() - *y;
-								cout << px << ", " << py << endl;
 								
 								if (px > 0 && py > 0) {
 									//topesq
@@ -1051,7 +1042,6 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 	int yi = *y;
 	int movi = mov;
 
-	cout << "RF" << endl;
 	for (Elementos* i : elem) {
 		if (i->getPosX() == *x && i->getPosY() == *y) {
 			id = i->getIDCor();
@@ -1069,7 +1059,6 @@ void RegraFoge::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 				
 				int px = *x - i->getPosX();
 				int py = *y - i->getPosY();
-				cout << px << ", " << py << endl;
 
 	
 				if (px > 0 && py > 0) {
@@ -1430,7 +1419,6 @@ bool RegraProtege::condicao(int * x, int * y, int dim, vector<Elementos*> elem, 
 	for (Elementos *i : elem) {
 		if (id == i->getIDCor() && (*x != i->getPosX() || *y != i->getPosY()) && i->getDenom() != 'N'  && i->getDenom() != 'M') {
 			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY())) {
-				cout << "Amiga!" << endl;
 				flagF = true;
 				break;
 			}
@@ -1440,7 +1428,6 @@ bool RegraProtege::condicao(int * x, int * y, int dim, vector<Elementos*> elem, 
 	for (Elementos *i : elem) {
 		if (id != i->getIDCor() && (*x != i->getPosX() || *y != i->getPosY()) && i->getDenom() != 'N' && i->getDenom() != 'M') {
 			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY())) {
-				cout << "Enimiga!" << endl;
 				flagE = true;
 				break;
 			}
@@ -1455,8 +1442,6 @@ bool RegraProtege::condicao(int * x, int * y, int dim, vector<Elementos*> elem, 
 }
 
 void RegraProtege::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis) {
-
-	cout << "[REGRA] Protege"<< endl;
 		
 	bool flagF = false;
 	bool flagE = false;
@@ -1507,8 +1492,6 @@ void RegraProtege::acao(int * x, int * y, int dim, vector<Elementos*> elem, int 
 		int posX = (int) round((xF + xE) / 2);
 		int posY = (int) round((yF + yE) / 2);
 
-		cout << "(INFO) " << posX << "," << posY << endl;
-
 		if (posX == *x && posY == *y) {
 			return;
 		}
@@ -1541,7 +1524,6 @@ void RegraProtege::acao(int * x, int * y, int dim, vector<Elementos*> elem, int 
 		
 			int px = posX - *x;
 			int py = posY - *y;
-			cout << px << ", " << py << endl;
 
 
 			if (px > 0 && py > 0) {
@@ -1948,8 +1930,6 @@ void RegraAssalta::acao(int * x, int * y, int dim, vector<Elementos*> elem, int 
 	int ninhoX = -1;
 	int ninhoY = -1;
 
-	cout << "[REGRA] Assalta" << endl;
-
 	for (Elementos *i : elem) {
 		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
 			id = i->getIDCor();
@@ -2037,8 +2017,6 @@ void RegraPersegue::acao(int * x, int * y, int dim, vector<Elementos*> elem, int
 	int ninhoX = -1;
 	int ninhoY = -1;
 
-	cout << "[REGRA] Persegue" << endl;
-
 	for (Elementos *i : elem) {
 		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
 			id = i->getIDCor();
@@ -2061,7 +2039,6 @@ void RegraPersegue::acao(int * x, int * y, int dim, vector<Elementos*> elem, int
 			}
 		}
 	}
-	cout << "best " << bestX << " " << bestY << endl;
 
 	for (Elementos* i : elem) {
 		if (flag == true) {
@@ -2093,7 +2070,6 @@ void RegraPersegue::acao(int * x, int * y, int dim, vector<Elementos*> elem, int
 
 			int px = bestX - xi;
 			int py = bestY - yi;
-			cout << "px py" << px << " " << py << endl;
 
 
 			if (px > 0 && py > 0) {
@@ -2481,7 +2457,6 @@ void RegraCura::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 	int ninhoX = -1;
 	int ninhoY = -1;
 
-	cout << "[REGRA] Cura" << endl;
 
 	for (Elementos *i : elem) {
 		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
@@ -2516,7 +2491,6 @@ void RegraCura::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov
 			}
 		}
 	}
-	cout << "best " << bestX << " " << bestY << endl;
 
 
 	for (Elementos *i : elem) { //alvo
