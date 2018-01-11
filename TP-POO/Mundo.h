@@ -14,7 +14,7 @@ class Mundo{
 
 	int dimensao;
 	int energNinhos;
-	int perFazNovoNinho;
+	int perFazNovaFormiga;
 	int transFormNin;
 	int percentagemPosMig;
 	int energiaInicialMig;
