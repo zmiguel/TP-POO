@@ -1,7 +1,7 @@
-mundo 12
+mundo 15
 en 200
 pc 10
-vt 1
+vt 3
 mi 10
 me 25
 nm 2

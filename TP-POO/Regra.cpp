@@ -54,7 +54,7 @@ bool RegraPasseia::condicao(int * x, int * y, int dim, vector<Elementos*> elem, 
 void RegraPasseia::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis)
 {
 	bool flag = false;
-	cout << "Passeia" << endl;
+	cout << "[REGRA] Passeia" << endl;
 	int xi = *x;
 	int yi = *y;
 
@@ -189,7 +189,7 @@ void RegraProcuraMigalha::acao(int * x, int * y, int dim, vector<Elementos*> ele
 	int xi = *x;
 	int yi = *y;
 
-	cout << "RPM" << endl;
+	cout << "[REGRA] Procura Migalha" << endl;
 	//vars para procurara mais energia
 	int bestX = 0;
 	int bestY = 0;
@@ -1416,25 +1416,31 @@ bool RegraProtege::condicao(int * x, int * y, int dim, vector<Elementos*> elem, 
 	bool flagF = false;
 	bool flagE = false;
 	int id;
+	cout << "Cond Proteje!" << endl;
 
 	for (Elementos *i : elem) {
 		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
 			id = i->getIDCor();
+			break;
 		}
 	}
 
 	for (Elementos *i : elem) {
-		if (id == i->getIDCor() && *x != i->getPosX() && *y != i->getPosY() && i->getDenom() != 'N'  && i->getDenom() != 'M') {
-			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosX())) {
+		if (id == i->getIDCor() && (*x != i->getPosX() || *y != i->getPosY()) && i->getDenom() != 'N'  && i->getDenom() != 'M') {
+			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY())) {
+				cout << "Amiga!" << endl;
 				flagF = true;
+				break;
 			}
 		}
 	}
 
 	for (Elementos *i : elem) {
-		if (id != i->getIDCor() && *x != i->getPosX() && *y != i->getPosY() && i->getDenom() != 'N' && i->getDenom() != 'M') {
-			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosX())) {
+		if (id != i->getIDCor() && (*x != i->getPosX() || *y != i->getPosY()) && i->getDenom() != 'N' && i->getDenom() != 'M') {
+			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY())) {
+				cout << "Enimiga!" << endl;
 				flagE = true;
+				break;
 			}
 		}
 	}
@@ -1473,8 +1479,8 @@ void RegraProtege::acao(int * x, int * y, int dim, vector<Elementos*> elem, int 
 	}
 
 	for (Elementos *i : elem) {
-		if (id == i->getIDCor() && *x != i->getPosX() && *y != i->getPosY() && i->getDenom() != 'N'  && i->getDenom() != 'M') {
-			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosX())) {
+		if (id == i->getIDCor() && (*x != i->getPosX() || *y != i->getPosY()) && i->getDenom() != 'N'  && i->getDenom() != 'M') {
+			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY())) {
 				flagF = true;
 				xF = i->getPosX();
 				yF = i->getPosY();
@@ -1484,8 +1490,8 @@ void RegraProtege::acao(int * x, int * y, int dim, vector<Elementos*> elem, int 
 	}
 
 	for (Elementos *i : elem) {
-		if (id != i->getIDCor() && *x != i->getPosX() && *y != i->getPosY() && i->getDenom() != 'N' && i->getDenom() != 'M') {
-			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosX())) {
+		if (id != i->getIDCor() && (*x != i->getPosX() || *y != i->getPosY()) && i->getDenom() != 'N' && i->getDenom() != 'M') {
+			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY())) {
 				flagE = true;
 				xE = i->getPosX();
 				yE = i->getPosY();
@@ -1499,8 +1505,14 @@ void RegraProtege::acao(int * x, int * y, int dim, vector<Elementos*> elem, int 
 		int posX = (int) round((xF + xE) / 2);
 		int posY = (int) round((yF + yE) / 2);
 
+		cout << "(INFO) " << posX << "," << posY << endl;
+
+		if (posX == *x && posY == *y) {
+			return;
+		}
+
 		if (estaMov(*x, *y, mov, posX, posY)) {
-			if (ocupaPos(*x, *y, elem) == false) {
+			if (ocupaPos(posX, posY, elem) == false) {
 				*x = posX;
 				*y = posY;
 			}
