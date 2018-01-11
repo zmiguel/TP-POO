@@ -219,7 +219,16 @@ void Formiga::cumpreRegras(int dim, vector <Elementos*> elem, int x, int y, int 
 
 void Formiga::energiaIteracao(int movEX, int movEY) {
 
-	int energGasta = abs(movEX) + abs(movEY) + 1;
+	int energGasta = 1;
+
+	if (getDenom() == 'A') {
+		energGasta = 1 + 2*( abs(movEX) + abs(movEY));
+	
+	}
+	else {
+		energGasta = 1 + abs(movEX) + abs(movEY);
+	}
+
 	int energInicial = getEner();
 	int energAtual = energInicial - energGasta;
 
