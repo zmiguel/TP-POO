@@ -2057,13 +2057,9 @@ void RegraPersegue::acao(int * x, int * y, int dim, vector<Elementos*> elem, int
 			}
 			else {
 				if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY()) && i->getPosX() != ninhoX && i->getPosY() != ninhoY) {
-					if (i->getPosX() <= *x + mov && i->getPosX() >= *x - mov && i->getPosY() <= *y + mov && i->getPosY() >= *y - mov) {
-						if (i->getEnergia() > BestEnerg) {
-							bestX = i->getPosX();
-							bestY = i->getPosY();
-							BestEnerg = i->getEnergia();
-						}
-					}
+					bestX = i->getPosX();
+					bestY = i->getPosY();
+					BestEnerg = i->getEnergia();
 				}
 			}
 		}
