@@ -452,7 +452,7 @@ void Mundo::iteracao(int temp){
 			}
 
 			for (int f = 0; f < ninhos[n]->numFormigas(); f++) {
-				if (ninhos[n]->formigaEstaNinho(ninhos[n]->formigaPosX(f), ninhos[n]->formigaPosY(f)) == true && (ninhos[n]->formigaEnerg(f) > ninhos[n]->formigaEnergiaInicial(f) || ninhos[n]->formigaEnerg(f) < ninhos[n]->formigaEnergiaInicial(f) * 0.5) && ninhos[n]->getEnergia() > 1) {
+				if (ninhos[n]->formigaEstaNinho(ninhos[n]->formigaPosX(f), ninhos[n]->formigaPosY(f)) == true && (ninhos[n]->formigaEnerg(f) > ninhos[n]->formigaEnergiaInicial(f) || ninhos[n]->formigaEnerg(f) < ninhos[n]->formigaEnergiaInicial(f) * 0.5) && ninhos[n]->getEnergia() > transFormNin+1) {
 					ninhos[n]->interacaoNinho(f, transFormNin, perFazNovaFormiga, getDim());					
 				}else{
 					ninhos[n]->regras(f, getDim(), elementos);
