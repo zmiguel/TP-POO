@@ -176,11 +176,10 @@ void RegraComeMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, 
 }
 
 
-bool RegraProcuraMigalha::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis)
-{
+bool RegraProcuraMigalha::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis){
 	for (Elementos* i : elem) {
 		if (i->getDenom() == 'M') {
-			if (i->getPosX() <= *x + vis && i->getPosX() >= *x - vis && i->getPosY() <= *y + vis && i->getPosY() >= *y - vis) {
+			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY())) {
 				return true;
 			}
 		}
@@ -204,7 +203,7 @@ void RegraProcuraMigalha::acao(int * x, int * y, int dim, vector<Elementos*> ele
 
 	for (Elementos* i : elem) {
 		if (i->getDenom() == 'M') {
-			if (i->getPosX() <= *x + vis && i->getPosX() >= *x - vis && i->getPosY() <= *y + vis && i->getPosY() >= *y - vis) {
+			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY())) {
 				if (i->getEnergia() > BestEnerg) {
 					bestX = i->getPosX();
 					bestY = i->getPosY();
@@ -1420,7 +1419,6 @@ bool RegraProtege::condicao(int * x, int * y, int dim, vector<Elementos*> elem, 
 	bool flagF = false;
 	bool flagE = false;
 	int id;
-	cout << "Cond Proteje!" << endl;
 
 	for (Elementos *i : elem) {
 		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
@@ -1914,7 +1912,6 @@ bool RegraAssalta::condicao(int * x, int * y, int dim, vector<Elementos*> elem, 
 	int ninhoY = -1;
 	mov = mov / 2;
 
-	cout << "Cond Assalta!" << endl;
 
 	for (Elementos *i : elem) {
 		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
@@ -2002,7 +1999,6 @@ bool RegraPersegue::condicao(int * x, int * y, int dim, vector<Elementos*> elem,
 	int ninhoX = -1;
 	int ninhoY = -1;
 
-	cout << "Cond Persegue!" << endl;
 
 	for (Elementos *i : elem) {
 		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
@@ -2448,7 +2444,6 @@ bool RegraCura::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int
 	int ninhoY = -1;
 	mov = mov / 2;
 
-	cout << "Cond Cura!" << endl;
 
 	for (Elementos *i : elem) {
 		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {

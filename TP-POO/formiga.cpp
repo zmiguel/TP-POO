@@ -143,7 +143,7 @@ void Formiga::acrescentaRegras() {
 		Regra * rCM = new RegraComeMigalha;
 		regras.push_back(rCM);
 		Regra * rPM = new RegraProcuraMigalha;
-		regras.push_back(rCM);
+		regras.push_back(rPM);
 		Regra * rVPN = new RegraVaiParaNinho;
 		regras.push_back(rVPN);
 		Regra * rP = new RegraPasseia;
@@ -156,7 +156,7 @@ void Formiga::acrescentaRegras() {
 		Regra * rCM = new RegraComeMigalha;
 		regras.push_back(rCM);
 		Regra * rPM = new RegraProcuraMigalha;
-		regras.push_back(rCM);
+		regras.push_back(rPM);
 		Regra * rP = new RegraPasseia;
 		regras.push_back(rP);
 	}
