@@ -239,8 +239,8 @@ void Ninho::acrescentaFormiga(int x, int y, char c, int idN) {
 		Formiga *formiga1 = new Healer(x, y, c);
 		
 		formiga1->setEnerInicial(250);
-		formiga1->setMov(5);
-		formiga1->setVisao(10);
+		formiga1->setMov(3);
+		formiga1->setVisao(6);
 		formiga1->setIdNinho(idN);
 		formigas.push_back(formiga1);
 	}
