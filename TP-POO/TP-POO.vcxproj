@@ -121,6 +121,7 @@
     <ClCompile Include="Mundo.cpp" />
     <ClCompile Include="Ninho.cpp" />
     <ClCompile Include="Regra.cpp" />
+    <ClCompile Include="Save.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Configs.h" />
@@ -133,6 +134,7 @@
     <ClInclude Include="Mundo.h" />
     <ClInclude Include="Ninho.h" />
     <ClInclude Include="Regra.h" />
+    <ClInclude Include="Save.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="conf.txt" />

@@ -5,12 +5,30 @@ Interface::Interface(Mundo * m){
 	mundo = m;
 }
 
+void Interface::deleteDefault() {
+	for (unsigned n = 0; n < saves.size(); n++) {
+		if (saves[n]->getNome().compare("default")==0) {
+			delete saves[n];
+			saves.erase(saves.begin() + n);
+		}
+	}
+}
+
+void Interface::deleteNome(string nome) {
+	for (unsigned n = 0; n < saves.size(); n++) {
+		if (saves[n]->getNome().compare(nome) == 0) {
+			delete saves[n];
+			saves.erase(saves.begin() + n);
+		}
+	}
+}
 
 void Interface::corre() {
 
 	string comando;
 	int comandoEsp = 0;
 	string str;
+	string str2;
 	int num;
 	int num2;
 	int num3;
@@ -67,7 +85,7 @@ void Interface::corre() {
 				iss >> str;
 				iss >> num;
 				if (iss.fail()) {
-					cout << num; // ver isto
+					iss >> str2;
 				}
 				else {
 					if (str.compare("tempo") == 0 && num > 0) {
@@ -89,6 +107,25 @@ void Interface::corre() {
 						}
 					}
 				}
+
+				if (str.compare("guarda") == 0) {
+					Save* newsave = new Save(str2, mundo->getMundo());
+					saves.push_back(newsave);
+					cout << "Guardado!" << endl;
+				}
+
+				if (str.compare("muda") == 0) {
+					deleteDefault();
+					Save* newsave = new Save("default", mundo->getMundo());
+					saves.push_back(newsave);
+					mundo->elementosCarrega(str2, saves);
+				}
+
+				if (str.compare("apaga") == 0) {
+					deleteNome(str2);
+				}
+
+
 			}
 			else {
 				if (comandoEsp == 2) {

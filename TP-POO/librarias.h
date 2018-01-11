@@ -10,6 +10,7 @@
 #include <cmath>
 
 #include "Elementos.h"
+#include "Save.h"
 #include "Formiga.h"
 #include "Ninho.h"
 #include "Configs.h"

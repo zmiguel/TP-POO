@@ -382,6 +382,25 @@ void Mundo::elementosAtualiza() {
 	}
 }
 
+void Mundo::elementosCarrega(string nome, vector<Save*> saves) {
+	for (Save* s : saves) {
+		if (nome.compare(s->getNome())==0) {
+			for (vector< Elementos*>::iterator it = elementos.begin(); it != elementos.end(); ++it) {
+				delete (*it);
+			}
+
+			elementos.clear();
+
+			vector<Elementos*> temp = s->getElementos();
+
+			for (Elementos* t:temp) {
+				elementos.push_back(t);
+				cout << t->getDenom();
+			}
+		}
+	}
+}
+
 bool Mundo::ocupaPos(int x, int y) {
 
 	for (unsigned int i = 0; i < elementos.size(); i++) {
@@ -507,6 +526,7 @@ void Mundo::setEnergias() {
 		}
 	}
 }
+
 
 
 Mundo::~Mundo()

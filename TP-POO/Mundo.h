@@ -5,6 +5,7 @@ class Ninho;
 class Migalha;
 class Interface;
 class Elementos;
+class Save;
 
 class Mundo{
 
@@ -46,6 +47,8 @@ public:
 
 	void setEnergias();
 
+	void criaSave();
+
 	void trataFormiga(int qnts, int id, char c);
 
 	void assassinaFormiga(int x, int y);
@@ -64,6 +67,8 @@ public:
 	void iteracaoAtualiza();
 
 	void elementosAtualiza();
+
+	void elementosCarrega(string nome, vector<Save*> saves);
 
 	
 	Mundo(int dim, int energNinhos, int perFazNovoNinho, int transFormNin, int numPosMigalhas, int energiaInicialMig, int migalhaSorteio);
