@@ -36,6 +36,7 @@ void Mundo::setTransferencia(int t) {
 
 	transFormNin = t;
 }
+
 //---------------LISTAGENS------------------//
 
 string Mundo::getAsString() const {

@@ -235,15 +235,14 @@ void Ninho::acrescentaFormiga(int x, int y, char c, int idN) {
 		formigas.push_back(formiga1);
 	}
 
-	if (c == 'T') {
-		Formiga *formiga1 = new Toxica(x, y, c){
+	if (c == 'H') {
+		Formiga *formiga1 = new Healer(x, y, c);
 		
-		formiga1->setEnerIniciaç(80);
+		formiga1->setEnerInicial(250);
 		formiga1->setMov(5);
 		formiga1->setVisao(10);
 		formiga1->setIdNinho(idN);
 		formigas.push_back(formiga1);
-		}
 	}
 }
 

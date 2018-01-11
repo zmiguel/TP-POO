@@ -91,11 +91,11 @@ public:
 	}
 };
 
-class Toxica : public Formiga {
+class Healer : public Formiga {
 
 public:
 
-	Toxica(int posX, int posY, char denom) :Formiga(posX, posY, denom) {
+	Healer(int posX, int posY, char denom) :Formiga(posX, posY, denom) {
 		acrescentaRegras();
 	}
 };
