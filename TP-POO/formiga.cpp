@@ -164,7 +164,8 @@ void Formiga::acrescentaRegras() {
 	if (getDenom() == 'A') {
 		Regra * rA = new RegraAssalta;
 		regras.push_back(rA);
-		//Regra * rPe = new RegraPersegue;
+		Regra * rPe = new RegraPersegue;
+		regras.push_back(rPe);
 		Regra * rCM = new RegraComeMigalha;
 		regras.push_back(rCM);
 		Regra * rPM = new RegraProcuraMigalha;
