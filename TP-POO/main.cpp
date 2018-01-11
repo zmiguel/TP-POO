@@ -7,7 +7,7 @@ int main() {
 	int valor;
 
 	srand((unsigned int) time(NULL));
-	Consola::setScreenSize(128, 32);
+	Consola::setScreenSize(32, 128);
 	Consola::setTextColor(Consola::VERDE);
 
 

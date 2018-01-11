@@ -1,6 +1,6 @@
 mundo 15
 en 200
-pc 10
+pc 50s
 vt 3
 mi 10
 me 25

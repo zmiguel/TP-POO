@@ -55,7 +55,7 @@ void Configs::config(int valor) {
 				if (str.compare("inicio") == 0) {
 					if (flag1 == true && flag2 == true && flag3 == true && flag4 == true && flag5 == true && flag6 == true && flag7 == true) {
 						Consola::clrscr();
-						Consola::setScreenSize(128 + defmundo * 2, 32);
+						Consola::setScreenSize(8 + defmundo, 100 + defmundo * 2);
 						Mundo *mundo = new Mundo(defmundo, defen, defpc, defvt, defmi, defme, defnm);
 						Interface inter(mundo);
 						inter.corre();
@@ -209,6 +209,7 @@ void Configs::config(int valor) {
 				cout << "Ficheiro lido!!\n";
 				if (flag1 == true && flag2 == true && flag3 == true && flag4 == true && flag5 == true && flag6 == true && flag7 == true) {
 					Consola::clrscr();
+					Consola::setScreenSize(8 + defmundo, 100 + defmundo * 2);
 					Mundo *mundo = new Mundo(defmundo, defen, defpc, defvt, defmi, defme, defnm);
 					Interface inter(mundo);
 					inter.corre();
