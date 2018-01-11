@@ -161,13 +161,17 @@ void Formiga::acrescentaRegras() {
 		regras.push_back(rP);
 	}
 
-	/*if (getDenom() == 'A') {
+	if (getDenom() == 'A') {
 		Regra * rA = new RegraAssalta;
-		Regra * rPe = new RegraPersegue;
+		regras.push_back(rA);
+		//Regra * rPe = new RegraPersegue;
 		Regra * rCM = new RegraComeMigalha;
+		regras.push_back(rCM);
 		Regra * rPM = new RegraProcuraMigalha;
+		regras.push_back(rPM);
 		Regra * rP = new RegraPasseia;
-	}*/
+		regras.push_back(rP);
+	}
 
 	
 
@@ -192,9 +196,9 @@ void Formiga::cumpreRegras(int dim, vector <Elementos*> elem, int x, int y, int 
 	int teste = 1;
 
 	for (unsigned int i = 0; i < regras.size(); i++) {
-			
-		if (regras[i]->condicao(&x, &y, dim, elem, getVisao())){
-			
+		
+		if (regras[i]->condicao(&x, &y, dim, elem, getVisao())) {
+
 			regras[i]->acao(&x, &y, dim, elem, getMov(), getVisao());
 
 			int xOcup = *xi;
@@ -210,6 +214,7 @@ void Formiga::cumpreRegras(int dim, vector <Elementos*> elem, int x, int y, int 
 			break;
 		}
 	}
+		
 }
 
 void Formiga::energiaIteracao(int movEX, int movEY) {

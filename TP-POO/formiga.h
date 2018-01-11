@@ -82,4 +82,13 @@ public:
 	}
 };
 
+class Assaltante : public Formiga {
+
+public:
+
+	Assaltante(int posX, int posY, char denom) :Formiga(posX, posY, denom) {
+		acrescentaRegras();
+	}
+};
+
 

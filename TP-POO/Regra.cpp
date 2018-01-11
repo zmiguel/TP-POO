@@ -1454,7 +1454,7 @@ bool RegraProtege::condicao(int * x, int * y, int dim, vector<Elementos*> elem, 
 
 void RegraProtege::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis) {
 
-	cout << "[REGRA] Protege"<<endl	;
+	cout << "[REGRA] Protege"<< endl;
 		
 	bool flagF = false;
 	bool flagE = false;
@@ -1898,6 +1898,153 @@ void RegraProtege::acao(int * x, int * y, int dim, vector<Elementos*> elem, int 
 
 
 	}
+
+
+}
+
+
+bool RegraAssalta::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int mov) {
+	
+	int id;
+	int ninhoX = -1;
+	int ninhoY = -1;
+	mov = mov / 2;
+
+	cout << "Cond Assalta!" << endl;
+
+	for (Elementos *i : elem) {
+		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
+			id = i->getIDCor();
+			break;
+		}
+	}
+
+	for (Elementos *i : elem) {
+		if (i->getIDCor() != id && i->getDenom() != 'M') {
+			if (i->getDenom() == 'N') {
+				ninhoX = i->getPosX();
+				ninhoY = i->getPosY();
+			}
+			else {
+				if (estaMov(*x, *y, mov, i->getPosX(), i->getPosY()) && i->getPosX() != ninhoX && i->getPosY() != ninhoY) {
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+
+}
+
+void RegraAssalta::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis) {
+
+	int id;
+	bool flag;
+	int bestX = 0;
+	int bestY = 0;
+	int BestEnerg = 0;
+
+	int ninhoX = -1;
+	int ninhoY = -1;
+
+	cout << "[REGRA] Assalta" << endl;
+
+	for (Elementos *i : elem) {
+		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
+			id = i->getIDCor();
+			break;
+		}
+	}
+
+	for (Elementos* i : elem) {
+		if (i->getIDCor() != id && i->getDenom() != 'M') {
+			if (i->getDenom() == 'N') {
+				ninhoX = i->getPosX();
+				ninhoY = i->getPosY();
+			}
+			else {
+				if (estaMov(*x, *y, mov, i->getPosX(), i->getPosY()) && i->getPosX() != ninhoX && i->getPosY() != ninhoY) {
+					if (i->getPosX() <= *x + mov && i->getPosX() >= *x - mov && i->getPosY() <= *y + mov && i->getPosY() >= *y - mov) {
+						if (i->getEnergia() > BestEnerg) {
+							bestX = i->getPosX();
+							bestY = i->getPosY();
+							BestEnerg = i->getEnergia();
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+	for (Elementos *i : elem) {
+		if (i->getPosX() == bestX && i->getPosY() == bestY) {
+			i->setEnergia(i->getEnergia() * 0.5);
+			break;
+		}
+	}
+
+	for (Elementos *i : elem) {
+		if (i->getPosX() == *x && i->getPosY() == *y) {
+			i->setEnergia(i->getEnergia() + (BestEnerg * 0.5));
+			break;
+		}
+	}
+}
+
+
+bool RegraPersegue::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis) {
+
+
+	int id;
+
+	cout << "Cond Persegue!" << endl;
+
+	for (Elementos *i : elem) {
+		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
+			id = i->getIDCor();
+			break;
+		}
+	}
+
+	for (Elementos *i : elem){
+		if (i->getIDCor() != id && i->getDenom() != 'N' && i->getDenom() != 'M') {
+			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY())) {
+				return true;
+			}
+		}
+	}
+
+	return false;
+}
+
+void RegraPersegue::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis) {
+
+	int id;
+
+	cout << "[REGRA] Persegue!" << endl;
+
+	for (Elementos *i : elem) {
+		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
+			id = i->getIDCor();
+			break;
+		}
+	}
+
+	for (Elementos *i : elem) {
+		if (i->getIDCor() != id && i->getDenom() != 'N' && i->getDenom() != 'M') {
+			if (estaVisao(*x, *y, vis, i->getPosX(), i->getPosY())) {
+				
+
+
+
+
+			}
+		}
+	}
+
+
 
 
 }
