@@ -292,6 +292,10 @@ void Mundo::trataFormiga(int qnts, int id, char c) {
 			ninhos[pos]->acrescentaFormiga(x, y, c, id);
 		}
 
+		if (c == 'H') {
+			ninhos[pos]->acrescentaFormiga(x, y, c, id);
+		}
+
 		qnts--;
 
 		

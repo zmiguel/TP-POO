@@ -113,3 +113,13 @@ public:
 
 	void acao(int *x, int *y, int dim, vector <Elementos*> elem, int mov, int vis);
 };
+
+class RegraCura : public Regra {
+
+public:
+	RegraCura() :Regra() {}
+
+	bool condicao(int *x, int *y, int dim, vector <Elementos*> elem, int vis);
+
+	void acao(int *x, int *y, int dim, vector <Elementos*> elem, int mov, int vis);
+};

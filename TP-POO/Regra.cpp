@@ -129,6 +129,10 @@ void RegraComeMigalha::acao(int * x, int * y, int dim, vector<Elementos*> elem, 
 		dentada = (float) 0.6;
 	}
 
+	if (denom == 'H') {
+		dentada = (float) 0.75;
+	}
+
 
 
 	for (Elementos* i : elem) {
@@ -1940,7 +1944,6 @@ bool RegraAssalta::condicao(int * x, int * y, int dim, vector<Elementos*> elem, 
 void RegraAssalta::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis) {
 
 	int id;
-	bool flag;
 	int bestX = 0;
 	int bestY = 0;
 	int BestEnerg = 0;
@@ -1965,12 +1968,10 @@ void RegraAssalta::acao(int * x, int * y, int dim, vector<Elementos*> elem, int 
 			}
 			else {
 				if (estaMov(*x, *y, mov, i->getPosX(), i->getPosY()) && i->getPosX() != ninhoX && i->getPosY() != ninhoY) {
-					if (i->getPosX() <= *x + mov && i->getPosX() >= *x - mov && i->getPosY() <= *y + mov && i->getPosY() >= *y - mov) {
-						if (i->getEnergia() > BestEnerg) {
-							bestX = i->getPosX();
-							bestY = i->getPosY();
-							BestEnerg = i->getEnergia();
-						}
+					if (i->getEnergia() > BestEnerg) {
+						bestX = i->getPosX();
+						bestY = i->getPosY();
+						BestEnerg = i->getEnergia();
 					}
 				}
 			}
@@ -1980,14 +1981,14 @@ void RegraAssalta::acao(int * x, int * y, int dim, vector<Elementos*> elem, int 
 
 	for (Elementos *i : elem) {
 		if (i->getPosX() == bestX && i->getPosY() == bestY) {
-			i->setEnergia(i->getEnergia() * 0.5);
+			i->setEnergia((int)(i->getEnergia() * 0.5));
 			break;
 		}
 	}
 
 	for (Elementos *i : elem) {
 		if (i->getPosX() == *x && i->getPosY() == *y) {
-			i->setEnergia(i->getEnergia() + (BestEnerg * 0.5));
+			i->setEnergia(i->getEnergia() + (int) (BestEnerg * 0.5));
 			break;
 		}
 	}
@@ -2438,4 +2439,102 @@ void RegraPersegue::acao(int * x, int * y, int dim, vector<Elementos*> elem, int
 		}
 	}
 
+}
+
+
+bool RegraCura::condicao(int * x, int * y, int dim, vector<Elementos*> elem, int mov) {
+	int id;
+	int ninhoX = -1;
+	int ninhoY = -1;
+	mov = mov / 2;
+
+	cout << "Cond Cura!" << endl;
+
+	for (Elementos *i : elem) {
+		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
+			id = i->getIDCor();
+			break;
+		}
+	}
+
+	for (Elementos *i : elem) {
+		if (i->getIDCor() == id && i->getDenom() != 'M' && (*x != i->getPosX() || *y != i->getPosY())) {
+			if (i->getDenom() == 'N') {
+				ninhoX = i->getPosX();
+				ninhoY = i->getPosY();
+			}	
+			else {
+				if (estaMov(*x, *y, mov, i->getPosX(), i->getPosY()) && i->getPosX() != ninhoX && i->getPosY() != ninhoY) {
+					return true;
+				}
+			}
+		}
+	}
+
+	return false;
+
+}
+
+void RegraCura::acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis) {
+	int id;
+	int bestX = 0;
+	int bestY = 0;
+	int BestEnerg;
+	int energDar;
+	bool flag = false;
+
+	int ninhoX = -1;
+	int ninhoY = -1;
+
+	cout << "[REGRA] Cura" << endl;
+
+	for (Elementos *i : elem) {
+		if (*x == i->getPosX() && *y == i->getPosY() && i->getDenom() != 'N') {
+			id = i->getIDCor();
+			energDar = i->getEnergia();
+			break;
+		}
+	}
+
+	for (Elementos* i : elem) {
+		if (i->getIDCor() == id && i->getDenom() != 'M' && (*x != i->getPosX() || *y != i->getPosY())) {
+			if (i->getDenom() == 'N') {
+				ninhoX = i->getPosX();
+				ninhoY = i->getPosY();
+			}
+			else {
+				if (estaMov(*x, *y, mov, i->getPosX(), i->getPosY()) && i->getPosX() != ninhoX && i->getPosY() != ninhoY) {
+					if (flag == false) {
+						flag = true;
+						bestX = i->getPosX();
+						bestY = i->getPosY();
+						BestEnerg = i->getEnergia();
+					}
+					else {
+						if (i->getEnergia() < BestEnerg) {
+							bestX = i->getPosX();
+							bestY = i->getPosY();
+							BestEnerg = i->getEnergia();
+						}
+					}
+				}
+			}
+		}
+	}
+	cout << "best " << bestX << " " << bestY << endl;
+
+
+	for (Elementos *i : elem) { //alvo
+		if (i->getPosX() == bestX && i->getPosY() == bestY) {
+			i->setEnergia(i->getEnergia() + (int)(energDar * .25));
+			break;
+		}
+	}
+
+	for (Elementos *i : elem) { //propria
+		if (i->getPosX() == *x && i->getPosY() == *y) {
+			i->setEnergia((int)(i->getEnergia() * .75));
+			break;
+		}
+	}
 }

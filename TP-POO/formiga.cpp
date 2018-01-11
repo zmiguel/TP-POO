@@ -175,8 +175,8 @@ void Formiga::acrescentaRegras() {
 	}
 
 	if (getDenom() == 'H') {
-		//Regra *rC = new RegraCura;
-		//regras.push_back(rC);
+		Regra *rC = new RegraCura;
+		regras.push_back(rC);
 		Regra * rCM = new RegraComeMigalha;
 		regras.push_back(rCM);
 		Regra * rPM = new RegraProcuraMigalha;
