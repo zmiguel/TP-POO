@@ -35,6 +35,8 @@ public:
 	int getX()const;
 	int getY()const;
 	int getID()const;
+	
+	int getEnergiaInicial();
 
 	int getFormigaDenom(int id);
 
@@ -71,7 +73,8 @@ public:
 	int formigaVisao(int id);
 
 	Ninho(int x, int y, int energia);
-	void interacaoNinho(int idF, int transferencia);
+
+	void interacaoNinho(int idF, int transferencia, int percentagemFazNova, int dim);
 	~Ninho();
 };
 

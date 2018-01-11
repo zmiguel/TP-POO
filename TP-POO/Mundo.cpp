@@ -1,10 +1,10 @@
 #include "Mundo.h"
 
-Mundo::Mundo(int dim, int energNinhos, int perFazNovoNinho, int transFormNin, int percentagemPosMigalhas, int energiaInicialMig, int migalhaSorteio){
+Mundo::Mundo(int dim, int energNinhos, int perFazNovaFormiga, int transFormNin, int percentagemPosMigalhas, int energiaInicialMig, int migalhaSorteio){
 
 	this->dimensao = dim;
 	this->energNinhos = energNinhos;
-	this->perFazNovoNinho = perFazNovoNinho;
+	this->perFazNovaFormiga = perFazNovaFormiga;
 	this->transFormNin = transFormNin;
 	this->percentagemPosMig = percentagemPosMigalhas;
 	this->energiaInicialMig = energiaInicialMig;
@@ -423,18 +423,41 @@ void Mundo::iteracao(int temp){
 
 	for (int it = 0; it < temp; it++) {
 		for (unsigned n = 0; n < ninhos.size(); n++) {
-			for (int f = 0; f < ninhos[n]->numFormigas(); f++) {
-				
-				if (ninhos[n]->formigaEstaNinho(ninhos[n]->formigaPosX(f), ninhos[n]->formigaPosY(f)) == true && (ninhos[n]->formigaEnerg(f) > ninhos[n]->formigaEnergiaInicial(f) || ninhos[n]->formigaEnerg(f) < ninhos[n]->formigaEnergiaInicial(f) * 0.5) && ninhos[n]->getEnergia() > 1) {
-		
-					ninhos[n]->interacaoNinho(f, transFormNin);
-
 					
+			if (ninhos[n]->getEnergia() > ninhos[n]->getEnergiaInicial() * (1 + (perFazNovaFormiga / 100))) {
+				
+				int random = rand() % 5;
+
+				if (random == 0) {
+					trataFormiga(1, ninhos[n]->getID(), 'A');
+				}
+
+				if (random == 1) {
+					trataFormiga(1, ninhos[n]->getID(), 'V');
+					
+				}
+
+				if (random == 2) {
+					trataFormiga(1, ninhos[n]->getID(), 'E');
+				}
+
+				if (random == 3) {
+					trataFormiga(1, ninhos[n]->getID(), 'C');
+				}
+
+				if (random == 4) {
+					trataFormiga(1, ninhos[n]->getID(), 'H');
+				}
+				ninhos[n]->setEnergia(ninhos[n]->getEnergiaInicial());
+			}
+
+			for (int f = 0; f < ninhos[n]->numFormigas(); f++) {
+				if (ninhos[n]->formigaEstaNinho(ninhos[n]->formigaPosX(f), ninhos[n]->formigaPosY(f)) == true && (ninhos[n]->formigaEnerg(f) > ninhos[n]->formigaEnergiaInicial(f) || ninhos[n]->formigaEnerg(f) < ninhos[n]->formigaEnergiaInicial(f) * 0.5) && ninhos[n]->getEnergia() > 1) {
+					ninhos[n]->interacaoNinho(f, transFormNin, perFazNovaFormiga, getDim());					
 				}else{
 					ninhos[n]->regras(f, getDim(), elementos);
 					setEnergias();
 				}
-				
 				elementosAtualiza();
 			}
 		}

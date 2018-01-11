@@ -24,6 +24,11 @@ int Ninho::getID() const {
 	return id;
 }
 
+int Ninho::getEnergiaInicial()
+{
+	return energiaInicial;
+}
+
 int Ninho::numFormigas() {
 	return (int) formigas.size();
 }
@@ -286,7 +291,7 @@ bool Ninho::formigaEstaNinho(int x, int y) {
 
 //---------------NINHO----------------//
 
-void Ninho::interacaoNinho(int idF, int transferencia) {
+void Ninho::interacaoNinho(int idF, int transferencia, int percentagemFazNova, int dim) {
 	
 	if (formigas[idF]->getEner() > formigas[idF]->getEnergiaInicial()) {
 		if (transferencia < formigas[idF]->getEner()) {
@@ -300,6 +305,8 @@ void Ninho::interacaoNinho(int idF, int transferencia) {
 			setEnergia(getEnergia() - transferencia);
 		}
 	}
+
+
 }
 
 
