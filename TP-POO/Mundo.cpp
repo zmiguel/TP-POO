@@ -47,6 +47,11 @@ string Mundo::getAsString() const {
 		oss << ninhos[i]->getAsString();
 	}
 
+	for (unsigned int i = 0; i < migalhas.size(); i++) {
+		oss << migalhas[i]->getAsString() << endl;
+	}
+
+
 	return oss.str();
 }
 
@@ -56,7 +61,7 @@ string Mundo::listaNinho(int id) {
 
 	for (unsigned int i = 0; i < ninhos.size(); i++) {
 		if (id == ninhos[i]->getID()) {
-			oss << ninhos[i]->getAsString();
+			oss << ninhos[i]->ninhoInfo();
 		}
 	}
 
