@@ -32,7 +32,8 @@ string Migalha::getAsString() {
 
 	ostringstream oss;
 
-	oss << "Migalha de energia: " << energia;
+	oss << "Migalha com energia: " << energia
+		<< " X: " << PosX << " Y: " << PosY;
 
 	return oss.str();
 }

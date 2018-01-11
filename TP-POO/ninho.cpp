@@ -45,8 +45,11 @@ string Ninho::ninhoInfo() const {
 		<< " Posicao: (" << PosX
 		<< "," << PosY << ")"
 		<< " Energia: " << energiaInicial
-		<< "\nNúmero de formigas do ninho:  " << formigas.size()
 		<< endl;
+
+	for (unsigned int i = 0; i < formigas.size();i++) {
+		oss << formigas[i]->getAsString();
+	}
 
 	return oss.str();
 }
@@ -93,11 +96,12 @@ string Ninho::getAsString()const {
 	oss << "Ninho ID: " << id
 		<< " Posicao: (" << PosX
 		<< "," << PosY << ")"
-		<< " Energia: "<< energia;
+		<< " Energia: "<< energia
+		<< " NºFormigas: " << formigas.size();
 
-	for (unsigned int i = 0; i < formigas.size();i++) {
+	/*for (unsigned int i = 0; i < formigas.size();i++) {
 		oss << formigas[i]->getAsString();
-	}
+	}*/
 
 	oss << endl;
 
