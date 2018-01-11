@@ -47,11 +47,6 @@ class RegraProtege : public Regra {
 public:
 	RegraProtege() :Regra() {}
 
-	bool condicao() {}
-	void acao() {
-
-		cout << "algo";
-	};
 	bool condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis);
 	void acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis);
 };
@@ -61,11 +56,6 @@ class RegraAssalta : public Regra {
 public:
 	RegraAssalta() :Regra() {}
 
-	bool condicao() {}
-	void acao() {
-
-		cout << "algo";
-	};
 	bool condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis);
 	void acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis);
 };
@@ -95,11 +85,6 @@ class RegraProcuraMigalha : public Regra {
 public:
 	RegraProcuraMigalha() :Regra() {}
 
-	bool condicao() {}
-	void acao() {
-
-		cout << "algo";
-	};
 	bool condicao(int * x, int * y, int dim, vector<Elementos*> elem, int vis);
 	void acao(int * x, int * y, int dim, vector<Elementos*> elem, int mov, int vis);
 };
